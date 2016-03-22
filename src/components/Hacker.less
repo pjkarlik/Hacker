@@ -1,14 +1,21 @@
-:global {
+@borderColor: #FFF;
+@borderColorAlt: #000;
 
+:global {
+  html {
+    height: 100%;
+    width: 100%;
+    * {
+      box-sizing: border-box;
+    }
+  }
   body {
-    background: #444;
-    color: #FFF;
     font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
-    box-sizing: border-box;
   }
 }
 
 .bodyContainer {
+  background: @borderColor;
   top: 0px;
   left: 0px;
   right: 0px;
@@ -26,4 +33,27 @@
     color: #FFF;
     text-align: center;
   }
+  &.negaitve{
+    background: @borderColorAlt;
+  }
+}
+
+.boxEffect {
+  border-color: @borderColorAlt;
+  border-style: solid;
+  position: absolute;;
+	top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  animation: boxEffect 1s steps(10) infinite;
+
+  &.negaitve{
+    border-color: @borderColor;
+  }
+}
+
+@keyframes boxEffect {
+    from {height: 0%; width: 0%; border-width: 10px; }
+    to {height: 100%; width: 100%; border-width: 75px; }
 }
