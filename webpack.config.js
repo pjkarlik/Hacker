@@ -1,3 +1,4 @@
+'use strict';
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ReactToHtmlPlugin = require('react-to-html-webpack-plugin');
@@ -30,6 +31,7 @@ const config = {
       {
         test: /\.(js|jsx)$/,
         loader: 'babel',
+        include: [/src/],
         exclude: /node_modules/,
         query:
           {
@@ -72,7 +74,7 @@ const config = {
   plugins: [
     new ExtractTextPlugin('style.css', { allChunks: true }),
     new ReactToHtmlPlugin('index.html', 'index.js', {
-      template: ejs.compile(fs.readFileSync(__dirname + '/src/template.ejs', 'utf-8'))
+        template: ejs.compile(fs.readFileSync(__dirname + '/src/template.ejs', 'utf-8'))
     })
   ]
 };
