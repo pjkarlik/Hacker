@@ -1,8 +1,7 @@
-import styles from './App.less';
+import styles from './Hacker.less';
 import React from 'react';
 
-export default class App extends React.Component {
-  static displayName = 'App';
+export default class Hacker extends React.Component {
 
   constructor(props) {
     super(props);
@@ -12,7 +11,7 @@ export default class App extends React.Component {
     return (
       <div>
         <div className={styles.bodyContainer}>
-          <h1>HACKER</h1>
+          <h1>The HACKER</h1>
         </div>
       </div>
     );

@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import Hacker from './components/Hacker';
 
 if (typeof document !== 'undefined') {
-  ReactDOM.render(<App />, document.getElementById('outlet')); //
+  ReactDOM.render(<Hacker />, document.getElementById('outlet')); //
 }
 
-export default App;
+export default Hacker;
