@@ -33,7 +33,8 @@ const config = {
           {
             presets: [
               require.resolve('babel-preset-es2015-loose'),
-              require.resolve('babel-preset-react')
+              require.resolve('babel-preset-react'),
+              require.resolve('babel-preset-stage-0')
             ],
             plugins: [
               require.resolve('babel-plugin-transform-object-assign')
