@@ -1,13 +1,11 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <title>Spherlax UI Demo</title>
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
-    <div id="outlet"><%- html %></div>
-    <% for (var chunk in assets) { -%>
-    <script src="<%= assets[chunk] %>"></script>
-    <% } -%>
   </body>
 </html>

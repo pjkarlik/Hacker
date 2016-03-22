@@ -1,12 +1,8 @@
 'use strict';
-const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const ReactToHtmlPlugin = require('react-to-html-webpack-plugin');
 const AutoPrefixer = require('autoprefixer');
-
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-const ejs = require('ejs');
-const fs = require('fs');
 
 const config = {
   name: 'hacker-demo',
@@ -40,9 +36,8 @@ const config = {
               require.resolve('babel-preset-react')
             ],
             plugins: [
-              require.resolve('babel-plugin-transform-object-assign'),
-              require.resolve('babel-plugin-transform-proto-to-assign')
-            ],
+              require.resolve('babel-plugin-transform-object-assign')
+            ]
           }
       },
       {
@@ -73,8 +68,10 @@ const config = {
   ],
   plugins: [
     new ExtractTextPlugin('style.css', { allChunks: true }),
-    new ReactToHtmlPlugin('index.html', 'index.js', {
-        template: ejs.compile(fs.readFileSync(__dirname + '/src/template.ejs', 'utf-8'))
+    new HtmlWebpackPlugin({
+      title: 'the Hacker',
+      template: './src/template.ejs',
+      inject: 'body'
     })
   ]
 };

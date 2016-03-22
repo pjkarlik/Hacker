@@ -1,9 +1,8 @@
 import styles from './App.less';
 import React from 'react';
-import ReactDom from 'react-dom';
 
 export default class App extends React.Component {
-  // static displayName = 'App'; causing build problems??
+  static displayName = 'App';
 
   constructor(props) {
     super(props);
@@ -18,4 +17,4 @@ export default class App extends React.Component {
       </div>
     );
   }
-};
+}
