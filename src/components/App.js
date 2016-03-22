@@ -1,14 +1,12 @@
 import styles from './App.less';
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDom from 'react-dom';
 
-export default class App extends Component {
+export default class App extends React.Component {
+  // static displayName = 'App'; causing build problems??
 
   constructor(props) {
     super(props);
-  }
-  componentDidMount() {
-
   }
 
   render() {

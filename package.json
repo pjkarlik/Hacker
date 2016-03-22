@@ -4,14 +4,14 @@
   "description": "Hacker Site Demo",
   "main": "index.js",
   "scripts": {
-    "test": "webpack",
-    "start": "webpack-dev-server  --progress --colors",
+    "webpack": "webpack --progress --colors",
+    "start": "webpack-dev-server --progress --colors",
     "clean": "rm -rf dist",
-    "build": "npm run clean && webpack  --progress --colors"
+    "build": "npm run clean && webpack --progress --colors"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/pjkarlik/repository.git"
+    "url": "git://github.com/pjkarlik/Hacker.git"
   },
   "author": "pjkarlik@gmail.com",
   "license": "Unlicense",

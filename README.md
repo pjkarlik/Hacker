@@ -1,6 +1,6 @@
 # HACKER
 
-Experimental React Website and Portfolio - This is a work in progress as I build out and test webpack / react / redux and other technologies. pjkarlik@gmail.com
+Experimental React Website - This is a work in progress..
 
 ## Run the example
 
