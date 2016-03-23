@@ -1,7 +1,7 @@
 {
   "name": "Hacker",
-  "version": "1.0.0",
-  "description": "Hacker Site Demo",
+  "version": "1.0.2",
+  "description": "The Hacker",
   "main": "index.js",
   "scripts": {
     "webpack": "webpack --progress --colors",
@@ -56,6 +56,7 @@
   },
   "devDependencies": {
     "babel-preset-stage-0": "^6.5.0",
-    "html-webpack-plugin": "^2.12.0"
+    "html-webpack-plugin": "^2.12.0",
+    "json-loader": "^0.5.4"
   }
 }

@@ -14,7 +14,7 @@ import HackerStyles from './Hacker.less';
                                                  ░
 
       the Hacker is an experimental website in design and user interaction.
-      intended for entertainment purposes only and not associated
+      it is intended for entertainment purposes only and not associated
       with any black-hat organization.
 */
 export default class Hacker extends React.Component {
