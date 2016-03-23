@@ -27,7 +27,10 @@
 
   height: 100%;
   width: 100%;
-  overflow: auto;
+  overflow: hidden;
+
+  -webkit-perspective: 250px;
+  -webkit-perspective-origin: 50% 50%;
 
   h1 {
     color: #FFF;
@@ -37,11 +40,29 @@
     background: @borderColorAlt;
   }
 }
+.panel{
+  border-width: 20px;
+  border-style: solid;
+  border-color: @borderColorAlt;
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  transition: 500ms;
+  // transform: translate(-50%, -50%);
+  -webkit-transform-origin: 50% 50% 50%;
+  -webkit-transform: perspective(0);
+  -webkit-transform-style: preserve-3d;
 
+  &.negaitve{
+    border-color: @borderColor;
+  }
+}
 .boxEffect {
   border-color: @borderColorAlt;
   border-style: solid;
-  position: absolute;;
+  position: absolute;
 	top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -56,4 +77,25 @@
 @keyframes boxEffect {
     from {height: 0%; width: 0%; border-width: 10px; }
     to {height: 100%; width: 100%; border-width: 75px; }
+}
+
+.circleEffect {
+  border-color: @borderColorAlt;
+  border-style: solid;
+  border-radius: 800px;
+  position: absolute;
+	top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  animation: circleEffect 1s steps(20) infinite;
+
+  &.negaitve{
+    border-color: @borderColor;
+  }
+}
+
+@keyframes circleEffect {
+    from {height: 0px; width: 0px; border-width: 10px; }
+    to {height: 800px; width: 800px; border-width: 75px; }
 }

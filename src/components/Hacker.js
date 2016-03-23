@@ -28,13 +28,18 @@ export default class Hacker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      alt: false
+      alt: false,
+      type: true,
+      panelStyle: null
     };
     this.negativeState = this.negativeState.bind(this);
+    this.typeState = this.typeState.bind(this);
   }
 
   componentDidMount() {
     this.interval = setInterval(this.negativeState, 100);
+    // the hacker frequencey //
+    this.interval = setInterval(this.typeState, 2600);
   }
 
   componentWillUnmount() {
@@ -46,12 +51,22 @@ export default class Hacker extends React.Component {
       alt: !this.state.alt
     });
   }
+  typeState() {
+    this.setState({
+      type: !this.state.type
+    });
+  }
+
   render() {
+    const background = (
+      <div {...resolve(this.props,
+        this.state.type ? 'boxEffect' : 'circleEffect',
+        this.state.alt ? 'negaitve' : null)} />
+    );
     return (
       <div {...resolve(this.props, 'bodyContainer',
         this.state.alt ? 'negaitve' : null)}>
-        <div {...resolve(this.props, 'boxEffect',
-          this.state.alt ? 'negaitve' : null)} />
+        {background}
       </div>
     );
   }
