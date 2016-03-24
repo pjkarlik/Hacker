@@ -29,8 +29,7 @@
   width: 100%;
   overflow: hidden;
 
-  -webkit-perspective: 250px;
-  -webkit-perspective-origin: 50% 50%;
+  perspective: 800px;
 
   h1 {
     color: #FFF;
@@ -40,20 +39,24 @@
     background: @borderColorAlt;
   }
 }
-.panel{
+.panelContainer {
+  width: 80%;
+  height: 80%;
+  top: 50%;
+  left: 50%;
+  position: relative;
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
+}
+.panel {
+  background: url('https://media.giphy.com/media/cAkavfftyHvl6/giphy.gif');
+  background-size: 100% 100%;
   border-width: 20px;
   border-style: solid;
   border-color: @borderColorAlt;
-  width: 50%;
-  height: 50%;
-  position: absolute;
-  top: 25%;
-  left: 25%;
-  transition: 500ms;
-  // transform: translate(-50%, -50%);
-  -webkit-transform-origin: 50% 50% 50%;
-  -webkit-transform: perspective(0);
-  -webkit-transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
 
   &.negaitve{
     border-color: @borderColor;
