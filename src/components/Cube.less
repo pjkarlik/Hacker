@@ -15,43 +15,63 @@
   height: 100%;
   position: absolute;
   transform-style: preserve-3d;
+  // transition: 1000ms;
 }
 
 .base {
   display: block;
-   position: absolute;
-   width: @cubeSize;
-   height: @cubeSize;
-   line-height: @cubeSize;
-   font-size: 120px;
-   font-weight: bold;
-   color: white;
-   text-align: center;
-   background: rgba(0,0,0,0.5);
+  position: absolute;
+  width: @cubeSize;
+  height: @cubeSize;
+  line-height: @cubeSize;
+  font-size: 220px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  background: rgba(0,0,0,1);
+  background-size: 100% 100%;
 }
 
 .front {
   composes: base;
   transform: translateZ( @cubeSize / 2 );
+  &.negaitve {
+    background: rgba(255,255,255,1);
+  }
 }
 
 .back {
   composes: base;
   transform: rotateX( -180deg ) translateZ( @cubeSize / 2 );
+  &.negaitve {
+    background: rgba(255,255,255,1);
+  }
 }
 .right {
   composes: base;
   transform: rotateY(   90deg ) translateZ( @cubeSize / 2 );
+  &.negaitve {
+    background: rgba(255,255,255,1);
+  }
 }
 .left {
   composes: base;
   transform: rotateY(  -90deg ) translateZ( @cubeSize / 2 );
+  &.negaitve {
+    background: rgba(255,255,255,1);
+  }
 }
 .top {
   composes: base;
   transform: rotateX(   90deg ) translateZ( @cubeSize / 2 );
+  &.negaitve {
+    background: rgba(255,255,255,1);
+  }
 }
 .bottom {
   composes: base;
   transform: rotateX(  -90deg ) translateZ( @cubeSize / 2 );
+  &.negaitve {
+    background: rgba(255,255,255,1);
+  }
 }
