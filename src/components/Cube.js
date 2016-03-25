@@ -42,12 +42,12 @@ export default class Hacker extends React.Component {
       <div {...resolve(this.props, 'container')}
         onMouseMove = {this.reactMouse}>
         <div {...resolve(this.props, 'cube')} style = {styleObject}>
-          <div {...resolve(this.props, 'front')}>1</div>
-          <div {...resolve(this.props, 'back')}>2</div>
-          <div {...resolve(this.props, 'right')}>3</div>
-          <div {...resolve(this.props, 'left')}>4</div>
-          <div {...resolve(this.props, 'top')}>5</div>
-          <div {...resolve(this.props, 'bottom')}>6</div>
+          <div {...resolve(this.props, 'front')}>H</div>
+          <div {...resolve(this.props, 'back')}>C</div>
+          <div {...resolve(this.props, 'right')}>A</div>
+          <div {...resolve(this.props, 'left')}>K</div>
+          <div {...resolve(this.props, 'top')}>E</div>
+          <div {...resolve(this.props, 'bottom')}>R</div>
         </div>
       </div>
     );

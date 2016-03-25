@@ -3,9 +3,11 @@
 .container {
   width: @cubeSize;
   height: @cubeSize;
-  position: relative;
-  margin: 100px auto 100px;
+  left: 50%;
+  position: absolute;
   perspective: 1000px;
+  transform: translate(-50%, -50%);
+  top: 50%;
 }
 
 .cube {
@@ -20,7 +22,6 @@
    position: absolute;
    width: @cubeSize;
    height: @cubeSize;
-   border: 2px solid black;
    line-height: @cubeSize;
    font-size: 120px;
    font-weight: bold;
