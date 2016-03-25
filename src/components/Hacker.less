@@ -16,20 +16,18 @@
 
 .bodyContainer {
   background: @borderColor;
+
   top: 0px;
   left: 0px;
   right: 0px;
   bottom: 0px;
 
   margin: 0px;
-  padding: 0px 15px 0px 0px;
-  position: fixed;
+  position: absolute;
 
   height: 100%;
   width: 100%;
   overflow: hidden;
-
-  perspective: 800px;
 
   h1 {
     color: #FFF;
@@ -49,8 +47,7 @@
   transform-style: preserve-3d;
 }
 .panel {
-  background: url('https://media.giphy.com/media/cAkavfftyHvl6/giphy.gif');
-  background-size: 100% 100%;
+  background: rgba(0,0,0,.5); // background: url('https://media.giphy.com/media/cAkavfftyHvl6/giphy.gif');
   border-width: 20px;
   border-style: solid;
   border-color: @borderColorAlt;
@@ -100,5 +97,5 @@
 
 @keyframes circleEffect {
     from {height: 0px; width: 0px; border-width: 10px; }
-    to {height: 800px; width: 800px; border-width: 75px; }
+    to {height: 1100px; width: 1100px; border-width: 75px; }
 }
