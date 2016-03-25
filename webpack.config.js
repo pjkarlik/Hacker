@@ -56,6 +56,10 @@ const config = {
       {
         test: /\.(woff|eot|ttf|svg)$/,
         loader: 'file-loader?name=fonts/[name]_[hash:base64:5].[ext]'
+      },
+      {
+        test: /\.json$/,
+        loader: 'json'
       }
     ],
     preLoaders: [
@@ -71,7 +75,7 @@ const config = {
     new ExtractTextPlugin('style.css', { allChunks: true }),
     new HtmlWebpackPlugin({
       title: 'the Hacker',
-      template: './src/template.ejs',
+      template: './resources/templates/template.ejs',
       inject: 'body'
     })
   ]

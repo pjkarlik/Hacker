@@ -38,7 +38,7 @@ export default class Hacker extends React.Component {
     this.typeState = this.typeState.bind(this);
   }
   componentDidMount() {
-    this.interval = setInterval(this.negativeState, 100);
+    // this.interval = setInterval(this.negativeState, 100);
     // the hacker frequencey //
     this.interval = setInterval(this.typeState, 2600);
   }
