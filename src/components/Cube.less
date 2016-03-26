@@ -1,4 +1,4 @@
-@cubeSize: 300px;
+@cubeSize: 400px;
 
 .container {
   width: @cubeSize;
@@ -15,7 +15,17 @@
   height: 100%;
   position: absolute;
   transform-style: preserve-3d;
-  // transition: 1000ms;
+}
+
+.pos {
+  background: rgba(0,0,0,1);
+  // background-size: 100% 100%;
+  color: white;
+}
+
+.neg {
+  background: rgba(255,255,255,1);
+  color: black;
 }
 
 .base {
@@ -26,52 +36,53 @@
   line-height: @cubeSize;
   font-size: 220px;
   font-weight: bold;
-  color: white;
   text-align: center;
-  background: rgba(0,0,0,1);
-  background-size: 100% 100%;
+  .pos();
 }
 
 .front {
   composes: base;
   transform: translateZ( @cubeSize / 2 );
   &.negaitve {
-    background: rgba(255,255,255,1);
+    .neg();
   }
 }
 
 .back {
   composes: base;
   transform: rotateX( -180deg ) translateZ( @cubeSize / 2 );
+  font-size: 28px;
   &.negaitve {
-    background: rgba(255,255,255,1);
+    .neg();
   }
 }
 .right {
   composes: base;
-  transform: rotateY(   90deg ) translateZ( @cubeSize / 2 );
+  transform: rotateY( 90deg ) translateZ( @cubeSize / 2 );
   &.negaitve {
-    background: rgba(255,255,255,1);
+    .neg();
   }
 }
 .left {
   composes: base;
-  transform: rotateY(  -90deg ) translateZ( @cubeSize / 2 );
+  transform: rotateY( -90deg ) translateZ( @cubeSize / 2 );
   &.negaitve {
-    background: rgba(255,255,255,1);
+    .neg();
   }
 }
 .top {
   composes: base;
-  transform: rotateX(   90deg ) translateZ( @cubeSize / 2 );
+  transform: rotateX( 90deg ) translateZ( @cubeSize / 2 );
+  font-size: 28px;
   &.negaitve {
-    background: rgba(255,255,255,1);
+    .neg();
   }
 }
 .bottom {
   composes: base;
   transform: rotateX(  -90deg ) translateZ( @cubeSize / 2 );
+  font-size: 28px;
   &.negaitve {
-    background: rgba(255,255,255,1);
+    .neg();
   }
 }
