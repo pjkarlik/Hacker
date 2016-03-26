@@ -4,8 +4,8 @@ import getBrowserDimensions from './utils/getBrowserDimensions';
 
 /**
 */
-export default class Hacker extends React.Component {
-  static displayName = 'Hacker';
+export default class Cube extends React.Component {
+  static displayName = 'Cube';
   static propTypes = {
     rotation: React.PropTypes.array,
     alt: React.PropTypes.bool,
