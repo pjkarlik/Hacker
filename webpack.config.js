@@ -13,7 +13,7 @@ const config = {
   },
   output: {
     path: path.join(__dirname, 'dist/'),
-    filename: 'index.js',
+    filename: 'src/index.js',
     libraryTarget: 'umd'
   },
   entry: './src/index.js',
@@ -72,8 +72,9 @@ const config = {
     AutoPrefixer
   ],
   plugins: [
-    new ExtractTextPlugin('style.css', { allChunks: true }),
+    new ExtractTextPlugin('style/style.css', { allChunks: true }),
     new HtmlWebpackPlugin({
+      css: 'styles/styles.css',
       title: 'the Hacker',
       template: './resources/templates/template.ejs',
       inject: 'body'
