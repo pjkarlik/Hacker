@@ -9,6 +9,7 @@ export default class Cube extends React.Component {
   static propTypes = {
     rotation: React.PropTypes.array,
     alt: React.PropTypes.bool,
+    cubeState: React.PropTypes.func,
     classes: React.PropTypes.object
   };
 
