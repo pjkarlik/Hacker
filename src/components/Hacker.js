@@ -1,8 +1,13 @@
 import React from 'react';
 import { resolve } from './utils/styles';
 import Cube from './Cube';
+import Navigation from './Navigation';
+
+// Less for CSS Modules
 import HackerStyles from './Hacker.less';
 import CubeStyles from './Cube.less';
+import NavigationStyles from './Navigation.less';
+
 /**
     ▄▄▄█████▓ ██░ ██ ▓█████     ██░ ██  ▄▄▄       ▄████▄   ██ ▄█▀▓█████  ██▀███
     ▓  ██▒ ▓▒▓██░ ██▒▓█   ▀    ▓██░ ██▒▒████▄    ▒██▀ ▀█   ██▄█▒ ▓█   ▀ ▓██ ▒ ██▒
@@ -30,17 +35,12 @@ export default class Hacker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      alt: false,
-      type: false,
-      panelStyle: null
+      alt: false
     };
     this.negativeState = this.negativeState.bind(this);
-    this.typeState = this.typeState.bind(this);
   }
   componentDidMount() {
-    this.interval = setInterval(this.negativeState, 120);
-    // the hacker frequencey //
-    // this.interval = setInterval(this.typeState, 2600);
+    // this.interval = setInterval(this.negativeState, 120);
   }
   componentWillUnmount() {
     clearInterval(this.interval);
@@ -50,18 +50,13 @@ export default class Hacker extends React.Component {
       alt: !this.state.alt
     });
   }
-  typeState() {
-    this.setState({
-      type: !this.state.type
-    });
-  }
   render() {
     const background = (
-      <div {...resolve(this.props, this.state.type ? 'boxEffect' : 'circleEffect',
-        this.state.alt ? 'negaitve' : null)} />
+      <div {...resolve(this.props, 'circleEffect', this.state.alt ? 'negaitve' : null)} />
     );
     return (
       <div {...resolve(this.props, 'bodyContainer', this.state.alt ? 'negaitve' : null)}>
+        <Navigation classes = {NavigationStyles} />
         {background}
         <Cube classes = {CubeStyles}
           alt = {this.state.alt}

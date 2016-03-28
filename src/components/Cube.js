@@ -22,12 +22,17 @@ export default class Cube extends React.Component {
     };
     this.reactMouse = this.reactMouse.bind(this);
     this.inactMouse = this.inactMouse.bind(this);
+    this.touchStart = this.touchStart.bind(this);
+    this.touchMove = this.touchMove.bind(this);
     this.waitFor = this.waitFor.bind(this);
     this.computeRotation = this.computeRotation.bind(this);
     this.generateMouseMove = this.generateMouseMove.bind(this);
   }
 
   componentDidMount() {
+    // React.initializeTouchEvents(true);
+    window.addEventListener('touchmove', this.touchMove);
+    window.addEventListener('touchend', this.inactMouse);
     this.generateMouseMove();
     this.waitFor();
   }
@@ -60,6 +65,14 @@ export default class Cube extends React.Component {
       mouseActive: true
     });
   }
+  touchStart(e) {
+    e.preventDefault();
+    this.reactMouse(e.touches[0]);
+  }
+  touchMove(e) {
+    e.preventDefault();
+    this.computeRotation(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+  }
   inactMouse() {
     this.waitFor();
     this.setState({
@@ -84,6 +97,7 @@ export default class Cube extends React.Component {
     };
     return (
       <div {...resolve(this.props, 'container')}
+        onTouchStart = {this.touchStart}
         onMouseMove = {this.reactMouse}
         onMouseLeave = {this.inactMouse}>
         <div {...resolve(this.props, 'cube')} style = {styleObject}>

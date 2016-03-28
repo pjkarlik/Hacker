@@ -76,8 +76,10 @@ const config = {
     new HtmlWebpackPlugin({
       css: 'styles/styles.css',
       title: 'the Hacker',
+      favicon: './resources/images/favicon.png',
       template: './resources/templates/template.ejs',
-      inject: 'body'
+      inject: 'body',
+      hash: true
     })
   ]
 };
