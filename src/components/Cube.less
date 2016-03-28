@@ -1,3 +1,5 @@
+@import (reference) '../utils/styles/MediaQuery.less';
+
 @cubeSize: 400px;
 
 .container {
@@ -8,6 +10,10 @@
   perspective: 1000px;
   transform: translate(-50%, -50%);
   top: 50%;
+  @media @medium {
+    width: @cubeSize / 2;
+    height: @cubeSize / 2;
+  }
 }
 
 .cube {
@@ -40,11 +46,20 @@
   text-align: center;
   backface-visibility: hidden;
   .pos();
+  @media @medium {
+    width: @cubeSize / 2;
+    height: @cubeSize / 2;
+    line-height: @cubeSize / 2;
+    font-size: 360px / 2;
+  }
 }
 
 .front {
   composes: base;
   transform: translateZ( @cubeSize / 2 );
+  @media @medium {
+    transform: translateZ( @cubeSize / 4 );
+  }
   &.negaitve {
     .neg();
   }
@@ -53,6 +68,9 @@
 .back {
   composes: base;
   transform: rotateX( -180deg ) translateZ( @cubeSize / 2 );
+  @media @medium {
+    transform: rotateX( -180deg ) translateZ( @cubeSize / 4 );
+  }
   font-size: 28px;
   &.negaitve {
     .neg();
@@ -61,6 +79,9 @@
 .right {
   composes: base;
   transform: rotateY( 90deg ) translateZ( @cubeSize / 2 );
+  @media @medium {
+    transform: rotateY( 90deg ) translateZ( @cubeSize / 4 );
+  }
   &.negaitve {
     .neg();
   }
@@ -68,6 +89,9 @@
 .left {
   composes: base;
   transform: rotateY( -90deg ) translateZ( @cubeSize / 2 );
+  @media @medium {
+    transform: rotateY( -90deg ) translateZ( @cubeSize / 4 );
+  }
   &.negaitve {
     .neg();
   }
@@ -76,6 +100,11 @@
   composes: base;
   transform: rotateX( 90deg ) translateZ( @cubeSize / 2 );
   font-size: 28px;
+  @media @medium {
+    transform: rotateX( 90deg ) translateZ( @cubeSize / 4 );
+    font-size: 28px / 2;
+  }
+
   &.negaitve {
     .neg();
   }
@@ -84,6 +113,10 @@
   composes: base;
   transform: rotateX(  -90deg ) translateZ( @cubeSize / 2 );
   font-size: 28px;
+  @media @medium {
+    transform: rotateX( -90deg ) translateZ( @cubeSize / 4 );
+    font-size: 28px / 2;
+  }
   &.negaitve {
     .neg();
   }
