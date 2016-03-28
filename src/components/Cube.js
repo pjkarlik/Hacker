@@ -71,7 +71,9 @@ export default class Cube extends React.Component {
   }
   touchMove(e) {
     e.preventDefault();
-    this.computeRotation(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+    const touchX = Math.floor(e.changedTouches[0].clientX);
+    const touchY = Math.floor(e.changedTouches[0].clientY);
+    this.computeRotation(touchX, touchY);
   }
   inactMouse() {
     this.waitFor();
