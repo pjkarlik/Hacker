@@ -1,3 +1,5 @@
+@import (reference) '../utils/styles/MediaQuery.less';
+
 @borderColor: #FFF;
 @borderColorAlt: #000;
 
@@ -82,20 +84,25 @@
 .circleEffect {
   border-color: @borderColorAlt;
   border-style: solid;
-  border-radius: 800px;
+  border-radius: 2200px;
   position: absolute;
 	top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 
   animation: circleEffect 2s infinite;
-
+  @media @medium {
+    animation: circleEffectMobile 2.5s infinite;
+  }
   &.negaitve{
     border-color: @borderColor;
   }
 }
-
 @keyframes circleEffect {
-    from {height: 0px; width: 0px; border-width: 10px; }
-    to {height: 1800px; width: 1800px; border-width: 75px; }
+    from {height: 0px; width: 0px; border-width: 10px; opacity: 1;}
+    to {height: 2200px; width: 2200px; border-width: 75px; opacity: 0;}
+}
+@keyframes circleEffectMobile {
+    from {height: 0px; width: 0px; border-width: 10px; opacity: 1;}
+    to {height: 1000px; width: 1000px; border-width: 75px; opacity: 0;}
 }

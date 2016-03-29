@@ -1,9 +1,53 @@
+@linkHeight: 20px;
+
 .navigation {
+  color: #FFF;
   position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: @linkHeight;
   top: 10px;
+  text-align: center;
   right: 10px;
+  z-index: 100;
+}
 
+.trigger {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #000;
+  height: @linkHeight;
+  width: @linkHeight;
+  font-size: 20px;
+  line-height: 21px;
+  cursor: default;
+  z-index: 101;
+}
 
-  width: 50px;
-  height: 50px;
+.menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  right: -800px;
+  transition: right 500ms ease-in;
+  white-space: nowrap;
+  li {
+    display: inline-block;
+    margin-left: 1px;
+    padding: 0 10px;
+    background: #000;
+    a {
+      color: #FFF;
+      font-size: 12px;
+      height: @linkHeight;
+      line-height: @linkHeight;
+      text-decoration: none;
+    }
+  }
+  &.open {
+    right: 21px;
+  }
 }

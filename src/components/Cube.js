@@ -30,7 +30,6 @@ export default class Cube extends React.Component {
   }
 
   componentDidMount() {
-    // React.initializeTouchEvents(true);
     window.addEventListener('touchmove', this.touchMove);
     window.addEventListener('touchend', this.inactMouse);
     this.generateMouseMove();
@@ -67,6 +66,7 @@ export default class Cube extends React.Component {
   }
   touchStart(e) {
     e.preventDefault();
+    clearInterval(this.interval);
     this.reactMouse(e.touches[0]);
   }
   touchMove(e) {
@@ -82,7 +82,7 @@ export default class Cube extends React.Component {
     });
   }
   waitFor() {
-    const randomDelay = Math.floor((Math.random() * 5000) + 1000);
+    const randomDelay = Math.floor((Math.random() * 6000) + 1000);
     this.interval = setInterval(this.generateMouseMove, randomDelay);
   }
   generateMouseMove() {
@@ -95,7 +95,7 @@ export default class Cube extends React.Component {
     const { rotation, mouseActive } = this.state;
     const styleObject = {
       transition: `${mouseActive ? '0' : '2000'}ms`,
-      transform: `rotateY(${rotation.x}deg) rotateX(${rotation.y}deg)`
+      transform: `rotateY(${360 - rotation.x}deg) rotateX(${rotation.y}deg)`
     };
     return (
       <div {...resolve(this.props, 'container')}
