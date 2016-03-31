@@ -10,14 +10,18 @@ export default class Cube extends React.Component {
     rotation: React.PropTypes.array,
     alt: React.PropTypes.bool,
     cubeState: React.PropTypes.func,
+    direction: React.PropTypes.string,
     classes: React.PropTypes.object
   };
-
+  static defaultProps = {
+    direction: null
+  };
   constructor(props) {
     super(props);
     this.state = {
       rotation: [0, 0],
       mouseActive: false,
+      direction: this.props.direction,
       alt: this.props.alt
     };
     this.reactMouse = this.reactMouse.bind(this);
@@ -39,6 +43,11 @@ export default class Cube extends React.Component {
     if (nextProps.alt !== this.props.alt) {
       this.setState({
         alt: !this.props.alt
+      });
+    }
+    if (nextProps.direction !== this.props.direction) {
+      this.setState({
+        direction: nextProps.direction
       });
     }
   }
@@ -98,7 +107,7 @@ export default class Cube extends React.Component {
       transform: `rotateY(${360 - rotation.x}deg) rotateX(${rotation.y}deg)`
     };
     return (
-      <div {...resolve(this.props, 'container')}
+      <div {...resolve(this.props, 'container', this.state.direction)}
         onTouchStart = {this.touchStart}
         onMouseMove = {this.reactMouse}
         onMouseLeave = {this.inactMouse}>

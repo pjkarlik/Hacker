@@ -92,7 +92,7 @@
 
   animation: circleEffect 2s infinite;
   @media @medium {
-    animation: circleEffectMobile 2.5s infinite;
+    animation: circleEffectMobile steps(50) 3s infinite;
   }
   &.negaitve{
     border-color: @borderColor;
@@ -104,5 +104,5 @@
 }
 @keyframes circleEffectMobile {
     from {height: 0px; width: 0px; border-width: 10px; opacity: 1;}
-    to {height: 1000px; width: 1000px; border-width: 75px; opacity: 0;}
+    to {height: 1200px; width: 1200px; border-width: 75px; opacity: 1;}
 }

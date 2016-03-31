@@ -2,13 +2,13 @@ require('console-polyfill');
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Hacker from './components/Hacker';
+import App from './components/App';
 
 /**
   Entry Point JavaScript
 */
 if (typeof document !== 'undefined') {
-  ReactDOM.render(<Hacker />, document.getElementById('outlet')); //
+  ReactDOM.render(<App />, document.getElementById('outlet')); //
 }
 
 const version = require('../package.json').version;
