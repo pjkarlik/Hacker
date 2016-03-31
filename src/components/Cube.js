@@ -1,5 +1,6 @@
 import React from 'react';
 import { resolve } from './utils/styles';
+import { connect } from 'react-redux';
 import getBrowserDimensions from './utils/getBrowserDimensions';
 
 /**
@@ -11,6 +12,7 @@ export default class Cube extends React.Component {
     alt: React.PropTypes.bool,
     cubeState: React.PropTypes.func,
     direction: React.PropTypes.string,
+    navigationIsOpen: React.PropTypes.bool,
     classes: React.PropTypes.object
   };
   static defaultProps = {
@@ -36,7 +38,6 @@ export default class Cube extends React.Component {
   componentDidMount() {
     window.addEventListener('touchmove', this.touchMove);
     window.addEventListener('touchend', this.inactMouse);
-    this.generateMouseMove();
     this.waitFor();
   }
   componentWillReceiveProps(nextProps) {
@@ -91,7 +92,8 @@ export default class Cube extends React.Component {
     });
   }
   waitFor() {
-    const randomDelay = Math.floor((Math.random() * 6000) + 1000);
+    clearInterval(this.interval);
+    const randomDelay = Math.floor((Math.random() * 8000) + 2000);
     this.interval = setInterval(this.generateMouseMove, randomDelay);
   }
   generateMouseMove() {
@@ -102,12 +104,13 @@ export default class Cube extends React.Component {
   }
   render() {
     const { rotation, mouseActive } = this.state;
+    const { navigationIsOpen } = this.props;
     const styleObject = {
       transition: `${mouseActive ? '0' : '2000'}ms`,
       transform: `rotateY(${360 - rotation.x}deg) rotateX(${rotation.y}deg)`
     };
     return (
-      <div {...resolve(this.props, 'container', this.state.direction)}
+      <div {...resolve(this.props, 'container', navigationIsOpen ? 'up' : null)}
         onTouchStart = {this.touchStart}
         onMouseMove = {this.reactMouse}
         onMouseLeave = {this.inactMouse}>
@@ -127,3 +130,9 @@ export default class Cube extends React.Component {
     );
   }
 }
+
+export default connect((state) => {
+  return {
+    navigationIsOpen: state.hacker.navigationIsOpen
+  };
+}, {})(Cube);

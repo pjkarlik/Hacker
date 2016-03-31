@@ -1,11 +1,14 @@
 import React from 'react';
 import { resolve } from './utils/styles';
-
+import { connect } from 'react-redux';
+import { setNavigationState } from '../redux/modules/hacker';
 /**
 */
-export default class Navigation extends React.Component {
+class Navigation extends React.Component {
   static displayName = 'Navigation';
   static propTypes = {
+    navigationIsOpen: React.PropTypes.bool,
+    setNavigationState: React.PropTypes.func,
     classes: React.PropTypes.object
   };
 
@@ -17,17 +20,18 @@ export default class Navigation extends React.Component {
     this.toggleMenu = this.toggleMenu.bind(this);
   }
   toggleMenu() {
-    this.setState({
-      menu: !this.state.menu
+    this.props.setNavigationState({
+      navigationIsOpen: !this.props.navigationIsOpen
     });
   }
   render() {
-    const navIcon = this.state.menu ? ' ' : '+';
+    const { navigationIsOpen } = this.props;
+    const navIcon = navigationIsOpen ? ' ' : '+';
     return (
       <div {...resolve(this.props, 'navigation')}>
         <div {...resolve(this.props, 'trigger')} onClick = {this.toggleMenu}
           dangerouslySetInnerHTML = {{ __html: navIcon }} />
-        <ul {...resolve(this.props, 'menu', this.state.menu ? 'open' : '')}>
+        <ul {...resolve(this.props, 'menu', navigationIsOpen ? 'open' : '')}>
           <li><a href="#" onClick = {this.toggleMenu}>about</a></li>
           <li><a href="#" onClick = {this.toggleMenu}>experiments</a></li>
           <li><a href="#" onClick = {this.toggleMenu}>resource links</a></li>
@@ -37,3 +41,9 @@ export default class Navigation extends React.Component {
     );
   }
 }
+
+export default connect((state) => {
+  return {
+    navigationIsOpen: state.hacker.navigationIsOpen
+  };
+}, { setNavigationState })(Navigation);
