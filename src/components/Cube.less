@@ -11,10 +11,10 @@
   transition: transform 800ms;
   transform: translate(-50%, -50%);
   &.up{
-    transform: translate(-50%, -250%);
+    transform: translate(-50%, -350%);
   }
   &.down{
-    transform: translate(-50%, 250%);
+    transform: translate(-50%, 350%);
   }
   top: 50%;
   @media @medium {
@@ -63,7 +63,6 @@
 }
 
 .front {
-  transition: transform 800ms;
   composes: base;
   transform: translateZ( @cubeSize / 2 );
   @media @medium {

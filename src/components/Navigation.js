@@ -2,6 +2,7 @@ import React from 'react';
 import { resolve } from './utils/styles';
 import { connect } from 'react-redux';
 import { setNavigationState } from '../redux/modules/hacker';
+import { setCubeRotation } from '../redux/modules/cube';
 /**
 */
 class Navigation extends React.Component {
@@ -9,6 +10,7 @@ class Navigation extends React.Component {
   static propTypes = {
     navigationIsOpen: React.PropTypes.bool,
     setNavigationState: React.PropTypes.func,
+    setCubeRotation: React.PropTypes.func,
     classes: React.PropTypes.object
   };
 
@@ -22,6 +24,9 @@ class Navigation extends React.Component {
   toggleMenu() {
     this.props.setNavigationState({
       navigationIsOpen: !this.props.navigationIsOpen
+    });
+    this.props.setCubeRotation({
+      rotationActive: true
     });
   }
   render() {
@@ -46,4 +51,4 @@ export default connect((state) => {
   return {
     navigationIsOpen: state.hacker.navigationIsOpen
   };
-}, { setNavigationState })(Navigation);
+}, { setNavigationState, setCubeRotation })(Navigation);

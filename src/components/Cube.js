@@ -1,6 +1,7 @@
 import React from 'react';
 import { resolve } from './utils/styles';
 import { connect } from 'react-redux';
+import { setCubeRotation } from '../redux/modules/cube';
 import getBrowserDimensions from './utils/getBrowserDimensions';
 
 /**
@@ -13,6 +14,8 @@ export default class Cube extends React.Component {
     cubeState: React.PropTypes.func,
     direction: React.PropTypes.string,
     navigationIsOpen: React.PropTypes.bool,
+    rotationActive: React.PropTypes.bool,
+    setCubeRotation: React.PropTypes.func,
     classes: React.PropTypes.object
   };
   static defaultProps = {
@@ -31,6 +34,7 @@ export default class Cube extends React.Component {
     this.touchStart = this.touchStart.bind(this);
     this.touchMove = this.touchMove.bind(this);
     this.waitFor = this.waitFor.bind(this);
+    this.focusCube = this.focusCube.bind(this);
     this.computeRotation = this.computeRotation.bind(this);
     this.generateMouseMove = this.generateMouseMove.bind(this);
   }
@@ -56,6 +60,9 @@ export default class Cube extends React.Component {
     clearInterval(this.interval);
   }
   computeRotation(x, y) {
+    if (!this.props.rotationActive) {
+      return;
+    }
     const rotation = [];
     const browserSize = getBrowserDimensions(window, document);
     const mouseX = 90 - Math.floor((90 / (browserSize.browserWidth / 2)) * x);
@@ -91,6 +98,15 @@ export default class Cube extends React.Component {
       mouseActive: false
     });
   }
+  focusCube() {
+    clearInterval(this.interval);
+    this.props.setCubeRotation({
+      rotationActive: !this.props.rotationActive
+    });
+    this.setState({
+      mouseActive: false
+    });
+  }
   waitFor() {
     clearInterval(this.interval);
     const randomDelay = Math.floor((Math.random() * 8000) + 2000);
@@ -104,18 +120,32 @@ export default class Cube extends React.Component {
   }
   render() {
     const { rotation, mouseActive } = this.state;
-    const { navigationIsOpen } = this.props;
-    const styleObject = {
-      transition: `${mouseActive ? '0' : '2000'}ms`,
-      transform: `rotateY(${360 - rotation.x}deg) rotateX(${rotation.y}deg)`
-    };
+    const { navigationIsOpen, rotationActive } = this.props;
+    let styleObject;
+    if (rotationActive) {
+      styleObject = {
+        transition: `${mouseActive ? '0' : '2000'}ms`,
+        transform: `rotateY(${360 - rotation.x}deg) rotateX(${rotation.y}deg)`
+      };
+    } else {
+      styleObject = {
+        transition: `${'2000'}ms`,
+        transform: `rotateY(${360 - 0}deg) rotateX(${0}deg) translateZ(150px)`
+      };
+    }
+    const frontContent = (
+      <span>J</span>
+    );
     return (
       <div {...resolve(this.props, 'container', navigationIsOpen ? 'up' : null)}
         onTouchStart = {this.touchStart}
         onMouseMove = {this.reactMouse}
         onMouseLeave = {this.inactMouse}>
         <div {...resolve(this.props, 'cube')} style = {styleObject}>
-          <div {...resolve(this.props, 'front', this.state.alt ? 'negaitve' : null)}>J</div>
+          <div {...resolve(this.props, 'front', this.state.alt ? 'negaitve' : null)}
+            onClick = {this.focusCube}>
+              {frontContent}
+            </div>
           <div {...resolve(this.props, 'back', this.state.alt ? 'negaitve' : null)}>pjkarlik@gmail.com</div>
           <div {...resolve(this.props, 'right', this.state.alt ? 'negaitve' : null)}>K</div>
           <div {...resolve(this.props, 'left', this.state.alt ? 'negaitve' : null)}>P</div>
@@ -133,6 +163,7 @@ export default class Cube extends React.Component {
 
 export default connect((state) => {
   return {
-    navigationIsOpen: state.hacker.navigationIsOpen
+    navigationIsOpen: state.hacker.navigationIsOpen,
+    rotationActive: state.cube.rotationActive
   };
-}, {})(Cube);
+}, { setCubeRotation })(Cube);
