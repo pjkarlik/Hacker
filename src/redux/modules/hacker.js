@@ -12,7 +12,8 @@ export function setNavigationState(state) {
 }
 // REDUCER
 export default function reducer(state = {
-  navigationIsOpen: false
+  navigationIsOpen: true,
+  mouseActive: true
 }, action) {
   switch (action.type) {
   case SET_NAVIGATION_STATE: {

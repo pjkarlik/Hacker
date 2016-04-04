@@ -8,10 +8,13 @@ import { setCubeRotation } from '../redux/modules/cube';
 class Navigation extends React.Component {
   static displayName = 'Navigation';
   static propTypes = {
+    classes: React.PropTypes.object,
+    /** Modules Props **/
     navigationIsOpen: React.PropTypes.bool,
+    mouseActive: React.PropTypes.bool,
+    /** Redux Actions **/
     setNavigationState: React.PropTypes.func,
-    setCubeRotation: React.PropTypes.func,
-    classes: React.PropTypes.object
+    setCubeRotation: React.PropTypes.func
   };
 
   constructor(props) {

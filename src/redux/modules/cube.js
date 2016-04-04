@@ -20,12 +20,6 @@ export function setCubeRotation(state) {
 }
 // REDUCER
 export default function reducer(state = {
-  cubeFront: false,
-  cubeBack: false,
-  cubeLeft: false,
-  cubeRight: false,
-  cubeTop: false,
-  cubeBottom: false,
   rotationActive: true,
   rotationX: 0,
   rotationY: 0

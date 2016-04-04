@@ -11,11 +11,11 @@ import CubeStyles from './Cube.less';
 import NavigationStyles from './Navigation.less';
 
 /**
-    ▄▄▄█████▓ ██░ ██ ▓█████     ██░ ██  ▄▄▄       ▄████▄   ██ ▄█▀▓█████  ██▀███
-    ▓  ██▒ ▓▒▓██░ ██▒▓█   ▀    ▓██░ ██▒▒████▄    ▒██▀ ▀█   ██▄█▒ ▓█   ▀ ▓██ ▒ ██▒
-    ▒ ▓██░ ▒░▒██▀▀██░▒███      ▒██▀▀██░▒██  ▀█▄  ▒▓█    ▄ ▓███▄░ ▒███   ▓██ ░▄█ ▒
+    ▄▄▄█████▓ ██░ ██ ▓█████     ██░ ██  ▄▄▄       ▄████▄   ██ ▄█▀▓█████ ▒██▀███
+    ▓  ██▒ ▓▒▓██░ ██▒▓█   ▀    ▓██░ ██▒▒████▄    ▒██▀ ▀█   ██▄█▒ ▓█   ▀ ▒▓█ ▒ ██▒
+    ▒ ▒▓█░ ▒░▒██▀▀██░▒███      ▒██▀▀██░▒██  ▀█▄  ▒▓█    ▄ ▓███▄░ ▒███    ▓█ ░▄█ ▒
     ░ ▓██▓ ░ ░▓█ ░██ ▒▓█  ▄    ░▓█ ░██ ░██▄▄▄▄██ ▒▓▓▄ ▄██▒▓██ █▄ ▒▓█  ▄ ▒███▀▀█▄
-      ▒██▒ ░ ░▓█▒░██▓░▒████▒   ░▓█▒░██▓ ▓█   ▓██▒▒ ▓███▀ ░▒██▒ █▄░▒████▒░██▓ ▒██▒
+      ▒██▒ ░ ░▓█▒░██▓░▒████▒   ░▓█▒░██▓ ▓█   ▓██▒  ▒▓█▒▀ ░▒██▒ █▄░▒████▒░██▓ ▒██▒
       ▒ ░░    ▒ ░░▒░▒░░ ▒░ ░    ▒ ░░▒░▒ ▒▒   ▓▒█░░ ░▒ ▒  ░▒ ▒▒ ▓▒░░ ▒░ ░░ ▒▓ ░▒▓░
         ░     ▒ ░▒░ ░ ░ ░  ░    ▒ ░▒░ ░  ▒   ▒▒ ░  ░  ▒   ░ ░▒ ▒░ ░ ░  ░  ░▒ ░ ▒░
       ░       ░  ░░ ░   ░       ░  ░░ ░  ░   ▒   ░        ░ ░░ ░    ░     ░░   ░
@@ -23,13 +23,16 @@ import NavigationStyles from './Navigation.less';
                                                  ░
 
       the Hacker is an experimental website in design and user interaction.
-      intended for entertainment purposes only and not associated
-      with any black-hat organization.
 */
 class Hacker extends React.Component {
   static displayName = 'Hacker';
   static propTypes = {
-    classes: React.PropTypes.object
+    classes: React.PropTypes.object,
+    /** Modules Props **/
+    navigationIsOpen: React.PropTypes.bool,
+    mouseActive: React.PropTypes.bool,
+    /** Redux Actions **/
+    setNavigationState: React.PropTypes.func
   };
   static defaultProps = {
     classes: HackerStyles
@@ -43,6 +46,11 @@ class Hacker extends React.Component {
   }
   componentDidMount() {
     // this.interval = setInterval(this.negativeState, 120);
+    setTimeout(() => {
+      this.props.setNavigationState({
+        navigationIsOpen: !this.props.navigationIsOpen
+      });
+    }, 500);
   }
   componentWillUnmount() {
     clearInterval(this.interval);
@@ -61,14 +69,14 @@ class Hacker extends React.Component {
         <Navigation classes = {NavigationStyles} />
         {background}
         <Cube classes = {CubeStyles}
-          alt = {this.state.alt}
-          rotation = {this.state.rotation} />
+          alt = {this.state.alt} />
       </div>
     );
   }
 }
 export default connect((state) => {
   return {
-    navigationIsOpen: state.hacker.navigationIsOpen
+    navigationIsOpen: state.hacker.navigationIsOpen,
+    mouseActive: state.hacker.mouseActive
   };
 }, { setNavigationState })(Hacker);
