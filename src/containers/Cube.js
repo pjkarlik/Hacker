@@ -9,10 +9,10 @@ export default class Cube extends React.Component {
   static displayName = 'Cube';
   static propTypes = {
     classes: React.PropTypes.object,
-    direction: React.PropTypes.string,
     rotation: React.PropTypes.array,
     /** Modules Props **/
-    navigationIsOpen: React.PropTypes.bool
+    navigationIsOpen: React.PropTypes.bool,
+    direction: React.PropTypes.string
   };
   static defaultProps = {
     direction: null
@@ -102,15 +102,15 @@ export default class Cube extends React.Component {
   }
   /* Render Cube */
   render() {
-    const { rotation, mouseActive } = this.state;
-    const { navigationIsOpen } = this.props;
+    const { rotation, mouseActive, direction } = this.state;
+    // const { direction } = this.props;
     const styleObject = {
       transition: `${mouseActive ? '0' : '2000'}ms`,
       transform: `rotateY(${360 - rotation.x}deg) rotateX(${rotation.y}deg)`
     };
 
     return (
-      <div {...resolve(this.props, 'container', navigationIsOpen ? 'up' : null)}
+      <div {...resolve(this.props, 'container', direction)}
         onTouchStart = {this.touchStart}
         onMouseMove = {this.reactMouse}
         onMouseLeave = {this.inactMouse}>
@@ -129,6 +129,7 @@ export default class Cube extends React.Component {
 
 export default connect((state) => {
   return {
-    navigationIsOpen: state.hacker.navigationIsOpen
+    navigationIsOpen: state.hacker.navigationIsOpen,
+    direction: state.cube.direction
   };
 }, {})(Cube);

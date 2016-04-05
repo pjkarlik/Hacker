@@ -19,7 +19,7 @@ const config = {
   entry: './src/index.js',
   resolve: {
     extensions: ['', '.js', '.jsx', '.less'],
-    modulesDirectories: ['node_modules', 'components'],
+    modulesDirectories: ['node_modules'],
     fallback: path.join(__dirname, 'node_modules')
   },
   module: {

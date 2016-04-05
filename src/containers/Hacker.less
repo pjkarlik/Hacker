@@ -1,0 +1,48 @@
+@import (reference) '../utils/styles/MediaQuery.less';
+
+@borderColor: #FFF;
+@borderColorAlt: #000;
+
+.container {
+  background: @borderColor;
+
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+
+  margin: 0px;
+  position: absolute;
+
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  h1 {
+    color: #FFF;
+    text-align: center;
+  }
+}
+
+.circleEffect {
+  border-color: @borderColorAlt;
+  border-style: solid;
+  border-radius: 2200px;
+  position: absolute;
+	top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  animation: circleEffect 2s infinite;
+  @media @medium {
+    animation: circleEffectMobile 2s infinite;
+  }
+}
+@keyframes circleEffect {
+    from {height: 0px; width: 0px; border-width: 10px; opacity: 1;}
+    to {height: 2200px; width: 2200px; border-width: 75px; opacity: 0;}
+}
+@keyframes circleEffectMobile {
+    from {height: 0px; width: 0px; border-width: 10px; }
+    to {height: 1200px; width: 1200px; border-width: 75px; }
+}

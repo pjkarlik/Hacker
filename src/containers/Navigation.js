@@ -1,8 +1,9 @@
 import React from 'react';
 import { resolve } from './utils/styles';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { setNavigationState } from '../redux/modules/hacker';
-import { setCubeRotation } from '../redux/modules/cube';
+import { setCubeState } from '../redux/modules/cube';
 /**
 */
 class Navigation extends React.Component {
@@ -14,7 +15,7 @@ class Navigation extends React.Component {
     mouseActive: React.PropTypes.bool,
     /** Redux Actions **/
     setNavigationState: React.PropTypes.func,
-    setCubeRotation: React.PropTypes.func
+    setCubeState: React.PropTypes.func
   };
 
   constructor(props) {
@@ -28,8 +29,8 @@ class Navigation extends React.Component {
     this.props.setNavigationState({
       navigationIsOpen: !this.props.navigationIsOpen
     });
-    this.props.setCubeRotation({
-      rotationActive: true
+    this.props.setCubeState({
+      direction: !this.props.navigationIsOpen ? 'up' : ''
     });
   }
   render() {
@@ -40,10 +41,11 @@ class Navigation extends React.Component {
         <div {...resolve(this.props, 'trigger')} onClick = {this.toggleMenu}
           dangerouslySetInnerHTML = {{ __html: navIcon }} />
         <ul {...resolve(this.props, 'menu', navigationIsOpen ? 'open' : '')}>
-          <li><a href="#" onClick = {this.toggleMenu}>about</a></li>
-          <li><a href="#" onClick = {this.toggleMenu}>experiments</a></li>
-          <li><a href="#" onClick = {this.toggleMenu}>resource links</a></li>
-          <li><a href="#" onClick = {this.toggleMenu}>contact</a></li>
+          <li><Link to = "/" onClick = {this.toggleMenu}>home</Link></li>
+          <li><Link to = "/about" onClick = {this.toggleMenu}>about</Link></li>
+          <li><Link to = "/experiments" onClick = {this.toggleMenu}>experiments</Link></li>
+          <li><Link to = "/resources" onClick = {this.toggleMenu}>resource links</Link></li>
+          <li><Link to = "/contact" onClick = {this.toggleMenu}>contact</Link></li>
         </ul>
       </div>
     );
@@ -54,4 +56,4 @@ export default connect((state) => {
   return {
     navigationIsOpen: state.hacker.navigationIsOpen
   };
-}, { setNavigationState, setCubeRotation })(Navigation);
+}, { setNavigationState, setCubeState })(Navigation);

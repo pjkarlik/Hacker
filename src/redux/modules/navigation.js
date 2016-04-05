@@ -1,5 +1,5 @@
 // ACTION TYPES.
-const SET_NAVIGATION_STATE = 'Hacker/hacker/SET_NAVIGATION_STATE';
+const SET_NAVIGATION_STATE = 'Hacker/navigation/SET_NAVIGATION_STATE';
 
 // ACTIONS.
 export function setNavigationState(state) {

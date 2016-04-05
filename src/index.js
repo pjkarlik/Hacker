@@ -1,15 +1,23 @@
 require('console-polyfill');
 import 'babel-polyfill';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './components/App';
+import { render } from 'react-dom';
+import { Router, useRouterHistory } from 'react-router';
+import { createHistory } from 'history';
 
+const history = useRouterHistory(createHistory)({ basename: window.baseName || '/' });
 /**
   Entry Point JavaScript
 */
-if (typeof document !== 'undefined') {
-  ReactDOM.render(<App />, document.getElementById('outlet')); //
-}
+require.ensure(['./routes'], (require) => {
+  const routes = require('./routes').default;
+  const prefetchRoutes = require('./routes').prefetchRoutes;
+  render(
+    <Router history={history} routes={routes} />,
+    document.getElementById('react-mount'));
+  prefetchRoutes();
+});
+
 
 const version = require('../package.json').version;
 const description = require('../package.json').description;

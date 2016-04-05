@@ -1,14 +1,12 @@
 import React from 'react';
 import { resolve } from './utils/styles';
 import { connect } from 'react-redux';
-import { setNavigationState } from '../redux/modules/hacker';
+import { setCubeState } from '../redux/modules/cube';
 import Cube from './Cube';
-import Navigation from './Navigation';
 
 // Less for CSS Modules
 import HackerStyles from './Hacker.less';
 import CubeStyles from './Cube.less';
-import NavigationStyles from './Navigation.less';
 
 /**
     ▄▄▄█████▓ ██░ ██ ▓█████     ██░ ██  ▄▄▄       ▄████▄   ██ ▄█▀▓█████ ▒██▀███
@@ -32,44 +30,33 @@ class Hacker extends React.Component {
     navigationIsOpen: React.PropTypes.bool,
     mouseActive: React.PropTypes.bool,
     /** Redux Actions **/
-    setNavigationState: React.PropTypes.func
+    setCubeState: React.PropTypes.func
   };
   static defaultProps = {
     classes: HackerStyles
   };
   constructor(props) {
     super(props);
-    this.state = {
-      alt: false
-    };
-    this.negativeState = this.negativeState.bind(this);
   }
   componentDidMount() {
-    // this.interval = setInterval(this.negativeState, 120);
     setTimeout(() => {
-      this.props.setNavigationState({
-        navigationIsOpen: !this.props.navigationIsOpen
+      this.props.setCubeState({
+        direction: ''
       });
     }, 500);
   }
   componentWillUnmount() {
     clearInterval(this.interval);
   }
-  negativeState() {
-    this.setState({
-      alt: !this.state.alt
-    });
-  }
   render() {
+    const { navigationIsOpen } = this.props;
     const background = (
-      <div {...resolve(this.props, 'circleEffect', this.state.alt ? 'negaitve' : null)} />
+      <div {...resolve(this.props, navigationIsOpen ? null : 'circleEffect')} />
     );
     return (
-      <div {...resolve(this.props, 'bodyContainer', this.state.alt ? 'negaitve' : null)}>
-        <Navigation classes = {NavigationStyles} />
+      <div {...resolve(this.props, 'container')}>
         {background}
-        <Cube classes = {CubeStyles}
-          alt = {this.state.alt} />
+        <Cube classes = {CubeStyles} />
       </div>
     );
   }
@@ -77,6 +64,7 @@ class Hacker extends React.Component {
 export default connect((state) => {
   return {
     navigationIsOpen: state.hacker.navigationIsOpen,
-    mouseActive: state.hacker.mouseActive
+    mouseActive: state.hacker.mouseActive,
+    direction: state.cube.direction
   };
-}, { setNavigationState })(Hacker);
+}, { setCubeState })(Hacker);
