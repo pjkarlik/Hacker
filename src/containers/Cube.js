@@ -11,8 +11,7 @@ export default class Cube extends React.Component {
     classes: React.PropTypes.object,
     rotation: React.PropTypes.array,
     /** Modules Props **/
-    navigationIsOpen: React.PropTypes.bool,
-    direction: React.PropTypes.string
+    transition: React.PropTypes.string
   };
   static defaultProps = {
     direction: null
@@ -25,7 +24,7 @@ export default class Cube extends React.Component {
         y: 0
       },
       mouseActive: false,
-      direction: this.props.direction
+      transition: this.props.transition
     };
     this.reactMouse = this.reactMouse.bind(this);
     this.inactMouse = this.inactMouse.bind(this);
@@ -42,9 +41,9 @@ export default class Cube extends React.Component {
     this.waitFor();
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.direction !== this.props.direction) {
+    if (nextProps.transition !== this.props.transition) {
       this.setState({
-        direction: nextProps.direction
+        transition: nextProps.transition
       });
     }
   }
@@ -102,15 +101,14 @@ export default class Cube extends React.Component {
   }
   /* Render Cube */
   render() {
-    const { rotation, mouseActive, direction } = this.state;
-    // const { direction } = this.props;
+    const { rotation, mouseActive, transition } = this.state;
     const styleObject = {
       transition: `${mouseActive ? '0' : '2000'}ms`,
       transform: `rotateY(${360 - rotation.x}deg) rotateX(${rotation.y}deg)`
     };
 
     return (
-      <div {...resolve(this.props, 'container', direction)}
+      <div {...resolve(this.props, 'container', transition)}
         onTouchStart = {this.touchStart}
         onMouseMove = {this.reactMouse}
         onMouseLeave = {this.inactMouse}>
@@ -129,7 +127,6 @@ export default class Cube extends React.Component {
 
 export default connect((state) => {
   return {
-    navigationIsOpen: state.hacker.navigationIsOpen,
-    direction: state.cube.direction
+    transition: state.site.transition
   };
 }, {})(Cube);

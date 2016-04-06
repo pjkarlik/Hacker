@@ -1,7 +1,7 @@
 import React from 'react';
 import { resolve } from './utils/styles';
 import { connect } from 'react-redux';
-import { setCubeState } from '../redux/modules/cube';
+import { setSiteState } from '../redux/modules/site';
 import Cube from './Cube';
 
 // Less for CSS Modules
@@ -28,9 +28,9 @@ class Hacker extends React.Component {
     classes: React.PropTypes.object,
     /** Modules Props **/
     navigationIsOpen: React.PropTypes.bool,
-    mouseActive: React.PropTypes.bool,
+    transition: React.PropTypes.string,
     /** Redux Actions **/
-    setCubeState: React.PropTypes.func
+    setSiteState: React.PropTypes.func
   };
   static defaultProps = {
     classes: HackerStyles
@@ -39,11 +39,25 @@ class Hacker extends React.Component {
     super(props);
   }
   componentDidMount() {
-    setTimeout(() => {
-      this.props.setCubeState({
-        direction: ''
+    if (this.props.transition === 'out') {
+      setTimeout(() => {
+        this.props.setSiteState({
+          transition: 'in'
+        });
+      }, 500);
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.transition !== this.props.transition) {
+      this.props.setSiteState({
+        transition: this.props.transition === 'in' ? 'out' : 'in'
       });
-    }, 500);
+    }
+    if (nextProps.navigationIsOpen !== this.props.navigationIsOpen) {
+      this.props.setSiteState({
+        transition: this.props.transition === 'in' ? 'out' : 'in'
+      });
+    }
   }
   componentWillUnmount() {
     clearInterval(this.interval);
@@ -63,8 +77,7 @@ class Hacker extends React.Component {
 }
 export default connect((state) => {
   return {
-    navigationIsOpen: state.hacker.navigationIsOpen,
-    mouseActive: state.hacker.mouseActive,
-    direction: state.cube.direction
+    navigationIsOpen: state.site.navigationIsOpen,
+    transition: state.site.transition
   };
-}, { setCubeState })(Hacker);
+}, { setSiteState })(Hacker);

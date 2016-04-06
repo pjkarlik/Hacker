@@ -2,8 +2,7 @@ import React from 'react';
 import { resolve } from './utils/styles';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { setNavigationState } from '../redux/modules/hacker';
-import { setCubeState } from '../redux/modules/cube';
+import { setSiteState } from '../redux/modules/site';
 /**
 */
 class Navigation extends React.Component {
@@ -13,39 +12,42 @@ class Navigation extends React.Component {
     /** Modules Props **/
     navigationIsOpen: React.PropTypes.bool,
     mouseActive: React.PropTypes.bool,
+    transition: React.PropTypes.string,
     /** Redux Actions **/
-    setNavigationState: React.PropTypes.func,
-    setCubeState: React.PropTypes.func
+    setSiteState: React.PropTypes.func
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      menu: false
+      menu: false,
+      true: true
     };
     this.toggleMenu = this.toggleMenu.bind(this);
   }
   toggleMenu() {
-    this.props.setNavigationState({
+    this.props.setSiteState({
       navigationIsOpen: !this.props.navigationIsOpen
-    });
-    this.props.setCubeState({
-      direction: !this.props.navigationIsOpen ? 'up' : ''
     });
   }
   render() {
-    const { navigationIsOpen } = this.props;
+    const { navigationIsOpen, classes } = this.props;
     const navIcon = navigationIsOpen ? ' ' : '+';
     return (
       <div {...resolve(this.props, 'navigation')}>
         <div {...resolve(this.props, 'trigger')} onClick = {this.toggleMenu}
           dangerouslySetInnerHTML = {{ __html: navIcon }} />
         <ul {...resolve(this.props, 'menu', navigationIsOpen ? 'open' : '')}>
-          <li><Link to = "/" onClick = {this.toggleMenu}>home</Link></li>
-          <li><Link to = "/about" onClick = {this.toggleMenu}>about</Link></li>
-          <li><Link to = "/experiments" onClick = {this.toggleMenu}>experiments</Link></li>
-          <li><Link to = "/resources" onClick = {this.toggleMenu}>resource links</Link></li>
-          <li><Link to = "/contact" onClick = {this.toggleMenu}>contact</Link></li>
+          <li><Link to = "/" onlyActiveOnIndex={this.state.true} activeClassName = {classes.active}
+            onClick = {this.toggleMenu}>home</Link></li>
+          <li><Link to = "/about" activeClassName = {classes.active}
+            onClick = {this.toggleMenu}>about</Link></li>
+          <li><Link to = "/experiments" activeClassName = {classes.active}
+            onClick = {this.toggleMenu}>experiments</Link></li>
+          <li><Link to = "/resources" activeClassName = {classes.active}
+            onClick = {this.toggleMenu}>resource links</Link></li>
+          <li><Link to = "/contact" activeClassName = {classes.active}
+            onClick = {this.toggleMenu}>contact</Link></li>
         </ul>
       </div>
     );
@@ -54,6 +56,7 @@ class Navigation extends React.Component {
 
 export default connect((state) => {
   return {
-    navigationIsOpen: state.hacker.navigationIsOpen
+    navigationIsOpen: state.site.navigationIsOpen,
+    transition: state.site.transition
   };
-}, { setNavigationState, setCubeState })(Navigation);
+}, { setSiteState })(Navigation);

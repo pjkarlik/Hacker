@@ -5,14 +5,13 @@ import getBrowserDimensions from './utils/getBrowserDimensions';
 
 /**
 */
-export default class Cube extends React.Component {
-  static displayName = 'Cube';
+export default class Environment extends React.Component {
+  static displayName = 'Environment';
   static propTypes = {
     classes: React.PropTypes.object,
-    direction: React.PropTypes.string,
     rotation: React.PropTypes.array,
     /** Modules Props **/
-    navigationIsOpen: React.PropTypes.bool
+    transition: React.PropTypes.string
   };
   static defaultProps = {
     direction: null
@@ -25,7 +24,7 @@ export default class Cube extends React.Component {
         y: 0
       },
       mouseActive: false,
-      direction: this.props.direction
+      transition: this.props.transition
     };
     this.reactMouse = this.reactMouse.bind(this);
     this.inactMouse = this.inactMouse.bind(this);
@@ -42,9 +41,9 @@ export default class Cube extends React.Component {
     this.waitFor();
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.direction !== this.props.direction) {
+    if (nextProps.transition !== this.props.transition) {
       this.setState({
-        direction: nextProps.direction
+        transition: nextProps.transition
       });
     }
   }
@@ -102,25 +101,24 @@ export default class Cube extends React.Component {
   }
   /* Render Cube */
   render() {
-    const { rotation, mouseActive } = this.state;
-    const { navigationIsOpen } = this.props;
+    const { rotation, mouseActive, transition } = this.state;
     const styleObject = {
       transition: `${mouseActive ? '0' : '2000'}ms`,
       transform: `rotateY(${360 - rotation.x}deg) rotateX(${rotation.y}deg)`
     };
 
     return (
-      <div {...resolve(this.props, 'container', navigationIsOpen ? 'up' : null)}
+      <div {...resolve(this.props, 'container', transition)}
         onTouchStart = {this.touchStart}
         onMouseMove = {this.reactMouse}
         onMouseLeave = {this.inactMouse}>
         <div {...resolve(this.props, 'cube')} style = {styleObject}>
-          <div {...resolve(this.props, 'front')}>J</div>
-          <div {...resolve(this.props, 'back')}>pjkarlik@gmail.com</div>
-          <div {...resolve(this.props, 'right')}>K</div>
-          <div {...resolve(this.props, 'left')}>P</div>
-          <div {...resolve(this.props, 'top')}>user interface architect</div>
-          <div {...resolve(this.props, 'bottom')}>front-end developer</div>
+          <div {...resolve(this.props, 'front')}> </div>
+          <div {...resolve(this.props, 'back')}> </div>
+          <div {...resolve(this.props, 'right')}> </div>
+          <div {...resolve(this.props, 'left')}> </div>
+          <div {...resolve(this.props, 'top')}> </div>
+          <div {...resolve(this.props, 'bottom')}> </div>
         </div>
       </div>
     );
@@ -129,6 +127,6 @@ export default class Cube extends React.Component {
 
 export default connect((state) => {
   return {
-    navigationIsOpen: state.hacker.navigationIsOpen
+    transition: state.site.transition
   };
-}, {})(Cube);
+}, {})(Environment);

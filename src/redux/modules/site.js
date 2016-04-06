@@ -1,10 +1,10 @@
 // ACTION TYPES.
-const SET_NAVIGATION_STATE = 'Hacker/hacker/SET_NAVIGATION_STATE';
+const SET_SITE_STATE = 'Hacker/site/SET_SITE_STATE';
 
 // ACTIONS.
-export function setNavigationState(state) {
+export function setSiteState(state) {
   return {
-    type: SET_NAVIGATION_STATE,
+    type: SET_SITE_STATE,
     payload: {
       state
     }
@@ -13,10 +13,10 @@ export function setNavigationState(state) {
 // REDUCER
 export default function reducer(state = {
   navigationIsOpen: false,
-  mouseActive: true
+  transition: 'out'
 }, action) {
   switch (action.type) {
-  case SET_NAVIGATION_STATE: {
+  case SET_SITE_STATE: {
     return {
       ...state,
       ...action.payload.state

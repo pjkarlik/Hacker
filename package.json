@@ -1,6 +1,6 @@
 {
   "name": "Hacker",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "The Hacker",
   "main": "index.js",
   "scripts": {
@@ -40,6 +40,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "history": "^2.0.0",
+    "image-webpack-loader": "^1.6.3",
     "json-loader": "^0.5.4",
     "less": "^2.6.0",
     "less-loader": "^2.2.2",

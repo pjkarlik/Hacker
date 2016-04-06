@@ -39,13 +39,13 @@
   li {
     display: inline-block;
     margin-left: 1px;
-    padding: 0 10px;
-    background: #000;
     a {
+      background: #000;
       color: #FFF;
       font-size: 12px;
       height: @linkHeight;
       line-height: @linkHeight;
+      padding: 10px;
       text-decoration: none;
 
       @media @medium {
@@ -56,4 +56,8 @@
   &.open {
     right: 21px;
   }
+}
+
+.active{
+  background: #FF0000 !important;
 }

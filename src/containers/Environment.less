@@ -1,7 +1,7 @@
 @import (reference) '../utils/styles/MediaQuery.less';
 
 @cubeSize: 400px;
-
+@base-url: "../../resources/images/";
 .container {
   height: @cubeSize;
   left: 50%;
@@ -10,7 +10,7 @@
   top: 50%;
   transition: transform 800ms;
   width: @cubeSize;
-  
+
   &.out{
     transform: translate(-50%, -350%);
   }
@@ -29,12 +29,13 @@
   height: 100%;
   position: absolute;
   transform-style: preserve-3d;
-  backface-visibility: hidden;
   transform: rotateY(45deg);
 }
 
+
 .base {
-  background: rgba(0,0,0,1);
+  background: url("@{base-url}glitch.gif");
+  background-size: 100% 50%;
   backface-visibility: hidden;
   color: #FFF;
   display: block;
@@ -54,6 +55,7 @@
 }
 
 .front {
+
   composes: base;
   transform: translateZ( @cubeSize / 2 );
   @media @medium {
@@ -62,6 +64,7 @@
 }
 
 .back {
+
   composes: base;
   transform: rotateX( -180deg ) translateZ( @cubeSize / 2 );
   @media @medium {
@@ -71,6 +74,7 @@
   font-size: 20px;
 }
 .right {
+
   composes: base;
   transform: rotateY( 90deg ) translateZ( @cubeSize / 2 );
   @media @medium {
@@ -78,6 +82,7 @@
   }
 }
 .left {
+
   composes: base;
   transform: rotateY( -90deg ) translateZ( @cubeSize / 2 );
   @media @medium {
@@ -85,6 +90,7 @@
   }
 }
 .top {
+
   composes: base;
   transform: rotateX( 90deg ) translateZ( @cubeSize / 2 );
   font-size: 28px;
@@ -94,6 +100,7 @@
   }
 }
 .bottom {
+
   composes: base;
   transform: rotateX(  -90deg ) translateZ( @cubeSize / 2 );
   font-size: 28px;
