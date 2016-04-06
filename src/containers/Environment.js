@@ -21,23 +21,17 @@ export default class Environment extends React.Component {
     this.state = {
       rotation: {
         x: -42,
-        y: 0
+        y: 22
       },
       mouseActive: false,
       transition: this.props.transition
     };
-    this.reactMouse = this.reactMouse.bind(this);
-    this.inactMouse = this.inactMouse.bind(this);
-    this.touchStart = this.touchStart.bind(this);
-    this.touchMove = this.touchMove.bind(this);
     this.waitFor = this.waitFor.bind(this);
     this.computeRotation = this.computeRotation.bind(this);
     this.generateMouseMove = this.generateMouseMove.bind(this);
   }
   /* Component Life Cycle */
   componentDidMount() {
-    window.addEventListener('touchmove', this.touchMove);
-    window.addEventListener('touchend', this.inactMouse);
     this.waitFor();
   }
   componentWillReceiveProps(nextProps) {
@@ -68,31 +62,6 @@ export default class Environment extends React.Component {
     const genX = Math.floor((Math.random() * browserSize.browserWidth) + 1);
     const genY = Math.floor((Math.random() * browserSize.browserHeight) + 1);
     this.computeRotation(genX, genY);
-  }
-  /* Mouse and Touch Events */
-  reactMouse(e) {
-    clearInterval(this.interval);
-    this.computeRotation(e.clientX, e.clientY);
-    this.setState({
-      mouseActive: true
-    });
-  }
-  inactMouse() {
-    this.waitFor();
-    this.setState({
-      mouseActive: false
-    });
-  }
-  touchStart(e) {
-    e.preventDefault();
-    clearInterval(this.interval);
-    this.reactMouse(e.touches[0]);
-  }
-  touchMove(e) {
-    e.preventDefault();
-    const touchX = Math.floor(e.changedTouches[0].clientX);
-    const touchY = Math.floor(e.changedTouches[0].clientY);
-    this.computeRotation(touchX, touchY);
   }
   waitFor() {
     clearInterval(this.interval);

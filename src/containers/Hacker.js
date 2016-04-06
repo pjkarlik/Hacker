@@ -9,6 +9,7 @@ import HackerStyles from './Hacker.less';
 import CubeStyles from './Cube.less';
 
 /**
+
     ▄▄▄█████▓ ██░ ██ ▓█████     ██░ ██  ▄▄▄       ▄████▄   ██ ▄█▀▓█████ ▒██▀███
     ▓  ██▒ ▓▒▓██░ ██▒▓█   ▀    ▓██░ ██▒▒████▄    ▒██▀ ▀█   ██▄█▒ ▓█   ▀ ▒▓█ ▒ ██▒
     ▒ ▒▓█░ ▒░▒██▀▀██░▒███      ▒██▀▀██░▒██  ▀█▄  ▒▓█    ▄ ▓███▄░ ▒███    ▓█ ░▄█ ▒
@@ -21,7 +22,9 @@ import CubeStyles from './Cube.less';
                                                  ░
 
       the Hacker is an experimental website in design and user interaction.
+
 */
+
 class Hacker extends React.Component {
   static displayName = 'Hacker';
   static propTypes = {
