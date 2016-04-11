@@ -4,26 +4,32 @@
 
 .navigation {
   color: #FFF;
-  position: absolute;
+  height: 29px;
   overflow: hidden;
-  width: 100%;
-  height: @linkHeight;
-  top: 10px;
-  text-align: center;
+  position: absolute;
   right: 10px;
+  text-align: right;
+  top: 10px;
+  width: 100%;
   z-index: 100;
+
+  @media @medium {
+    overflow: visible;
+    text-align: right;
+  }
 }
 
 .trigger {
-  position: absolute;
-  top: 0;
-  right: 0;
   background: #000;
-  height: @linkHeight;
-  width: @linkHeight;
-  font-size: 20px;
-  line-height: 21px;
   cursor: default;
+  display: inline-block;
+  font-size: 20px;
+  height: 29px;
+  line-height: 30px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  width: 29px;
   z-index: 101;
 }
 
@@ -36,28 +42,40 @@
   right: -800px;
   transition: right 500ms ease-in;
   white-space: nowrap;
-  li {
-    display: inline-block;
-    margin-left: 1px;
-    a {
-      background: #000;
-      color: #FFF;
-      font-size: 12px;
-      height: @linkHeight;
-      line-height: @linkHeight;
-      padding: 10px;
-      text-decoration: none;
-
-      @media @medium {
-        font-size: 18px;
-      }
+  &.open {
+    right: 30px;
+    @media @medium {
+      top: 0px;
     }
   }
-  &.open {
-    right: 21px;
+  @media @medium {
+    transition: top 200ms ease-in;
+    top: -220px;
+    right: 30px;
   }
 }
 
-.active{
-  background: #FF0000 !important;
+.list{
+  display: inline-block;
+  margin-left: 1px;
+  margin-bottom: 1px;
+
+  @media @medium {
+    clear: both;
+    display: block;
+  }
+}
+
+.link {
+  background: #000;
+  box-sizing: border-box;
+  color: #FFF;
+  display: inline-block;
+  font-size: .85em;
+  padding: 7px;
+  text-decoration: none;
+
+  &.active{
+    background: #FF0000;
+  }
 }

@@ -70,6 +70,7 @@ export default class Environment extends React.Component {
   }
   /* Render Cube */
   render() {
+    const { classes } = this.props;
     const { rotation, mouseActive, transition } = this.state;
     const styleObject = {
       transition: `${mouseActive ? '0' : '2000'}ms`,
@@ -81,13 +82,13 @@ export default class Environment extends React.Component {
         onTouchStart = {this.touchStart}
         onMouseMove = {this.reactMouse}
         onMouseLeave = {this.inactMouse}>
-        <div {...resolve(this.props, 'cube')} style = {styleObject}>
-          <div {...resolve(this.props, 'front')}> </div>
-          <div {...resolve(this.props, 'back')}> </div>
-          <div {...resolve(this.props, 'right')}> </div>
-          <div {...resolve(this.props, 'left')}> </div>
-          <div {...resolve(this.props, 'top')}> </div>
-          <div {...resolve(this.props, 'bottom')}> </div>
+        <div className = {classes.cube} style = {styleObject}>
+          <div className = {classes.front}> </div>
+          <div className = {classes.back}> </div>
+          <div className = {classes.right}> </div>
+          <div className = {classes.left}> </div>
+          <div className = {classes.top}> </div>
+          <div className = {classes.bottom}> </div>
         </div>
       </div>
     );

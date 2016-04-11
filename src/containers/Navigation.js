@@ -34,20 +34,31 @@ class Navigation extends React.Component {
     const { navigationIsOpen, classes } = this.props;
     const navIcon = navigationIsOpen ? ' ' : '+';
     return (
-      <div {...resolve(this.props, 'navigation')}>
-        <div {...resolve(this.props, 'trigger')} onClick = {this.toggleMenu}
+      <div className = {classes.navigation}>
+        <div className = {classes.trigger} onClick = {this.toggleMenu}
           dangerouslySetInnerHTML = {{ __html: navIcon }} />
         <ul {...resolve(this.props, 'menu', navigationIsOpen ? 'open' : '')}>
-          <li><Link to = "/" onlyActiveOnIndex={this.state.true} activeClassName = {classes.active}
-            onClick = {this.toggleMenu}>home</Link></li>
-          <li><Link to = "/about" activeClassName = {classes.active}
-            onClick = {this.toggleMenu}>about</Link></li>
-          <li><Link to = "/experiments" activeClassName = {classes.active}
-            onClick = {this.toggleMenu}>experiments</Link></li>
-          <li><Link to = "/resources" activeClassName = {classes.active}
-            onClick = {this.toggleMenu}>resource links</Link></li>
-          <li><Link to = "/contact" activeClassName = {classes.active}
-            onClick = {this.toggleMenu}>contact</Link></li>
+          <li className = {classes.list}>
+            <Link to = "/" className = {classes.link}
+              onlyActiveOnIndex={this.state.true}
+              activeClassName = {classes.active}
+              onClick = {this.toggleMenu}>home</Link></li>
+          <li className = {classes.list}>
+            <Link to = "/about" className = {classes.link}
+              activeClassName = {classes.active}
+              onClick = {this.toggleMenu}>about</Link></li>
+          <li className = {classes.list}>
+            <Link to = "/experiments" className = {classes.link}
+              activeClassName = {classes.active}
+              onClick = {this.toggleMenu}>experiments</Link></li>
+          <li className = {classes.list}>
+            <Link to = "/resources" className = {classes.link}
+              activeClassName = {classes.active}
+              onClick = {this.toggleMenu}>resource links</Link></li>
+          <li className = {classes.list}>
+            <Link to = "/contact" className = {classes.link}
+              activeClassName = {classes.active}
+              onClick = {this.toggleMenu}>contact</Link></li>
         </ul>
       </div>
     );

@@ -101,6 +101,7 @@ export default class Cube extends React.Component {
   }
   /* Render Cube */
   render() {
+    const { classes } = this.props;
     const { rotation, mouseActive, transition } = this.state;
     const styleObject = {
       transition: `${mouseActive ? '0' : '2000'}ms`,
@@ -112,13 +113,13 @@ export default class Cube extends React.Component {
         onTouchStart = {this.touchStart}
         onMouseMove = {this.reactMouse}
         onMouseLeave = {this.inactMouse}>
-        <div {...resolve(this.props, 'cube')} style = {styleObject}>
-          <div {...resolve(this.props, 'front')}>J</div>
-          <div {...resolve(this.props, 'back')}>pjkarlik@gmail.com</div>
-          <div {...resolve(this.props, 'right')}>K</div>
-          <div {...resolve(this.props, 'left')}>P</div>
-          <div {...resolve(this.props, 'top')}>user interface architect</div>
-          <div {...resolve(this.props, 'bottom')}>front-end developer</div>
+        <div className = {classes.cube} style = {styleObject}>
+          <div className = {classes.front}>J</div>
+          <div className = {classes.back}>pjkarlik@gmail.com</div>
+          <div className = {classes.right}>K</div>
+          <div className = {classes.left}>P</div>
+          <div className = {classes.top}>user interface architect</div>
+          <div className = {classes.bottom}>front-end developer</div>
         </div>
       </div>
     );

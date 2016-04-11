@@ -1,6 +1,6 @@
 @import (reference) '../utils/styles/MediaQuery.less';
 
-@cubeSize: 400px;
+@cubeSize: 600px;
 @base-url: "../../resources/images/";
 .container {
   height: @cubeSize;
@@ -55,7 +55,6 @@
 }
 
 .front {
-
   composes: base;
   transform: translateZ( @cubeSize / 2 );
   @media @medium {
@@ -64,7 +63,6 @@
 }
 
 .back {
-
   composes: base;
   transform: rotateX( -180deg ) translateZ( @cubeSize / 2 );
   @media @medium {
@@ -74,7 +72,6 @@
   font-size: 20px;
 }
 .right {
-
   composes: base;
   transform: rotateY( 90deg ) translateZ( @cubeSize / 2 );
   @media @medium {
@@ -82,7 +79,6 @@
   }
 }
 .left {
-
   composes: base;
   transform: rotateY( -90deg ) translateZ( @cubeSize / 2 );
   @media @medium {
@@ -90,7 +86,6 @@
   }
 }
 .top {
-
   composes: base;
   transform: rotateX( 90deg ) translateZ( @cubeSize / 2 );
   font-size: 28px;
@@ -100,7 +95,6 @@
   }
 }
 .bottom {
-
   composes: base;
   transform: rotateX(  -90deg ) translateZ( @cubeSize / 2 );
   font-size: 28px;

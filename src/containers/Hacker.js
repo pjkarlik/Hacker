@@ -66,12 +66,12 @@ class Hacker extends React.Component {
     clearInterval(this.interval);
   }
   render() {
-    const { navigationIsOpen } = this.props;
+    const { navigationIsOpen, classes } = this.props;
     const background = (
       <div {...resolve(this.props, navigationIsOpen ? null : 'circleEffect')} />
     );
     return (
-      <div {...resolve(this.props, 'container')}>
+      <div className = {classes.container}>
         {background}
         <Cube classes = {CubeStyles} />
       </div>

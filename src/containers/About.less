@@ -1,0 +1,100 @@
+@import (reference) '../utils/styles/MediaQuery.less';
+
+@borderColor: #FFF;
+@borderColorAlt: #000;
+
+.container {
+
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+
+  margin: 0px;
+  position: absolute;
+
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  h1 {
+    color: #FFF;
+    text-align: center;
+  }
+
+}
+
+.information {
+  background: #FFF;
+  font-size: 1em;
+  left: 50%;
+  padding: 0 20px;
+  position: absolute;
+  top: 50%;
+  transition: transform 800ms;
+  width: 600px;
+
+  &.out{
+    transform: translate(-50%, 350%);
+  }
+  &.in{
+    transform: translate(-50%, -50%);
+  }
+
+  h3,h4,h5 {
+    font-family: 'roboto';
+    margin-bottom: 10px;
+  }
+  h3 {
+    font-size: 4.25em;
+    margin-top: 10px;
+    @media @medium {
+      font-size: 2em;
+    }
+  }
+  h4 {
+    font-size: 1em;
+  }
+  p {
+    font-size: .85em;
+    line-height: 1.5em;
+    margin-top: 0;
+  }
+
+
+  a {
+    color: #000;
+    text-decoration: none;
+    &:hover{
+      text-decoration: underline;;
+    }
+  }
+
+  @media @medium {
+    font-size: .85em;
+    width: 90%;
+  }
+}
+
+.circleEffect {
+  border-color: @borderColorAlt;
+  border-style: solid;
+  border-radius: 2200px;
+  position: absolute;
+	top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  animation: circleEffect 2s infinite;
+  @media @medium {
+    animation: circleEffectMobile 2s infinite;
+  }
+}
+@keyframes circleEffect {
+    from {height: 0px; width: 0px; border-width: 10px; opacity: 1;}
+    to {height: 2200px; width: 2200px; border-width: 75px; opacity: 0;}
+}
+@keyframes circleEffectMobile {
+    from {height: 0px; width: 0px; border-width: 10px; }
+    to {height: 1200px; width: 1200px; border-width: 75px; }
+}

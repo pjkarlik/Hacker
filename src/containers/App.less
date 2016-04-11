@@ -1,13 +1,30 @@
+@fontPath:'../../resources/fonts';
+
 :global {
+
+  @font-face {
+      font-family: 'sanspro';
+      src: url('@{fontPath}/SourceSansPro-Regular.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+  }
+
+  @font-face {
+      font-family: 'roboto';
+      src: url('@{fontPath}/Roboto-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+  }
+
   html {
     height: 100%;
     width: 100%;
-    * {
-      box-sizing: border-box;
-    }
   }
   body {
     font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
+    * {
+      box-sizing: border-box;
+    }
   }
 }
 
