@@ -6,9 +6,7 @@ import Hacker from './containers/Hacker';
 export function prefetchRoutes() {
   require.ensure([
     './containers/About',
-    './containers/Experiments',
-    './containers/Resources',
-    './containers/Contact'], () => {});
+    './containers/Experiments'], () => {});
 }
 
 export default (
@@ -22,16 +20,6 @@ export default (
     <Route path = "experiments" getComponent={(location, cb) =>
       require.ensure(['./containers/Experiments'], (require) => {
         cb(null, require('./containers/Experiments').default);
-      })
-    } />
-    <Route path = "sesources" getComponent={(location, cb) =>
-      require.ensure(['./containers/Resources'], (require) => {
-        cb(null, require('./containers/Resources').default);
-      })
-    } />
-    <Route path = "contact" getComponent={(location, cb) =>
-      require.ensure(['./containers/Contact'], (require) => {
-        cb(null, require('./containers/Contact').default);
       })
     } />
   </Route>

@@ -4,13 +4,13 @@
 
 .container {
   font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
-  height: @cubeSize;
+  height: 80%;
   left: 50%;
   perspective: 1000px;
   position: absolute;
   top: 50%;
   transition: transform 800ms;
-  width: @cubeSize;
+  width: 80%;
 
   &.out{
     transform: translate(-50%, 350%);
@@ -30,7 +30,6 @@
   height: 100%;
   position: absolute;
   transform-style: preserve-3d;
-  // backface-visibility: hidden;
   transform: rotateY(45deg);
 
   transition: all 500ms linear;
@@ -38,15 +37,13 @@
 
 .base {
   background: rgba(0,0,0,1);
-  // backface-visibility: hidden;
-  // border: 2px solid #000;
   color: #FFF;
   display: block;
   font-size: 20px;
-  height: @cubeSize;
+  height: 100%;
   outline: 1px solid transparent;
   position: absolute;
-  width: @cubeSize;
+  width: 100%;
   @media @medium {
     font-size: 360px / 2;
     height: @cubeSize / 2;
@@ -56,46 +53,4 @@
 
 .front {
   composes: base;
-}
-
-.back {
-  composes: base;
-  transform: rotateX( -180deg ) translateZ( @cubeSize / 2 );
-  @media @medium {
-    transform: rotateX( -180deg ) translateZ( @cubeSize / 4 );
-    font-size: 20px / 2;
-  }
-  font-size: 20px;
-}
-.right {
-  composes: base;
-  transform: rotateY( 90deg ) translateZ( @cubeSize / 2 );
-  @media @medium {
-    transform: rotateY( 90deg ) translateZ( @cubeSize / 4 );
-  }
-}
-.left {
-  composes: base;
-  transform: rotateY( -90deg ) translateZ( @cubeSize / 2 );
-  @media @medium {
-    transform: rotateY( -90deg ) translateZ( @cubeSize / 4 );
-  }
-}
-.top {
-  composes: base;
-  transform: rotateX( 90deg ) translateZ( @cubeSize / 2 );
-  font-size: 28px;
-  @media @medium {
-    transform: rotateX( 90deg ) translateZ( @cubeSize / 4 );
-    font-size: 28px / 2;
-  }
-}
-.bottom {
-  composes: base;
-  transform: rotateX(  -90deg ) translateZ( @cubeSize / 2 );
-  font-size: 28px;
-  @media @medium {
-    transform: rotateX( -90deg ) translateZ( @cubeSize / 4 );
-    font-size: 28px / 2;
-  }
 }

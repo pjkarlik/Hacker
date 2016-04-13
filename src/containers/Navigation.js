@@ -48,10 +48,6 @@ class Navigation extends React.Component {
               activeClassName = {classes.active}
               onClick = {this.toggleMenu}>experiments</Link></li>
           <li className = {classes.list}>
-            <Link to = "/resources" className = {classes.link}
-              activeClassName = {classes.active}
-              onClick = {this.toggleMenu}>resource links</Link></li>
-          <li className = {classes.list}>
             <Link to = "/about" className = {classes.link}
               activeClassName = {classes.active}
               onClick = {this.toggleMenu}>about</Link></li>
