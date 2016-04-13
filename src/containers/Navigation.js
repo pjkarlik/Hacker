@@ -44,10 +44,6 @@ class Navigation extends React.Component {
               activeClassName = {classes.active}
               onClick = {this.toggleMenu}>home</Link></li>
           <li className = {classes.list}>
-            <Link to = "/about" className = {classes.link}
-              activeClassName = {classes.active}
-              onClick = {this.toggleMenu}>about</Link></li>
-          <li className = {classes.list}>
             <Link to = "/experiments" className = {classes.link}
               activeClassName = {classes.active}
               onClick = {this.toggleMenu}>experiments</Link></li>
@@ -56,9 +52,9 @@ class Navigation extends React.Component {
               activeClassName = {classes.active}
               onClick = {this.toggleMenu}>resource links</Link></li>
           <li className = {classes.list}>
-            <Link to = "/contact" className = {classes.link}
+            <Link to = "/about" className = {classes.link}
               activeClassName = {classes.active}
-              onClick = {this.toggleMenu}>contact</Link></li>
+              onClick = {this.toggleMenu}>about</Link></li>
         </ul>
       </div>
     );

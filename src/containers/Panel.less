@@ -1,6 +1,6 @@
 @import (reference) '../utils/styles/MediaQuery.less';
 
-@cubeSize: 400px;
+@cubeSize: 600px;
 
 .container {
   font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
@@ -13,7 +13,7 @@
   width: @cubeSize;
 
   &.out{
-    transform: translate(-50%, -350%);
+    transform: translate(-50%, 350%);
   }
   &.in{
     transform: translate(-50%, -50%);
@@ -30,37 +30,32 @@
   height: 100%;
   position: absolute;
   transform-style: preserve-3d;
-  backface-visibility: hidden;
+  // backface-visibility: hidden;
   transform: rotateY(45deg);
+
+  transition: all 500ms linear;
 }
 
 .base {
   background: rgba(0,0,0,1);
-  backface-visibility: hidden;
+  // backface-visibility: hidden;
+  // border: 2px solid #000;
   color: #FFF;
   display: block;
-  font-size: 360px;
-  font-weight: bold;
+  font-size: 20px;
   height: @cubeSize;
-  line-height: @cubeSize;
   outline: 1px solid transparent;
   position: absolute;
-  text-align: center;
   width: @cubeSize;
   @media @medium {
     font-size: 360px / 2;
     height: @cubeSize / 2;
-    line-height: @cubeSize / 2;
     width: @cubeSize / 2;
   }
 }
 
 .front {
   composes: base;
-  transform: translateZ( @cubeSize / 2 );
-  @media @medium {
-    transform: translateZ( @cubeSize / 4 );
-  }
 }
 
 .back {
