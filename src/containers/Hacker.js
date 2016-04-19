@@ -75,6 +75,7 @@ class Hacker extends React.Component {
       <div className = {classes.container}>
         {background}
         <Cube
+          interactive
           initialX = {-42}
           classes = {CubeStyles}>
           <div className = {CubeStyles.front}>J</div>
