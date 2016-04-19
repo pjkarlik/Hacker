@@ -53,6 +53,7 @@ class About extends React.Component {
         <Cube
           initialX = {-42}
           initialY = {22}
+          interactive = {false}
           classes = {CubeStyles}>
           <div className = {CubeStyles.front}/>
           <div className = {CubeStyles.back}/>

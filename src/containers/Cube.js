@@ -46,8 +46,10 @@ export default class Cube extends React.Component {
   }
   /* Component Life Cycle */
   componentDidMount() {
-    window.addEventListener('touchmove', this.touchMove);
-    window.addEventListener('touchend', this.inactMouse);
+    if (this.props.interactive) {
+      window.addEventListener('touchmove', this.touchMove);
+      window.addEventListener('touchend', this.inactMouse);
+    }
     this.waitFor();
   }
   componentWillReceiveProps(nextProps) {
@@ -81,6 +83,9 @@ export default class Cube extends React.Component {
   }
   /* Mouse and Touch Events */
   reactMouse(e) {
+    if (!this.props.interactive) {
+      return;
+    }
     clearInterval(this.interval);
     this.computeRotation(e.clientX, e.clientY);
     this.setState({
