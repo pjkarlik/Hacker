@@ -4,8 +4,8 @@
   "description": "The Hacker",
   "main": "index.js",
   "scripts": {
-    "webpack": "webpack --progress --colors",
-    "start": "webpack-dev-server --progress --colors",
+    "webpack": "node node_modules/.bin/webpack --progress --colors",
+    "dev": "node node_modules/.bin/webpack-dev-server --progress --colors",
     "clean": "rm -rf dist",
     "build": "npm run clean && webpack --progress --colors"
   },
