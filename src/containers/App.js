@@ -2,9 +2,9 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import configureStore from '../redux/configureStore';
+// Container Elements
 import Navigation from './Navigation';
-
-/* Navigation Component */
+// Less for CSS Modules
 import AppStyles from './App.less';
 import NavigationStyles from './Navigation.less';
 // Set up store and load data.

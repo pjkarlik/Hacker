@@ -1,15 +1,25 @@
 import React from 'react';
-import { resolve } from './utils/styles';
+import { resolve } from '../utils/styles';
 import { connect } from 'react-redux';
-import getBrowserDimensions from './utils/getBrowserDimensions';
+import getBrowserDimensions from '../utils/getBrowserDimensions';
 
 /**
 */
 export default class Cube extends React.Component {
   static displayName = 'Cube';
   static propTypes = {
+    /** Object to render inside Cube **/
+    children: React.PropTypes.node,
+    /** CSS Modules Object **/
     classes: React.PropTypes.object,
+    /** Initial X Rotation of Cube **/
     rotation: React.PropTypes.array,
+    /** Initial X Rotation of Cube **/
+    initialX: React.PropTypes.number,
+    /** Initial Y Rotation of Cube **/
+    initialY: React.PropTypes.number,
+    /** Does this respond to mouse of touch **/
+    interactive: React.PropTypes.bool,
     /** Modules Props **/
     transition: React.PropTypes.string
   };
@@ -20,8 +30,8 @@ export default class Cube extends React.Component {
     super(props);
     this.state = {
       rotation: {
-        x: -42,
-        y: 0
+        x: this.props.initialX || 0,
+        y: this.props.initialY || 0
       },
       mouseActive: false,
       transition: this.props.transition
@@ -101,7 +111,7 @@ export default class Cube extends React.Component {
   }
   /* Render Cube */
   render() {
-    const { classes } = this.props;
+    const { classes, children } = this.props;
     const { rotation, mouseActive, transition } = this.state;
     const styleObject = {
       transition: `${mouseActive ? '0' : '2000'}ms`,
@@ -114,12 +124,7 @@ export default class Cube extends React.Component {
         onMouseMove = {this.reactMouse}
         onMouseLeave = {this.inactMouse}>
         <div className = {classes.cube} style = {styleObject}>
-          <div className = {classes.front}>J</div>
-          <div className = {classes.back}>pjkarlik@gmail.com</div>
-          <div className = {classes.right}>K</div>
-          <div className = {classes.left}>P</div>
-          <div className = {classes.top}>user interface architect</div>
-          <div className = {classes.bottom}>front-end developer</div>
+          {children}
         </div>
       </div>
     );

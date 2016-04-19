@@ -1,9 +1,9 @@
 import React from 'react';
-// import { resolve } from './utils/styles';
+// import { resolve } from '../utils/styles';
 import { connect } from 'react-redux';
 import { setSiteState } from '../redux/modules/site';
+// Container Elements
 import Panel from './Panel';
-
 // Less for CSS Modules
 import ExperimentsStyles from './Experiments.less';
 import PanelStyles from './Panel.less';
@@ -11,6 +11,7 @@ import PanelStyles from './Panel.less';
 class Experiments extends React.Component {
   static displayName = 'Experiments';
   static propTypes = {
+    /** CSS Modules Object **/
     classes: React.PropTypes.object,
     /** Modules Props **/
     navigationIsOpen: React.PropTypes.bool,

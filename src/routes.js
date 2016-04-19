@@ -3,12 +3,15 @@ import App from './containers/App';
 import { Route, IndexRoute } from 'react-router';
 import Hacker from './containers/Hacker';
 
+// Route Prefetching
 export function prefetchRoutes() {
   require.ensure([
     './containers/About',
     './containers/Experiments'], () => {});
 }
-
+/**
+  Routes for site - using Require.Ensures
+**/
 export default (
   <Route path = "/" component = {App}>
     <IndexRoute component = {Hacker} />

@@ -1,9 +1,9 @@
 import React from 'react';
-import { resolve } from './utils/styles';
+import { resolve } from '../utils/styles';
 import { connect } from 'react-redux';
 import { setSiteState } from '../redux/modules/site';
+// Container Elements
 import Cube from './Cube';
-
 // Less for CSS Modules
 import HackerStyles from './Hacker.less';
 import CubeStyles from './Cube.less';
@@ -28,6 +28,7 @@ import CubeStyles from './Cube.less';
 class Hacker extends React.Component {
   static displayName = 'Hacker';
   static propTypes = {
+    /** CSS Modules Object **/
     classes: React.PropTypes.object,
     /** Modules Props **/
     navigationIsOpen: React.PropTypes.bool,
@@ -73,7 +74,16 @@ class Hacker extends React.Component {
     return (
       <div className = {classes.container}>
         {background}
-        <Cube classes = {CubeStyles} />
+        <Cube
+          initialX = {-42}
+          classes = {CubeStyles}>
+          <div className = {CubeStyles.front}>J</div>
+          <div className = {CubeStyles.back}>pjkarlik@gmail.com</div>
+          <div className = {CubeStyles.right}>K</div>
+          <div className = {CubeStyles.left}>P</div>
+          <div className = {CubeStyles.top}>user interface architect</div>
+          <div className = {CubeStyles.bottom}>front-end developer</div>
+        </Cube>
       </div>
     );
   }

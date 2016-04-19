@@ -1,5 +1,5 @@
 import React from 'react';
-import { resolve } from './utils/styles';
+import { resolve } from '../utils/styles';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { setSiteState } from '../redux/modules/site';
@@ -8,6 +8,7 @@ import { setSiteState } from '../redux/modules/site';
 class Navigation extends React.Component {
   static displayName = 'Navigation';
   static propTypes = {
+    /** CSS Modules Object **/
     classes: React.PropTypes.object,
     /** Modules Props **/
     navigationIsOpen: React.PropTypes.bool,

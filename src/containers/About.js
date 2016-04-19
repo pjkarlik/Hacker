@@ -1,15 +1,17 @@
 import React from 'react';
-import { resolve } from './utils/styles';
+import { resolve } from '../utils/styles';
 import { connect } from 'react-redux';
 import { setSiteState } from '../redux/modules/site';
-import Environment from './Environment';
+// Container Elements
+import Cube from './Cube';
 // Less for CSS Modules
 import AboutStyles from './About.less';
-import EnvironmentStyles from './Environment.less';
+import CubeStyles from './Environment.less';
 
 class About extends React.Component {
   static displayName = 'About';
   static propTypes = {
+    /** CSS Modules Object **/
     classes: React.PropTypes.object,
     /** Modules Props **/
     navigationIsOpen: React.PropTypes.bool,
@@ -48,7 +50,17 @@ class About extends React.Component {
     const { transition, classes } = this.props;
     return (
       <div className = {classes.container}>
-        <Environment classes = {EnvironmentStyles} />
+        <Cube
+          initialX = {-42}
+          initialY = {22}
+          classes = {CubeStyles}>
+          <div className = {CubeStyles.front}/>
+          <div className = {CubeStyles.back}/>
+          <div className = {CubeStyles.right}/>
+          <div className = {CubeStyles.left}/>
+          <div className = {CubeStyles.top}/>
+          <div className = {CubeStyles.bottom}/>
+        </Cube>
         <div {...resolve(this.props, 'information', transition)}>
           <h3>About the Hacker</h3>
           <p>

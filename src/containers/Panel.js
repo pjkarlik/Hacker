@@ -1,13 +1,13 @@
 import React from 'react';
-import { resolve } from './utils/styles';
+import { resolve } from '../utils/styles';
 import { connect } from 'react-redux';
 import getBrowserDimensions from './utils/getBrowserDimensions';
-
 /**
 */
 export default class Panel extends React.Component {
   static displayName = 'Panel';
   static propTypes = {
+    /** CSS Modules Object **/
     classes: React.PropTypes.object,
     rotation: React.PropTypes.array,
     /** Modules Props **/

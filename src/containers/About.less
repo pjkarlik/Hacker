@@ -62,7 +62,6 @@
     margin-top: 0;
   }
 
-
   a {
     color: #000;
     text-decoration: none;
@@ -75,27 +74,4 @@
     font-size: .85em;
     width: 90%;
   }
-}
-
-.circleEffect {
-  border-color: @borderColorAlt;
-  border-style: solid;
-  border-radius: 2200px;
-  position: absolute;
-	top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  animation: circleEffect 2s infinite;
-  @media @medium {
-    animation: circleEffectMobile 2s infinite;
-  }
-}
-@keyframes circleEffect {
-    from {height: 0px; width: 0px; border-width: 10px; opacity: 1;}
-    to {height: 2200px; width: 2200px; border-width: 75px; opacity: 0;}
-}
-@keyframes circleEffectMobile {
-    from {height: 0px; width: 0px; border-width: 10px; }
-    to {height: 1200px; width: 1200px; border-width: 75px; }
 }
