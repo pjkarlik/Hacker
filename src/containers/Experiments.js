@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setSiteState } from '../redux/modules/site';
 // Container Elements
-import Panel from './Panel';
+import Cube from './Cube';
 // Less for CSS Modules
 import ExperimentsStyles from './Experiments.less';
 import PanelStyles from './Panel.less';
@@ -50,7 +50,12 @@ class Experiments extends React.Component {
     const { classes } = this.props;
     return (
       <div className = {classes.container}>
-        <Panel classes = {PanelStyles} />
+      <Cube
+        interactive
+        initialX = {-42}
+        classes = {PanelStyles}>
+          <div className = {PanelStyles.front} />
+        </Cube>
       </div>
     );
   }
