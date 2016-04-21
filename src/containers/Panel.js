@@ -1,7 +1,7 @@
 import React from 'react';
 import { resolve } from '../utils/styles';
 import { connect } from 'react-redux';
-import getBrowserDimensions from './utils/getBrowserDimensions';
+import getBrowserDimensions from '../utils/getBrowserDimensions';
 /**
 */
 export default class Panel extends React.Component {
