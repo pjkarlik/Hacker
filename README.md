@@ -5,6 +5,7 @@
   with any black-hat organization.
 
 ## Run the example
+  Requires Node v5.5 or greater
 
 ```bash
 $ npm install

@@ -5,7 +5,7 @@
 .navigation {
   color: #FFF;
   height: 29px;
-  overflow: hidden;
+  // overflow: hidden;
   position: absolute;
   right: 10px;
   text-align: right;
@@ -68,6 +68,45 @@
 
 .link {
   background: #000;
+  box-sizing: border-box;
+  color: #FFF;
+  display: inline-block;
+  font-size: .85em;
+  padding: 7px;
+  text-decoration: none;
+
+  &.active{
+    background: #FF0000;
+  }
+}
+
+.submenu{
+  list-style-type: none;
+  margin: 0;
+  max-height: 0px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  top: 30px;
+  text-align: left;
+  transition: max-height 0.15s ease-out;
+  &.open{
+    max-height: 200px;
+  }
+}
+
+.sublist{
+  display:block;
+  margin-bottom: 1px;
+
+  @media @medium {
+    clear: both;
+    display: block;
+  }
+}
+
+.sublink {
+  background: #999;
   box-sizing: border-box;
   color: #FFF;
   display: inline-block;

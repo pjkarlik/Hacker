@@ -12,6 +12,7 @@ class Navigation extends React.Component {
     classes: React.PropTypes.object,
     /** Modules Props **/
     navigationIsOpen: React.PropTypes.bool,
+    experimentsIsOpen: React.PropTypes.bool,
     mouseActive: React.PropTypes.bool,
     transition: React.PropTypes.string,
     /** Redux Actions **/
@@ -25,14 +26,20 @@ class Navigation extends React.Component {
       true: true
     };
     this.toggleMenu = this.toggleMenu.bind(this);
+    this.toggleSubMenu = this.toggleSubMenu.bind(this);
   }
   toggleMenu() {
     this.props.setSiteState({
       navigationIsOpen: !this.props.navigationIsOpen
     });
   }
+  toggleSubMenu() {
+    this.props.setSiteState({
+      experimentsIsOpen: !this.props.experimentsIsOpen
+    });
+  }
   render() {
-    const { navigationIsOpen, classes } = this.props;
+    const { navigationIsOpen, experimentsIsOpen, classes } = this.props;
     const navIcon = navigationIsOpen ? ' ' : '+';
     return (
       <div className = {classes.navigation}>
@@ -45,9 +52,30 @@ class Navigation extends React.Component {
               activeClassName = {classes.active}
               onClick = {this.toggleMenu}>home</Link></li>
           <li className = {classes.list}>
-            <Link to = "/experiments" className = {classes.link}
+            <a href="#" className = {classes.link}
               activeClassName = {classes.active}
-              onClick = {this.toggleMenu}>experiments</Link></li>
+              onClick = {this.toggleSubMenu}>experiments</a>
+              <ul {...resolve(this.props, 'submenu', experimentsIsOpen ? 'open' : '')}>
+                <li className = {classes.sublist}>
+                  <Link to = "/fieldeffect" className = {classes.sublink}
+                    onlyActiveOnIndex={this.state.true}
+                    onClick = {this.toggleMenu}
+                    activeClassName = {classes.active}>field effect</Link>
+                </li>
+                <li className = {classes.sublist}>
+                  <Link to = "/dimensiontransform" className = {classes.sublink}
+                    onlyActiveOnIndex={this.state.true}
+                    onClick = {this.toggleMenu}
+                    activeClassName = {classes.active}>dimension transforms</Link>
+                </li>
+                <li className = {classes.sublist}>
+                  <Link to = "/bindarygarden" className = {classes.sublink}
+                    onlyActiveOnIndex={this.state.true}
+                    onClick = {this.toggleMenu}
+                    activeClassName = {classes.active}>binary garden</Link>
+                </li>
+              </ul>
+          </li>
           <li className = {classes.list}>
             <Link to = "/about" className = {classes.link}
               activeClassName = {classes.active}
@@ -61,6 +89,7 @@ class Navigation extends React.Component {
 export default connect((state) => {
   return {
     navigationIsOpen: state.site.navigationIsOpen,
+    experimentsIsOpen: state.site.experimentsIsOpen,
     transition: state.site.transition
   };
 }, { setSiteState })(Navigation);

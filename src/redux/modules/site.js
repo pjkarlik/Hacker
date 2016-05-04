@@ -13,6 +13,7 @@ export function setSiteState(state) {
 // REDUCER
 export default function reducer(state = {
   navigationIsOpen: false,
+  experimentsIsOpen: false,
   transition: 'out'
 }, action) {
   switch (action.type) {
