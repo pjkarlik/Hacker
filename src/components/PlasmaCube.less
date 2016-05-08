@@ -12,7 +12,7 @@
   width: @cubeSize;
 
   &.out{
-    transform: translate(-50%, -350%);
+    transform: translate(-350%, -50%);
   }
   &.in{
     transform: translate(-50%, -50%);
@@ -34,7 +34,7 @@
 
 
 .base {
-  border: 3px solid #000;
+  // border: 3px solid #000;
   //backface-visibility: hidden;
   color: #FFF;
   display: block;
@@ -51,6 +51,9 @@
     height: @cubeSize / 2;
     line-height: @cubeSize / 2;
     width: @cubeSize / 2;
+  }
+  &:hover{
+    border: 3px solid #000;
   }
 }
 

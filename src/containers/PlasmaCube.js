@@ -55,18 +55,28 @@ class PlasmaCube extends React.Component {
         initialY = {22}
         interactive = {false}
         classes = {CubeStyles}>
-        <Plasma className = {CubeStyles.front}/>
-        <Plasma className = {CubeStyles.back}/>
-        <Plasma className = {CubeStyles.right}/>
-        <Plasma className = {CubeStyles.left}/>
-        <Plasma className = {CubeStyles.top}/>
-        <Plasma className = {CubeStyles.bottom}/>
+        <Plasma className = {CubeStyles.front} square = {30} />
+        <Plasma className = {CubeStyles.back} square = {15} />
+        <Plasma className = {CubeStyles.right} square = {25}/>
+        <Plasma className = {CubeStyles.left} />
+        <Plasma className = {CubeStyles.top} square = {5}/>
+        <Plasma className = {CubeStyles.bottom} />
       </Cube>
     );
     return (
       <div className = {classes.container}>
         <div {...resolve(this.props, 'window', transition)}>
-          <h2>PlasmaCube</h2>
+          <h2>Plasma Cube</h2>
+          <p>
+            This experiment creats a plasma effect using multipule sine wave functions. An array of DIV elements
+            are dynamically created inside of the parent container and the background of each DIV in a set
+            interval on render.
+          </p>
+          <p>
+            The cube is a CSS3 transformation, and each side of the cube has a plasma component inside of it. Each
+            side can be controlled in the amount of squares that make up the grid and a value for each color
+            component.
+          </p>
         </div>
         {cube}
       </div>

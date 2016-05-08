@@ -17,26 +17,30 @@
   width: 100%;
   overflow: hidden;
 
-  h1 {
-    color: #FFF;
-    text-align: center;
-  }
-
 }
 
 .window {
-  background: #FFF;
   font-size: 1em;
-  height: 600px;
+  height: 100%;
   left: 50%;
   padding: 0 20px;
   position: absolute;
   top: 50%;
   transition: transform 800ms;
-  width: 600px;
+  width: 100%;
 
+  h1 {
+    color: #FFF;
+    text-align: center;
+  }
+
+  p {
+    color: #AAA;
+    font-size: 14px;
+    width: 30%;
+  }
   &.out{
-    transform: translate(-50%, 350%);
+    transform: translate(-350%, -50%);
   }
   &.in{
     transform: translate(-50%, -50%);

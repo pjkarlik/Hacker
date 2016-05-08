@@ -8,11 +8,17 @@ export default class PlasmaCube extends React.Component {
     /** CSS Modules Object **/
     classes: React.PropTypes.object,
     className: React.PropTypes.string,
-    square: React.PropTypes.number
+    square: React.PropTypes.number,
+    offsetRed: React.PropTypes.number,
+    offsetBlue: React.PropTypes.number,
+    offsetGreen: React.PropTypes.number
   };
   static defaultProps = {
     classes: PlasmaStyles,
-    square: 26
+    square: 22,
+    offsetRed: 0,
+    offsetBlue: 0,
+    offsetGreen: 0
   };
   constructor(props) {
     super(props);
@@ -44,13 +50,12 @@ export default class PlasmaCube extends React.Component {
   }
 
   renderPlasma() {
-    const { square } = this.props;
+    const { square, offsetRed, offsetBlue, offsetGreen } = this.props;
     const colorMap = [];
     let value;
     let color;
     let convert;
-    // const time = new Date().getMilliseconds();
-    this.time += 0.5;
+    this.time += 1;
     for (let x = 0; x < square; x++) {
       for (let y = 0; y < square; y++) {
         value = Math.sin(this.dist(x + this.time, y, 128.0, 128.0) / 6.0)
@@ -60,7 +65,12 @@ export default class PlasmaCube extends React.Component {
 
         color = parseInt((4 + value), 10) * 56;
         convert = Math.floor(color);
-        colorMap[x + (y * square)] = `${convert}, ${convert}, ${convert}, ${convert / 255}`;
+        colorMap[x + (y * square)] =
+          `${offsetRed > 0 ? offsetRed - convert : convert},` +
+          `${offsetBlue > 0 ? offsetBlue - convert : convert},` +
+          `${offsetGreen > 0 ? offsetGreen - convert : convert},` +
+          `${convert / 255}`;
+          // `${offsetRed - convert}, ${offsetBlue - convert}, ${offsetGreen - convert}, ${convert / 255}`;
       }
     }
     return colorMap;
