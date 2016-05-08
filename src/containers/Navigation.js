@@ -63,16 +63,10 @@ class Navigation extends React.Component {
                     activeClassName = {classes.active}>field effect</Link>
                 </li>
                 <li className = {classes.sublist}>
-                  <Link to = "/dimensiontransform" className = {classes.sublink}
+                  <Link to = "/plasmacube" className = {classes.sublink}
                     onlyActiveOnIndex={this.state.true}
                     onClick = {this.toggleMenu}
-                    activeClassName = {classes.active}>dimension transforms</Link>
-                </li>
-                <li className = {classes.sublist}>
-                  <Link to = "/bindarygarden" className = {classes.sublink}
-                    onlyActiveOnIndex={this.state.true}
-                    onClick = {this.toggleMenu}
-                    activeClassName = {classes.active}>binary garden</Link>
+                    activeClassName = {classes.active}>plasma cube</Link>
                 </li>
               </ul>
           </li>

@@ -3,11 +3,14 @@ import { resolve } from '../utils/styles';
 import { connect } from 'react-redux';
 import { setSiteState } from '../redux/modules/site';
 // Container Elements
+import Cube from './Cube';
+import Plasma from '../components/Plasma';
 // Less for CSS Modules
-import FieldEffectStyles from './FieldEffect.less';
+import PlasmaCubeStyles from './PlasmaCube.less';
+import CubeStyles from '../components/PlasmaCube.less';
 
-class FieldEffect extends React.Component {
-  static displayName = 'FieldEffect';
+class PlasmaCube extends React.Component {
+  static displayName = 'PlasmaCube';
   static propTypes = {
     /** CSS Modules Object **/
     classes: React.PropTypes.object,
@@ -18,7 +21,7 @@ class FieldEffect extends React.Component {
     setSiteState: React.PropTypes.func
   };
   static defaultProps = {
-    classes: FieldEffectStyles
+    classes: PlasmaCubeStyles
   };
   constructor(props) {
     super(props);
@@ -46,11 +49,26 @@ class FieldEffect extends React.Component {
   }
   render() {
     const { classes, transition } = this.props;
+    const cube = (
+      <Cube
+        initialX = {-42}
+        initialY = {22}
+        interactive = {false}
+        classes = {CubeStyles}>
+        <Plasma className = {CubeStyles.front}/>
+        <Plasma className = {CubeStyles.back}/>
+        <Plasma className = {CubeStyles.right}/>
+        <Plasma className = {CubeStyles.left}/>
+        <Plasma className = {CubeStyles.top}/>
+        <Plasma className = {CubeStyles.bottom}/>
+      </Cube>
+    );
     return (
       <div className = {classes.container}>
         <div {...resolve(this.props, 'window', transition)}>
-          <h2>Field Effect</h2>
+          <h2>PlasmaCube</h2>
         </div>
+        {cube}
       </div>
     );
   }
@@ -60,4 +78,4 @@ export default connect((state) => {
     navigationIsOpen: state.site.navigationIsOpen,
     transition: state.site.transition
   };
-}, { setSiteState })(FieldEffect);
+}, { setSiteState })(PlasmaCube);

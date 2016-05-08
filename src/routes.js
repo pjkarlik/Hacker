@@ -9,8 +9,7 @@ export function prefetchRoutes() {
     './containers/About',
     './containers/Experiments',
     './containers/FieldEffect',
-    './containers/DimensionTransform',
-    './containers/BinaryGarden'
+    './containers/PlasmaCube'
   ], () => {});
 }
 /**
@@ -34,14 +33,9 @@ export default (
         cb(null, require('./containers/FieldEffect').default);
       })
     } />
-    <Route path = "dimensiontransform" getComponent={(location, cb) =>
-      require.ensure(['./containers/DimensionTransform'], (require) => {
-        cb(null, require('./containers/DimensionTransform').default);
-      })
-    } />
-    <Route path = "bindarygarden" getComponent={(location, cb) =>
-      require.ensure(['./containers/BinaryGarden'], (require) => {
-        cb(null, require('./containers/BinaryGarden').default);
+    <Route path = "plasmacube" getComponent={(location, cb) =>
+      require.ensure(['./containers/PlasmaCube'], (require) => {
+        cb(null, require('./containers/PlasmaCube').default);
       })
     } />
   </Route>

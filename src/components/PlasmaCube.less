@@ -1,0 +1,105 @@
+@import (reference) '../utils/styles/MediaQuery.less';
+
+@cubeSize: 400px;
+
+.container {
+  height: @cubeSize;
+  left: 50%;
+  perspective: 1000px;
+  position: absolute;
+  top: 50%;
+  transition: transform 800ms;
+  width: @cubeSize;
+
+  &.out{
+    transform: translate(-50%, -350%);
+  }
+  &.in{
+    transform: translate(-50%, -50%);
+  }
+
+  @media @medium {
+    height: @cubeSize / 2;
+    width: @cubeSize / 2;
+  }
+}
+
+.cube {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transform: rotateY(45deg);
+}
+
+
+.base {
+  border: 3px solid #000;
+  //backface-visibility: hidden;
+  color: #FFF;
+  display: block;
+  font-size: 360px;
+  font-weight: bold;
+  height: @cubeSize;
+  line-height: @cubeSize;
+  outline: 1px solid transparent;
+  position: absolute;
+  text-align: center;
+  width: @cubeSize;
+  @media @medium {
+    font-size: 360px / 2;
+    height: @cubeSize / 2;
+    line-height: @cubeSize / 2;
+    width: @cubeSize / 2;
+  }
+}
+
+.front {
+  composes: base;
+  transform: translateZ( @cubeSize / 2 );
+  @media @medium {
+    transform: translateZ( @cubeSize / 4 );
+  }
+}
+
+.back {
+  composes: base;
+  transform: rotateX( -180deg ) translateZ( @cubeSize / 2 );
+  @media @medium {
+    transform: rotateX( -180deg ) translateZ( @cubeSize / 4 );
+    font-size: 20px / 2;
+  }
+  font-size: 20px;
+}
+.right {
+  composes: base;
+  transform: rotateY( 90deg ) translateZ( @cubeSize / 2 );
+  @media @medium {
+    transform: rotateY( 90deg ) translateZ( @cubeSize / 4 );
+  }
+}
+.left {
+  composes: base;
+  transform: rotateY( -90deg ) translateZ( @cubeSize / 2 );
+  @media @medium {
+    transform: rotateY( -90deg ) translateZ( @cubeSize / 4 );
+  }
+}
+.top {
+  composes: base;
+  transform: rotateX( 90deg ) translateZ( @cubeSize / 2 );
+  font-size: 28px;
+  @media @medium {
+    transform: rotateX( 90deg ) translateZ( @cubeSize / 4 );
+    font-size: 28px / 2;
+  }
+}
+.bottom {
+  composes: base;
+  transform: rotateX(  -90deg ) translateZ( @cubeSize / 2 );
+  font-size: 28px;
+  @media @medium {
+    transform: rotateX( -90deg ) translateZ( @cubeSize / 4 );
+    font-size: 28px / 2;
+  }
+}
