@@ -9,7 +9,8 @@ export function prefetchRoutes() {
     './containers/About',
     './containers/Experiments',
     './containers/FieldEffect',
-    './containers/PlasmaCube'
+    './containers/PlasmaCube',
+    './containers/PlasmaDisplay'
   ], () => {});
 }
 /**
@@ -36,6 +37,11 @@ export default (
     <Route path = "plasmacube" getComponent={(location, cb) =>
       require.ensure(['./containers/PlasmaCube'], (require) => {
         cb(null, require('./containers/PlasmaCube').default);
+      })
+    } />
+    <Route path = "plasmadisplay" getComponent={(location, cb) =>
+      require.ensure(['./containers/PlasmaDisplay'], (require) => {
+        cb(null, require('./containers/PlasmaDisplay').default);
       })
     } />
   </Route>

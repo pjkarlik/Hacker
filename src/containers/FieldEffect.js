@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { setSiteState } from '../redux/modules/site';
 // Container Elements
 // Less for CSS Modules
-import FieldEffectStyles from './FieldEffect.less';
+import ExperimentBaseStyles from './ExperimentBase.less';
 
 class FieldEffect extends React.Component {
   static displayName = 'FieldEffect';
@@ -18,7 +18,7 @@ class FieldEffect extends React.Component {
     setSiteState: React.PropTypes.func
   };
   static defaultProps = {
-    classes: FieldEffectStyles
+    classes: ExperimentBaseStyles
   };
   constructor(props) {
     super(props);

@@ -3,14 +3,13 @@ import { resolve } from '../utils/styles';
 import { connect } from 'react-redux';
 import { setSiteState } from '../redux/modules/site';
 // Container Elements
-import Cube from './Cube';
-import PlasmaHTML from '../components/PlasmaHTML';
+// import PlasmaCanvas from '../components/PlasmaCanvas';
+import Plasma from '../components/Plasma';
 // Less for CSS Modules
 import ExperimentBaseStyles from './ExperimentBase.less';
-import CubeStyles from '../components/PlasmaCube.less';
 
-class PlasmaCube extends React.Component {
-  static displayName = 'PlasmaCube';
+class PlasmaDisplay extends React.Component {
+  static displayName = 'PlasmaDisplay';
   static propTypes = {
     /** CSS Modules Object **/
     classes: React.PropTypes.object,
@@ -34,6 +33,10 @@ class PlasmaCube extends React.Component {
         });
       }, 500);
     }
+    setTimeout(() => {
+      const plasmaObject = new Plasma(this.refs.plasmaInject, 400, 50, 0, 255, 255);
+      console.log(plasmaObject);
+    }, 200);
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.transition !== this.props.transition) {
@@ -49,36 +52,17 @@ class PlasmaCube extends React.Component {
   }
   render() {
     const { classes, transition } = this.props;
-    const cube = (
-      <Cube
-        initialX = {-42}
-        initialY = {22}
-        interactive = {false}
-        classes = {CubeStyles}>
-        <PlasmaHTML className = {CubeStyles.front} square = {30} />
-        <PlasmaHTML className = {CubeStyles.back} square = {15} />
-        <PlasmaHTML className = {CubeStyles.right} square = {25}/>
-        <PlasmaHTML className = {CubeStyles.left} />
-        <PlasmaHTML className = {CubeStyles.top} square = {5}/>
-        <PlasmaHTML className = {CubeStyles.bottom} />
-      </Cube>
-    );
     return (
       <div className = {classes.container}>
         <div {...resolve(this.props, 'window', transition)}>
-          <h2>Plasma Cube</h2>
+          <h2>Plasma Canvas</h2>
           <p>
-            This experiment creats a plasma effect using multipule sine wave functions. An array of DIV elements
-            are dynamically created inside of the parent container and the background of each DIV in a set
-            interval on render.
-          </p>
-          <p>
-            The cube is a CSS3 transformation, and each side of the cube has a plasma component inside of it. Each
-            side can be controlled in the amount of squares that make up the grid and a value for each color
-            component.
+            This experiment is a pure ES6 that creates a plasma effect using multipule sine wave functions and an HTML5
+            Canvas element. As time increases a value is fed into the function which cycles though each position on the
+            Canvas surface.
           </p>
         </div>
-        {cube}
+        <div {...resolve(this.props, 'experiment', transition)} ref="plasmaInject" />
       </div>
     );
   }
@@ -88,4 +72,4 @@ export default connect((state) => {
     navigationIsOpen: state.site.navigationIsOpen,
     transition: state.site.transition
   };
-}, { setSiteState })(PlasmaCube);
+}, { setSiteState })(PlasmaDisplay);
