@@ -47,7 +47,7 @@ export default class Plasma {
     let convert;
     for (let x = 0; x < this.grid; x++) {
       for (let y = 0; y < this.grid; y++) {
-        value = Math.sin(this.dist(x + this.time, y, 128.0, 128.0) / 6.0)
+        value = Math.sin(this.dist(x + this.time, y, 128.0, 128.0) / 7.0)
              + Math.sin(this.dist(x, y, 64.0, 64.0) / 6.0)
              + Math.sin(this.dist(x, y + this.time / 6, 192.0, 64) / 5.0)
              + Math.sin(this.dist(x, y, 192.0, 100.0) / 5.0);

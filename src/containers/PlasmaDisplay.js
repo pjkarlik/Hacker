@@ -57,9 +57,9 @@ class PlasmaDisplay extends React.Component {
         <div {...resolve(this.props, 'window', transition)}>
           <h2>Plasma Canvas</h2>
           <p>
-            This experiment is a pure ES6 that creates a plasma effect using multipule sine wave functions and an HTML5
-            Canvas element. As time increases a value is fed into the function which cycles though each position on the
-            Canvas surface.
+            This experiment is a pure ES6 class that creates a plasma effect using multipule sine wave functions and an
+            HTML5 Canvas element. As time increases a value is fed into the function which cycles though each position
+            on the Canvas surface.
           </p>
         </div>
         <div {...resolve(this.props, 'experiment', transition)} ref="plasmaInject" />
