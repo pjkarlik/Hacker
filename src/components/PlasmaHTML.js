@@ -2,6 +2,14 @@ import React from 'react';
 // Less for CSS Modules
 import PlasmaStyles from './PlasmaHTML.less';
 
+// Shim layer with setTimeout fallback from Paul Irish
+window.requestAnimFrame = (() => {
+  return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame ||
+  ((callback) => {
+    window.setTimeout(callback, 6000 / 60);
+  });
+})();
+
 export default class PlasmaHTML extends React.Component {
   static displayName = 'PlasmaHTML';
   static propTypes = {
@@ -31,12 +39,7 @@ export default class PlasmaHTML extends React.Component {
     this.dist = this.dist.bind(this);
   }
   componentDidMount() {
-    this.timer = setInterval(() => {
-      this.plasmaLoop();
-    }, 100);
-  }
-  componentWillUnmount() {
-    clearInterval(this.timer);
+    window.requestAnimFrame(this.plasmaLoop);
   }
   dist(a, b, c, d) {
     return Math.sqrt(((a - c) * (a - c) + (b - d) * (b - d)));
@@ -47,6 +50,7 @@ export default class PlasmaHTML extends React.Component {
     this.setState({
       colorMap
     });
+    window.requestAnimFrame(this.plasmaLoop);
   }
 
   renderPlasma() {
