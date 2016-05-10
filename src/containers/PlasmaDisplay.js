@@ -31,11 +31,11 @@ class PlasmaDisplay extends React.Component {
         this.props.setSiteState({
           transition: 'in'
         });
-      }, 500);
+      }, 100);
     }
     setTimeout(() => {
-      const plasmaObject = new Plasma(this.refs.plasmaInject, 400, 50, 0, 255, 255);
-      console.log(plasmaObject);
+      const plasmaObject = new Plasma(this.refs.plasmaInject, 400, 75, 0, 255, 255);
+      return plasmaObject;
     }, 200);
   }
   componentWillReceiveProps(nextProps) {

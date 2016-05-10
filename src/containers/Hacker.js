@@ -48,7 +48,7 @@ class Hacker extends React.Component {
         this.props.setSiteState({
           transition: 'in'
         });
-      }, 500);
+      }, 100);
     }
   }
   componentWillReceiveProps(nextProps) {

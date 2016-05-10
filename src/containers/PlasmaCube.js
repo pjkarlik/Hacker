@@ -32,7 +32,7 @@ class PlasmaCube extends React.Component {
         this.props.setSiteState({
           transition: 'in'
         });
-      }, 500);
+      }, 100);
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -55,11 +55,11 @@ class PlasmaCube extends React.Component {
         initialY = {22}
         interactive = {false}
         classes = {CubeStyles}>
-        <PlasmaHTML className = {CubeStyles.front} square = {30} />
-        <PlasmaHTML className = {CubeStyles.back} square = {15} />
-        <PlasmaHTML className = {CubeStyles.right} square = {25}/>
+        <PlasmaHTML className = {CubeStyles.front} />
+        <PlasmaHTML className = {CubeStyles.back} />
+        <PlasmaHTML className = {CubeStyles.right} />
         <PlasmaHTML className = {CubeStyles.left} />
-        <PlasmaHTML className = {CubeStyles.top} square = {5}/>
+        <PlasmaHTML className = {CubeStyles.top} />
         <PlasmaHTML className = {CubeStyles.bottom} />
       </Cube>
     );

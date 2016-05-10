@@ -1,4 +1,4 @@
-import PlasmaStyles from './PlasmaCanvas.less';
+import PlasmaStyles from './Plasma.less';
 
 // Shim layer with setTimeout fallback from Paul Irish
 window.requestAnimFrame = (() => {
