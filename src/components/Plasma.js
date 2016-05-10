@@ -42,6 +42,12 @@ export default class Plasma {
     return Math.sqrt(((a - c) * (a - c) + (b - d) * (b - d)));
   }
 
+  updateColor(offsetRed, offsetGreen, offsetBlue) {
+    this.offsetRed = offsetRed;
+    this.offsetGreen = offsetGreen;
+    this.offsetBlue = offsetBlue;
+  }
+
   renderPlasma() {
     let value;
     let convert;

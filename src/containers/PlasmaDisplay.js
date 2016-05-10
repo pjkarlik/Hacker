@@ -24,6 +24,7 @@ class PlasmaDisplay extends React.Component {
   };
   constructor(props) {
     super(props);
+    this.updateColor = this.updateColor.bind(this);
   }
   componentDidMount() {
     if (this.props.transition === 'out') {
@@ -37,9 +38,8 @@ class PlasmaDisplay extends React.Component {
       const redShift = Math.round(Math.random() * 255) + 1;
       const blueShift = Math.round(Math.random() * 255) + 1;
       const greenShift = Math.round(Math.random() * 255) + 1;
-      const plasmaObject = new Plasma(this.refs.plasmaInject, 400, 75, redShift, greenShift, blueShift);
-      // const plasmaObject = new Plasma(this.refs.plasmaInject, 400, 75, 255, 155, 55);
-      return plasmaObject;
+      this.plasmaObject = new Plasma(this.refs.plasmaInject, 400, 75, redShift, greenShift, blueShift);
+      return this.plasmaObject;
     }, 200);
   }
   componentWillReceiveProps(nextProps) {
@@ -54,6 +54,13 @@ class PlasmaDisplay extends React.Component {
       });
     }
   }
+  updateColor(e) {
+    e.preventDefault();
+    const redShift = Math.round(Math.random() * 255) + 1;
+    const blueShift = Math.round(Math.random() * 255) + 1;
+    const greenShift = Math.round(Math.random() * 255) + 1;
+    this.plasmaObject.updateColor(redShift, greenShift, blueShift);
+  }
   render() {
     const { classes, transition } = this.props;
     return (
@@ -66,7 +73,7 @@ class PlasmaDisplay extends React.Component {
             on the Canvas surface.
           </p>
         </div>
-        <div {...resolve(this.props, 'experiment', transition)} ref="plasmaInject" />
+        <div {...resolve(this.props, 'experiment', transition)} onClick = {this.updateColor} ref="plasmaInject" />
       </div>
     );
   }
