@@ -34,7 +34,11 @@ class PlasmaDisplay extends React.Component {
       }, 100);
     }
     setTimeout(() => {
-      const plasmaObject = new Plasma(this.refs.plasmaInject, 400, 75, 0, 255, 255);
+      const redShift = Math.round(Math.random() * 255) + 1;
+      const blueShift = Math.round(Math.random() * 255) + 1;
+      const greenShift = Math.round(Math.random() * 255) + 1;
+      const plasmaObject = new Plasma(this.refs.plasmaInject, 400, 75, redShift, greenShift, blueShift);
+      // const plasmaObject = new Plasma(this.refs.plasmaInject, 400, 75, 255, 155, 55);
       return plasmaObject;
     }, 200);
   }
