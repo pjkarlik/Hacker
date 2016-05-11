@@ -66,8 +66,8 @@ class About extends React.Component {
           <h3>About the Hacker</h3>
           <p>
             This site is my ongoing experiment and testing area for web and JavaScript development. My goal
-            is to create a modular site in which to present my interact experiments, and in doing so show
-            my skills as well. This has been a generative process, as Ive started with no plan other than
+            is to create a modular site in which to present my interactive experiments, and in doing so show
+            my skills as well. This is a generative process, as I have started with no plan other than
             to learn React/Redux and Webpack better. Please feel free to click around and interact with
             everything here. More to come, this is still in a work in progress...
           </p>

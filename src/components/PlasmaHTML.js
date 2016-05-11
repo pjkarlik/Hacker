@@ -71,7 +71,7 @@ export default class PlasmaHTML extends React.Component {
         convert = Math.floor(color);
 
         colorMap =
-          `rgba(${offsetRed > 0 ? convert - offsetRed : convert},` +
+          `rgba(${offsetRed > 0 ? offsetRed - convert : convert},` +
           `${offsetGreen > 0 ? offsetGreen - convert : convert},` +
           `${offsetBlue > 0 ? convert - offsetBlue : convert},` +
           `${convert / 255})`;
