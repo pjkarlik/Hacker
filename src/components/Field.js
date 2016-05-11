@@ -18,9 +18,9 @@ export default class Field extends React.Component {
     classes: FieldStyles,
     square: 20,
     size: 5,
-    radius: 80,
+    radius: 120,
     padding: 20,
-    maxTileSize: 50
+    maxTileSize: 80
   };
   constructor(props) {
     super(props);
@@ -112,16 +112,21 @@ export default class Field extends React.Component {
     }
   }
   render() {
-    const { classes, className, size, square, padding } = this.props;
+    const { classes, size, square, padding } = this.props;
     const tiles = [];
     const spacing = size + padding;
+    const containerStyle = {
+      width: `${square * spacing}px`,
+      height: `${square * spacing}px`
+    };
     for (let x = 0; x < square; x++) {
       for (let y = 0; y < square; y++) {
         const styleObject = {
           top: `${x * spacing}px`,
           left: `${y * spacing}px`,
           width: `${size}px`,
-          height: `${size}px`
+          height: `${size}px`,
+          backgroundColor: `#EEE`
         };
         const tileId = `tile${x}_${y}`;
         tiles.push(
@@ -141,7 +146,7 @@ export default class Field extends React.Component {
       }
     }
     return (
-      <div className = {`${classes.container} ${className || null}`} ref="container">
+      <div className = {classes.container} style = {containerStyle} ref="container">
         {tiles}
       </div>
     );
