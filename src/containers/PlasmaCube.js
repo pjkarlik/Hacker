@@ -25,6 +25,12 @@ class PlasmaCube extends React.Component {
   };
   constructor(props) {
     super(props);
+    this.state = {
+      offsetRed: 0,
+      offsetGreen: 0,
+      offsetBlue: 0
+    };
+    this.updateColor = this.updateColor.bind(this);
   }
   componentDidMount() {
     if (this.props.transition === 'out') {
@@ -47,20 +53,33 @@ class PlasmaCube extends React.Component {
       });
     }
   }
+  updateColor() {
+    this.setState({
+      offsetRed: Math.round(Math.random() * 255) + 1,
+      offsetGreen: Math.round(Math.random() * 255) + 1,
+      offsetBlue: Math.round(Math.random() * 255) + 1
+    });
+  }
   render() {
     const { classes, transition } = this.props;
+    const offsetColors = {
+      offsetRed: this.state.offsetRed,
+      offsetGreen: this.state.offsetGreen,
+      offsetBlue: this.state.offsetBlue
+    };
     const cube = (
       <Cube
+        ref = "plasmaCube"
         initialX = {-42}
         initialY = {22}
         interactive = {false}
         classes = {CubeStyles}>
-        <PlasmaHTML className = {CubeStyles.front} />
-        <PlasmaHTML className = {CubeStyles.back} />
-        <PlasmaHTML className = {CubeStyles.right} />
-        <PlasmaHTML className = {CubeStyles.left} />
-        <PlasmaHTML className = {CubeStyles.top} />
-        <PlasmaHTML className = {CubeStyles.bottom} />
+        <PlasmaHTML className = {CubeStyles.front} {...offsetColors}/>
+        <PlasmaHTML className = {CubeStyles.back} {...offsetColors}/>
+        <PlasmaHTML className = {CubeStyles.right} {...offsetColors}/>
+        <PlasmaHTML className = {CubeStyles.left} {...offsetColors}/>
+        <PlasmaHTML className = {CubeStyles.top} {...offsetColors}/>
+        <PlasmaHTML className = {CubeStyles.bottom} {...offsetColors}/>
       </Cube>
     );
     return (
@@ -77,6 +96,7 @@ class PlasmaCube extends React.Component {
             side can be controlled in the amount of squares that make up the grid and a value for each color
             component.
           </p>
+          <a href="#" className = {classes.link} onClick = {this.updateColor}>random color</a>
         </div>
         {cube}
       </div>

@@ -9,12 +9,13 @@ window.requestAnimFrame = (() => {
 })();
 
 export default class Plasma {
-  constructor(element, square, grid, offsetRed, offsetBlue, offsetGreen) {
+  constructor(element, square, grid, offsetRed, offsetBlue, offsetGreen, noise) {
     this.element = element;
     this.square = square;
     this.offsetRed = offsetRed;
     this.offsetBlue = offsetBlue;
     this.offsetGreen = offsetGreen;
+    this.noise = noise || Math.round(Math.random() * 6) + 6;
     this.grid = grid;
     this.size = square / grid;
     this.time = Math.round(Math.random() * 3000) + 1;
@@ -53,10 +54,10 @@ export default class Plasma {
     let convert;
     for (let x = 0; x < this.grid; x++) {
       for (let y = 0; y < this.grid; y++) {
-        value = Math.sin(this.dist(x + this.time, y, 128.0, 128.0) / 7.0)
-             + Math.sin(this.dist(x, y, 64.0, 64.0) / 6.0)
-             + Math.sin(this.dist(x, y + this.time / 6, 192.0, 64) / 5.0)
-             + Math.sin(this.dist(x, y, 192.0, 100.0) / 5.0);
+        value = Math.sin(this.dist(x + this.time, y, 128.0, 128.0) / this.noise)
+             + Math.sin(this.dist(x, y, 64.0, 64.0) / this.noise)
+             + Math.sin(this.dist(x, y + this.time / 6, 192.0, 64) / (this.noise - 2))
+             + Math.sin(this.dist(x, y, 192.0, 100.0) / (this.noise - 2));
 
         convert = Math.floor(parseInt((4 + value), 10) * 32);
         this.surface.fillStyle =
