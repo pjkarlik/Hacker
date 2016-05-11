@@ -33,11 +33,11 @@ export default class Field extends React.Component {
   componentDidMount() {
     this.refs.container.addEventListener('mousemove', (event) => {
       this.effectObjects(event);
-    });
+    }, false);
   }
 
   componentWillUnmount() {
-    this.refs.container.removeEventListener('mousemove');
+    this.refs.container.removeEventListener('mousemove', this.effectObjects, false);
   }
 
   effectObjects(event) {
