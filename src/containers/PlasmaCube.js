@@ -72,7 +72,7 @@ class PlasmaCube extends React.Component {
         ref = "plasmaCube"
         initialX = {-42}
         initialY = {22}
-        interactive = {false}
+        interactive
         classes = {CubeStyles}>
         <PlasmaHTML className = {CubeStyles.front} {...offsetColors}/>
         <PlasmaHTML className = {CubeStyles.back} {...offsetColors}/>

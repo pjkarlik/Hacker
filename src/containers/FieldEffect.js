@@ -3,6 +3,7 @@ import { resolve } from '../utils/styles';
 import { connect } from 'react-redux';
 import { setSiteState } from '../redux/modules/site';
 // Container Elements
+import Field from '../components/Field';
 // Less for CSS Modules
 import ExperimentBaseStyles from './ExperimentBase.less';
 
@@ -54,6 +55,9 @@ class FieldEffect extends React.Component {
             Working with proximity of mouse movements and objects rendered on screen which change in size in relation
             to the distance from the mouse.
           </p>
+        </div>
+        <div {...resolve(this.props, 'experiment', transition)}>
+          <Field />
         </div>
       </div>
     );
