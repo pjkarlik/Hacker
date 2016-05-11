@@ -55,7 +55,8 @@ class Navigation extends React.Component {
             <a href="#" className = {classes.link}
               activeClassName = {classes.active}
               onClick = {this.toggleSubMenu}>experiments</a>
-              <ul {...resolve(this.props, 'submenu', experimentsIsOpen ? 'open' : '')}>
+              <ul {...resolve(this.props, 'submenu', experimentsIsOpen ? 'open' : '')}
+                onClick = {this.toggleSubMenu}>
                 <li className = {classes.sublist}>
                   <Link to = "/fieldeffect" className = {classes.sublink}
                     onlyActiveOnIndex={this.state.true}
