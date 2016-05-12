@@ -18,16 +18,3 @@ export function modus(v, s) {
   const m = v - (v % s);
   return (m < 0) ? 0 : m;
 }
-
-/**
-* Original left/top
-*
-* @param {element} x/y of element 1 & 2
-* @return {object}
-*/
-export function originalPosition(element) {
-  return {
-    left: parseInt(element.getAttribute('data-left'), 10),
-    top: parseInt(element.getAttribute('data-top'), 10)
-  };
-}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { distance, modus, originalPosition } from './MathUtils';
+import { distance, modus } from './MathUtils';
 
 import FieldStyles from './Field.less';
 
@@ -18,7 +18,7 @@ export default class Field extends React.Component {
     classes: FieldStyles,
     square: 20,
     size: 5,
-    radius: 120,
+    radius: 140,
     padding: 20,
     maxTileSize: 80
   };
@@ -29,21 +29,22 @@ export default class Field extends React.Component {
     this.affected_tiles = [];
     this.effectMouse = this.effectMouse.bind(this);
     this.effectTouch = this.effectTouch.bind(this);
+    this.originalPosition = this.originalPosition.bind(this);
     this.effectObjects = this.effectObjects.bind(this);
   }
 
   componentDidMount() {
-    this.refs.container.addEventListener('mousemove', (event) => {
+    window.addEventListener('mousemove', (event) => {
       this.effectObjects(event);
     }, false);
-    this.refs.container.addEventListener('touchmove', (event) => {
+    window.addEventListener('touchmove', (event) => {
       this.effectObjects(event);
     }, false);
   }
 
   componentWillUnmount() {
-    this.refs.container.removeEventListener('mousemove', this.effectObjects, false);
-    this.refs.container.removeEventListener('touchmove', this.effectObjects, false);
+    window.removeEventListener('mousemove', this.effectObjects, false);
+    window.removeEventListener('touchmove', this.effectObjects, false);
   }
 
   effectMouse(event) {
@@ -60,6 +61,13 @@ export default class Field extends React.Component {
       y: Math.floor(event.changedTouches[0].clientY)
     };
     this.effectObjects(mouseEvent);
+  }
+
+  originalPosition(element) {
+    return {
+      left: parseInt(element.getAttribute('data-left'), 10),
+      top: parseInt(element.getAttribute('data-top'), 10)
+    };
   }
 
   effectObjects(mouseEvent) {
@@ -85,7 +93,7 @@ export default class Field extends React.Component {
         continue;
       }
       const tileElement = this.refs[this.cache[this.affected_tiles[x]].id];
-      const original = originalPosition(tileElement);
+      const original = this.originalPosition(tileElement);
       tileElement.style.left = `${original.left}px`;
       tileElement.style.top = `${original.top}px`;
       tileElement.style.width = `${size}px`;
@@ -111,7 +119,7 @@ export default class Field extends React.Component {
       // Get the numbers
       const tileObject = this.refs[this.cache[this.current_tiles[x]].id];
 
-      const original = originalPosition(tileObject);
+      const original = this.originalPosition(tileObject);
       // Calc distance from center of tiles
       const d = distance(_x, original.left + (size / 2), _y, original.top + (size / 2));
       const newSize = maxTileSize - (maxTileSize - size) * (d / radius);
