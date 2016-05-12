@@ -27,6 +27,9 @@ export default class Field extends React.Component {
     this.cache = [];
     this.current_tiles = [];
     this.affected_tiles = [];
+    this.touchStart = this.touchStart.bind(this);
+    this.effectMouse = this.effectMouse.bind(this);
+    this.effectTouch = this.effectTouch.bind(this);
     this.effectObjects = this.effectObjects.bind(this);
   }
 
@@ -34,18 +37,39 @@ export default class Field extends React.Component {
     this.refs.container.addEventListener('mousemove', (event) => {
       this.effectObjects(event);
     }, false);
+    this.refs.container.addEventListener('touchmove', (event) => {
+      this.effectObjects(event);
+    }, false);
   }
 
   componentWillUnmount() {
     this.refs.container.removeEventListener('mousemove', this.effectObjects, false);
+    this.refs.container.removeEventListener('touchmove', this.effectObjects, false);
   }
-
-  effectObjects(event) {
+  effectMouse(event) {
+    const mouseEvent = {
+      x: event.clientX,
+      y: event.clientY
+    };
+    this.effectObjects(mouseEvent);
+  }
+  effectTouch(event) {
+    const mouseEvent = {
+      x: Math.floor(event.changedTouches[0].clientX),
+      y: Math.floor(event.changedTouches[0].clientY)
+    };
+    this.effectObjects(mouseEvent);
+  }
+  touchStart(event) {
+    event.preventDefault();
+    this.effectMouse(event.touches[0]);
+  }
+  effectObjects(mouseEvent) {
     const { radius, size, padding, maxTileSize } = this.props;
     // Mouse positions, current tiles array
     this.container = this.refs.container.getBoundingClientRect();
-    const _x = event.clientX - this.container.left;
-    const _y = event.clientY - this.container.top;
+    const _x = mouseEvent.x - this.container.left;
+    const _y = mouseEvent.y - this.container.top;
 
     // Mod the min/max of x/y for cache look up
     const min = {
@@ -144,7 +168,7 @@ export default class Field extends React.Component {
       }
     }
     return (
-      <div className = {classes.container} style = {containerStyle} ref="container">
+      <div className = {classes.container} style = {containerStyle} ref="container" onTouchStart = {this.touchStart}>
         {tiles}
       </div>
     );
