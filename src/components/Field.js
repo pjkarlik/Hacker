@@ -43,9 +43,9 @@ export default class Field extends React.Component {
   effectObjects(event) {
     const { radius, size, padding, maxTileSize } = this.props;
     // Mouse positions, current tiles array
-    const container = this.refs.container.getBoundingClientRect();
-    const _x = event.clientX - container.left;
-    const _y = event.clientY - container.top;
+    this.container = this.refs.container.getBoundingClientRect();
+    const _x = event.clientX - this.container.left;
+    const _y = event.clientY - this.container.top;
 
     // Mod the min/max of x/y for cache look up
     const min = {
@@ -56,7 +56,7 @@ export default class Field extends React.Component {
       x: modus(_x + radius, size + padding),
       y: modus(_y + radius, size + padding)
     };
-
+    // console.log(min.x, min.y, max.x, max.y);
     // Reset tiles that are no longer in the hit area
     for (let x = 0; x < this.affected_tiles.length; x++) {
       if (!this.cache[this.affected_tiles[x]]) {
@@ -99,14 +99,14 @@ export default class Field extends React.Component {
         tileObject.style.top = `${(original.top - ~~(newSize / 2) + (size / 2))}px`;
         tileObject.style.width = `${newSize}px`;
         tileObject.style.height = `${newSize}px`;
-        // tileObject.style.zIndex = `${~~newSize}`;
+        tileObject.style.zIndex = `${~~newSize}`;
         tileObject.style.backgroundColor = `#333`;
       } else {
         tileObject.style.left = `${original.left}px`;
         tileObject.style.top = `${original.top}px`;
         tileObject.style.width = `${size}px`;
         tileObject.style.height = `${size}px`;
-        // tileObject.style.zIndex = `${1}`;
+        tileObject.style.zIndex = `${1}`;
         tileObject.style.backgroundColor = `#EEE`;
       }
     }
@@ -122,8 +122,8 @@ export default class Field extends React.Component {
     for (let x = 0; x < square; x++) {
       for (let y = 0; y < square; y++) {
         const styleObject = {
-          top: `${x * spacing}px`,
-          left: `${y * spacing}px`,
+          top: `${y * spacing}px`,
+          left: `${x * spacing}px`,
           width: `${size}px`,
           height: `${size}px`,
           backgroundColor: `#EEE`
@@ -133,14 +133,12 @@ export default class Field extends React.Component {
           <div key = {tileId}
             ref = {tileId}
             className = {classes.tile}
-            data-top = {x * spacing}
-            data-left = {y * spacing}
+            data-top = {y * spacing}
+            data-left = {x * spacing}
             style = {styleObject} />
         );
         const cacheID = `${x * spacing}_${y * spacing}`;
         this.cache[cacheID] = {
-          x: x * spacing,
-          y: y * spacing,
           id: tileId
         };
       }
