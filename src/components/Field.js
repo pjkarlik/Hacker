@@ -129,14 +129,14 @@ export default class Field extends React.Component {
         tileObject.style.top = `${(original.top - ~~(newSize / 2) + (size / 2))}px`;
         tileObject.style.width = `${newSize}px`;
         tileObject.style.height = `${newSize}px`;
-        tileObject.style.zIndex = `${~~newSize}`;
+        // tileObject.style.zIndex = `${~~newSize}`;
         tileObject.style.backgroundColor = `#333`;
       } else {
         tileObject.style.left = `${original.left}px`;
         tileObject.style.top = `${original.top}px`;
         tileObject.style.width = `${size}px`;
         tileObject.style.height = `${size}px`;
-        tileObject.style.zIndex = `${1}`;
+        // tileObject.style.zIndex = `${1}`;
         tileObject.style.backgroundColor = `#EEE`;
       }
     }

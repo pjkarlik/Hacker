@@ -11,10 +11,11 @@ export function distance(x1, y1, x2, y2) {
 /**
 * Calculate Mod
 *
-* @param {number} x/y of element 1 & 2
+* @param {number} vector/position
+* @param {number} size/displacment
 * @return {object}
 */
-export function modus(v, s) {
-  const m = v - (v % s);
-  return (m < 0) ? 0 : m;
+export function modus(vector, size) {
+  const mod = vector - (vector % size);
+  return (mod < 0) ? 0 : mod;
 }
