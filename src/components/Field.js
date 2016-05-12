@@ -34,17 +34,13 @@ export default class Field extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('mousemove', (event) => {
-      this.effectObjects(event);
-    }, false);
-    window.addEventListener('touchmove', (event) => {
-      this.effectObjects(event);
-    }, false);
+    window.addEventListener('mousemove', this.effectMouse);
+    window.addEventListener('touchmove', this.effectTouch);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('mousemove', this.effectObjects, false);
-    window.removeEventListener('touchmove', this.effectObjects, false);
+    window.removeEventListener('mousemove', this.effectMouse);
+    window.removeEventListener('touchmove', this.effectTouch);
   }
 
   effectMouse(event) {
