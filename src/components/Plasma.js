@@ -10,15 +10,24 @@ window.requestAnimFrame = (() => {
 
 export default class Plasma {
   constructor(element, square, grid, offsetRed, offsetBlue, offsetGreen, noise) {
+    /** element to attach the plasma display to **/
     this.element = element;
+    /** size of parent container applied to canvas **/
     this.square = square;
+    /** value to offset red color by **/
     this.offsetRed = offsetRed;
-    this.offsetBlue = offsetBlue;
+    /** value to offset green color by **/
     this.offsetGreen = offsetGreen;
+    /** value to offset blue color by **/
+    this.offsetBlue = offsetBlue;
+    /** sine wave divider number **/
     this.noise = noise || Math.round(Math.random() * 6) + 6;
+    /** Amount of squares to across a row **/
     this.grid = grid;
+    /** dynamically set items **/
     this.size = square / grid;
     this.time = Math.round(Math.random() * 3000) + 1;
+    /** canvas items **/
     this.plasmaGrid = this.createCanvas('plasma', square, square);
     this.surface = this.plasmaGrid.getContext('2d');
     this.surface.scale(1, 1);

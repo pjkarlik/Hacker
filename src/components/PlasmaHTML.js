@@ -13,14 +13,20 @@ window.requestAnimFrame = (() => {
 export default class PlasmaHTML extends React.Component {
   static displayName = 'PlasmaHTML';
   static propTypes = {
-    /** CSS Modules Object **/
+    /** css modules style object **/
     classes: React.PropTypes.object,
+    /** css classname applied to container **/
     className: React.PropTypes.string,
+    /** Amount of squares to across a row **/
     square: React.PropTypes.number,
+    /** sine wave divider number **/
     noise: React.PropTypes.number,
+    /** value to offset red color by **/
     offsetRed: React.PropTypes.number,
-    offsetBlue: React.PropTypes.number,
-    offsetGreen: React.PropTypes.number
+    /** value to offset green color by **/
+    offsetGreen: React.PropTypes.number,
+    /** value to offset blue color by **/
+    offsetBlue: React.PropTypes.number
   };
   static defaultProps = {
     classes: PlasmaStyles,
