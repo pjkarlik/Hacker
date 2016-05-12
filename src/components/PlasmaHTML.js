@@ -81,8 +81,11 @@ export default class PlasmaHTML extends React.Component {
           `${offsetGreen > 0 ? offsetGreen - convert : convert},` +
           `${offsetBlue > 0 ? convert - offsetBlue : convert},` +
           `${convert / 255})`;
-        this.refs[`tile${x}_${y}`].style.background = colorMap;
-          // `${offsetRed - convert}, ${offsetBlue - convert}, ${offsetGreen - convert}, ${convert / 255}`;
+          // Check for small case that component unmounted before function stopped.
+        const objectCheck = this.refs[`tile${x}_${y}`];
+        if (objectCheck) {
+          objectCheck.style.background = colorMap;
+        }
       }
     }
   }

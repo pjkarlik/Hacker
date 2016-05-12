@@ -6,12 +6,19 @@ import FieldStyles from './Field.less';
 export default class Field extends React.Component {
   static displayName = 'Field';
   static propTypes = {
+    /** css modules style object **/
     classes: React.PropTypes.object,
+    /** css classname applied to container **/
     className: React.PropTypes.string,
+    /** Amount of squares to across a row **/
     square: React.PropTypes.number,
+    /** Size of dot **/
     size: React.PropTypes.number,
+    /** Field Radius **/
     radius: React.PropTypes.number,
+    /** Space between dots in rows **/
     padding: React.PropTypes.number,
+    /** Max grow size of dot **/
     maxTileSize: React.PropTypes.number
   };
   static defaultProps = {
@@ -98,7 +105,7 @@ export default class Field extends React.Component {
       tileElement.style.backgroundColor = `#EEE`;
     }
     this.affected_tiles = [];
-
+    // find radius for currently effected tiles
     for (let x = min.x; x <= max.x; x = x + size + padding) {
       for (let y = min.y; y <= max.y; y = y + size + padding) {
         const cacheID = `${x}_${y}`;
@@ -107,7 +114,7 @@ export default class Field extends React.Component {
       }
     }
 
-    // Loop through current tiles
+    // Loop through current tiles in cache
     for (let x = 0; x < this.current_tiles.length; x++) {
       if (!this.cache[this.current_tiles[x]]) {
         continue;
@@ -119,7 +126,7 @@ export default class Field extends React.Component {
       // Calc distance from center of tiles
       const d = distance(_x, original.left + (size / 2), _y, original.top + (size / 2));
       const newSize = maxTileSize - (maxTileSize - size) * (d / radius);
-
+      // set styles - TODO find better way to do this
       if (d < radius && newSize > size) {
         tileObject.style.left = `${(original.left - ~~(newSize / 2) + (size / 2))}px`;
         tileObject.style.top = `${(original.top - ~~(newSize / 2) + (size / 2))}px`;
@@ -138,7 +145,7 @@ export default class Field extends React.Component {
     }
   }
   render() {
-    const { classes, size, square, padding } = this.props;
+    const { classes, className, size, square, padding } = this.props;
     const tiles = [];
     const spacing = size + padding;
     const containerStyle = {
@@ -170,7 +177,7 @@ export default class Field extends React.Component {
       }
     }
     return (
-      <div className = {classes.container}
+      <div className = {`${classes.container} ${className || null}`}
         style = {containerStyle}
         onTouchStart = {this.effectTouch}
         ref="container" >
