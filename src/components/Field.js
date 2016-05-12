@@ -27,7 +27,6 @@ export default class Field extends React.Component {
     this.cache = [];
     this.current_tiles = [];
     this.affected_tiles = [];
-    this.touchStart = this.touchStart.bind(this);
     this.effectMouse = this.effectMouse.bind(this);
     this.effectTouch = this.effectTouch.bind(this);
     this.effectObjects = this.effectObjects.bind(this);
@@ -46,6 +45,7 @@ export default class Field extends React.Component {
     this.refs.container.removeEventListener('mousemove', this.effectObjects, false);
     this.refs.container.removeEventListener('touchmove', this.effectObjects, false);
   }
+
   effectMouse(event) {
     const mouseEvent = {
       x: event.clientX,
@@ -53,6 +53,7 @@ export default class Field extends React.Component {
     };
     this.effectObjects(mouseEvent);
   }
+
   effectTouch(event) {
     const mouseEvent = {
       x: Math.floor(event.changedTouches[0].clientX),
@@ -60,10 +61,7 @@ export default class Field extends React.Component {
     };
     this.effectObjects(mouseEvent);
   }
-  touchStart(event) {
-    event.preventDefault();
-    this.effectMouse(event.touches[0]);
-  }
+
   effectObjects(mouseEvent) {
     const { radius, size, padding, maxTileSize } = this.props;
     // Mouse positions, current tiles array
@@ -168,7 +166,10 @@ export default class Field extends React.Component {
       }
     }
     return (
-      <div className = {classes.container} style = {containerStyle} ref="container" onTouchStart = {this.touchStart}>
+      <div className = {classes.container}
+        style = {containerStyle}
+        onTouchStart = {this.effectTouch}
+        ref="container" >
         {tiles}
       </div>
     );
