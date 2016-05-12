@@ -90,13 +90,12 @@ export default class Field extends React.Component {
       }
       const tileElement = this.refs[this.cache[this.affected_tiles[x]].id];
       const original = this.originalPosition(tileElement);
-      tileElement.style = {
-        left: `${original.left}px`,
-        top: `${original.top}px`,
-        width: `${size}px`,
-        height: `${size}px`,
-        backgroundColor: `#EEE`
-      };
+      tileElement.style.left = `${original.left}px`;
+      tileElement.style.top = `${original.top}px`;
+      tileElement.style.width = `${size}px`;
+      tileElement.style.height = `${size}px`;
+      // tileElement.style.zIndex = `${1}`;
+      tileElement.style.backgroundColor = `#EEE`;
     }
     this.affected_tiles = [];
 
@@ -122,23 +121,19 @@ export default class Field extends React.Component {
       const newSize = maxTileSize - (maxTileSize - size) * (d / radius);
 
       if (d < radius && newSize > size) {
-        tileObject.style = {
-          left: `${(original.left - ~~(newSize / 2) + (size / 2))}px`,
-          top: `${(original.top - ~~(newSize / 2) + (size / 2))}px`,
-          width: `${newSize}px`,
-          height: `${newSize}px`,
-          // zIndex: `${~~newSize}`,
-          backgroundColor: `#333`
-        };
+        tileObject.style.left = `${(original.left - ~~(newSize / 2) + (size / 2))}px`;
+        tileObject.style.top = `${(original.top - ~~(newSize / 2) + (size / 2))}px`;
+        tileObject.style.width = `${newSize}px`;
+        tileObject.style.height = `${newSize}px`;
+        // tileObject.style.zIndex = `${~~newSize}`;
+        tileObject.style.backgroundColor = `#333`;
       } else {
-        tileObject.style = {
-          left: `${original.left}px`,
-          top: `${original.top}px`,
-          width: `${size}px`,
-          height: `${size}px`,
-          // zIndex: `${1}`,
-          backgroundColor: `#EEE`
-        };
+        tileObject.style.left = `${original.left}px`;
+        tileObject.style.top = `${original.top}px`;
+        tileObject.style.width = `${size}px`;
+        tileObject.style.height = `${size}px`;
+        // tileObject.style.zIndex = `${1}`;
+        tileObject.style.backgroundColor = `#EEE`;
       }
     }
   }
