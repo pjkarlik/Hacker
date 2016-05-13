@@ -8,6 +8,7 @@ export function prefetchRoutes() {
   require.ensure([
     './containers/About',
     './containers/Experiments',
+    './containers/AnimationCycle',
     './containers/FieldEffect',
     './containers/PlasmaCube',
     './containers/PlasmaDisplay'
@@ -27,6 +28,11 @@ export default (
     <Route path = "experiments" getComponent={(location, cb) =>
       require.ensure(['./containers/Experiments'], (require) => {
         cb(null, require('./containers/Experiments').default);
+      })
+    } />
+    <Route path = "animationcycle" getComponent={(location, cb) =>
+      require.ensure(['./containers/AnimationCycle'], (require) => {
+        cb(null, require('./containers/AnimationCycle').default);
       })
     } />
     <Route path = "fieldeffect" getComponent={(location, cb) =>

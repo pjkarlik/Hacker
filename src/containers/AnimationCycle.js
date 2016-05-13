@@ -3,12 +3,12 @@ import { resolve } from '../utils/styles';
 import { connect } from 'react-redux';
 import { setSiteState } from '../redux/modules/site';
 // Container Elements
-import Plasma from '../components/Plasma';
+import UfoObjects from '../components/UfoObjects.js';
 // Less for CSS Modules
 import ExperimentBaseStyles from './ExperimentBase.less';
 
-class PlasmaDisplay extends React.Component {
-  static displayName = 'PlasmaDisplay';
+class AnimationCycle extends React.Component {
+  static displayName = 'AnimationCycle';
   static propTypes = {
     /** CSS Modules Object **/
     classes: React.PropTypes.object,
@@ -23,7 +23,6 @@ class PlasmaDisplay extends React.Component {
   };
   constructor(props) {
     super(props);
-    this.updateColor = this.updateColor.bind(this);
   }
   componentDidMount() {
     if (this.props.transition === 'out') {
@@ -34,12 +33,14 @@ class PlasmaDisplay extends React.Component {
       }, 100);
     }
     setTimeout(() => {
-      const redShift = Math.round(Math.random() * 255) + 1;
-      const blueShift = Math.round(Math.random() * 255) + 1;
-      const greenShift = Math.round(Math.random() * 255) + 1;
-      this.plasmaObject = new Plasma(this.refs.plasmaInject, 400, 75, redShift, greenShift, blueShift, 7);
-      return this.plasmaObject;
-    }, 200);
+      const config = {
+        amount: 100,
+        size: 25,
+        frames: 4
+      };
+      this.animationObject = new UfoObjects(this.refs.inject, config);
+      return this.animationObject;
+    }, 900);
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.transition !== this.props.transition) {
@@ -53,26 +54,21 @@ class PlasmaDisplay extends React.Component {
       });
     }
   }
-  updateColor(e) {
-    e.preventDefault();
-    const redShift = Math.round(Math.random() * 255) + 1;
-    const blueShift = Math.round(Math.random() * 255) + 1;
-    const greenShift = Math.round(Math.random() * 255) + 1;
-    this.plasmaObject.updateColor(redShift, greenShift, blueShift);
-  }
+
   render() {
     const { classes, transition } = this.props;
     return (
       <div className = {classes.container}>
         <div {...resolve(this.props, 'window', transition)}>
-          <h2>Plasma Canvas</h2>
+          <h2>Animation Cycle</h2>
           <p>
-            This experiment is a pure ES6 class that creates a plasma effect using multipule sine wave functions and an
-            HTML5 Canvas element. As time increases a value is fed into the function which cycles though each position
-            on the Canvas surface.
+            This was an older project, back when doing animated items on screen was a new thing. It uses what is called
+            a sprite sheet to produce the animated image. Each frame the position on the background image is shifted
+            by the width in a POV (persistance of vision) effect. The result is an animating ship that can be controlled
+            programatically.
           </p>
         </div>
-        <div {...resolve(this.props, 'experiment', transition)} onClick = {this.updateColor} ref="plasmaInject" />
+        <div {...resolve(this.props, 'experiment', transition)} ref="inject" />
       </div>
     );
   }
@@ -82,4 +78,4 @@ export default connect((state) => {
     navigationIsOpen: state.site.navigationIsOpen,
     transition: state.site.transition
   };
-}, { setSiteState })(PlasmaDisplay);
+}, { setSiteState })(AnimationCycle);
