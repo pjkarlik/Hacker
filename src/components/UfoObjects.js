@@ -50,16 +50,16 @@ export class UfoShip {
       this.frame = 0;
     }
 
-    if (this.randomValue(50) > 49) {
+    if (this.randomValue(250) > 249) {
       this.newPosition._x = this.randomValue(window.innerWidth);
     }
-    if (this.randomValue(50) > 49) {
+    if (this.randomValue(250) > 249) {
       this.newPosition._y = this.randomValue(window.innerHeight);
     }
-    this.currentPosition._x = this.currentPosition._x - (this.currentPosition._x - this.newPosition._x) * 0.01;
+    this.currentPosition._x = this.currentPosition._x - (this.currentPosition._x - this.newPosition._x) * 0.006;
     this.ufo.style.left = `${Math.round(this.currentPosition._x)}px`;
 
-    this.currentPosition._y = this.currentPosition._y - (this.currentPosition._y - this.newPosition._y) * 0.01;
+    this.currentPosition._y = this.currentPosition._y - (this.currentPosition._y - this.newPosition._y) * 0.006;
     this.ufo.style.top = `${Math.round(this.currentPosition._y)}px`;
 
     if (this.animated) {

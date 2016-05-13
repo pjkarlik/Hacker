@@ -34,7 +34,7 @@ class AnimationCycle extends React.Component {
     }
     setTimeout(() => {
       const config = {
-        amount: 100,
+        amount: 75,
         size: 25,
         frames: 4
       };
