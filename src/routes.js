@@ -3,13 +3,15 @@ import App from './containers/App';
 import { Route, IndexRoute } from 'react-router';
 import Hacker from './containers/Hacker';
 
-// Route Prefetching
+/**
+  Route Prefetching
+**/
 export function prefetchRoutes() {
   require.ensure([
     './containers/About',
-    './containers/Experiments',
     './containers/AnimationCycle',
     './containers/FieldEffect',
+    './containers/FlockDemo',
     './containers/PlasmaCube',
     './containers/PlasmaDisplay'
   ], () => {});
@@ -25,11 +27,6 @@ export default (
         cb(null, require('./containers/About').default);
       })
     } />
-    <Route path = "experiments" getComponent={(location, cb) =>
-      require.ensure(['./containers/Experiments'], (require) => {
-        cb(null, require('./containers/Experiments').default);
-      })
-    } />
     <Route path = "animationcycle" getComponent={(location, cb) =>
       require.ensure(['./containers/AnimationCycle'], (require) => {
         cb(null, require('./containers/AnimationCycle').default);
@@ -38,6 +35,11 @@ export default (
     <Route path = "fieldeffect" getComponent={(location, cb) =>
       require.ensure(['./containers/FieldEffect'], (require) => {
         cb(null, require('./containers/FieldEffect').default);
+      })
+    } />
+    <Route path = "flockdemo" getComponent={(location, cb) =>
+      require.ensure(['./containers/FlockDemo'], (require) => {
+        cb(null, require('./containers/FlockDemo').default);
       })
     } />
     <Route path = "plasmacube" getComponent={(location, cb) =>

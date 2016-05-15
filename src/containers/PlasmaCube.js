@@ -68,7 +68,7 @@ class PlasmaCube extends React.Component {
       offsetBlue: this.state.offsetBlue
     };
     const cube = (
-      <Cube
+      <Cube onClick = {this.updateColor}
         ref = "plasmaCube"
         initialX = {-42}
         initialY = {22}
@@ -83,21 +83,8 @@ class PlasmaCube extends React.Component {
       </Cube>
     );
     return (
-      <div className = {classes.container}>
-        <div {...resolve(this.props, 'window', transition)}>
-          <h2>Plasma Cube</h2>
-          <p>
-            This experiment creats a plasma effect using multipule sine wave functions. An array of DIV elements
-            are dynamically created inside of the parent container and the background of each DIV in a set
-            interval on render.
-          </p>
-          <p>
-            The cube is a CSS3 transformation, and each side of the cube has a plasma component inside of it. Each
-            side can be controlled in the amount of squares that make up the grid and a value for each color
-            component.
-          </p>
-          <a href="#" className = {classes.link} onClick = {this.updateColor}>random color</a>
-        </div>
+      <div className = {classes.container} style = {{ background: '#999' }}>
+        <h2 {...resolve(this.props, 'title', transition)}>Plasma Cube</h2>
         {cube}
       </div>
     );

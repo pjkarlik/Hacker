@@ -37,7 +37,7 @@ class PlasmaDisplay extends React.Component {
       const redShift = Math.round(Math.random() * 255) + 1;
       const blueShift = Math.round(Math.random() * 255) + 1;
       const greenShift = Math.round(Math.random() * 255) + 1;
-      this.plasmaObject = new Plasma(this.refs.plasmaInject, 400, 75, redShift, greenShift, blueShift, 7);
+      this.plasmaObject = new Plasma(this.refs.plasmaInject, 400, 90, redShift, greenShift, blueShift, 7);
       return this.plasmaObject;
     }, 200);
   }
@@ -64,14 +64,7 @@ class PlasmaDisplay extends React.Component {
     const { classes, transition } = this.props;
     return (
       <div className = {classes.container}>
-        <div {...resolve(this.props, 'window', transition)}>
-          <h2>Plasma Canvas</h2>
-          <p>
-            This experiment is a pure ES6 class that creates a plasma effect using multipule sine wave functions and an
-            HTML5 Canvas element. As time increases a value is fed into the function which cycles though each position
-            on the Canvas surface.
-          </p>
-        </div>
+          <h2 {...resolve(this.props, 'title', transition)}>Plasma Canvas</h2>
         <div {...resolve(this.props, 'experiment', transition)} onClick = {this.updateColor} ref="plasmaInject" />
       </div>
     );

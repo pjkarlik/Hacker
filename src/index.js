@@ -19,7 +19,7 @@ require.ensure(['./routes'], (require) => {
 });
 
 /**
-  Fancy Console Log experiment for 'the Hacker'
+  Fancy console log statement
 */
 const version = require('../package.json').version;
 const description = require('../package.json').description;
@@ -32,7 +32,7 @@ const args = [
   'color: black; background: #FFF; padding:5px 0; border-top: 1px solid #000; border-bottom: 1px solid #000;',
   'background: #000; padding:5px 0;'
 ];
-// Check to see if browser can handle fancy console.log else just blurb text
+// Check to see if browser can handle fancy console log else just blurb text
 try {
   window.console.log.apply(console, args);
 } catch (e) {

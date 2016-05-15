@@ -16,6 +16,29 @@
 
 }
 
+.title {
+  background: #000;
+  bottom: 2px;
+  color: #FFF;
+  font-size: 15px;
+  height: 29px;
+  line-height:30px;
+  margin: 0;
+  padding: 0 20px 0 0;
+  position: absolute;
+  right: 100%;
+  text-align: right;
+  transition: all 300ms;
+  transition-delay: 300ms;
+  z-index: 300;
+  width: 100%;
+  &.out{
+    right: 100%;
+  }
+  &.in{
+    right: 31px;
+  }
+}
 .window {
   font-size: 1em;
   height: 100%;
@@ -37,7 +60,7 @@
     width: 30%;
   }
   &.out{
-    transform: translate(-350%, -50%);
+    transform: translate(-50%, -350%);
   }
   &.in{
     transform: translate(-50%, -50%);
@@ -60,7 +83,7 @@
   width: 100%;
 
   &.out{
-    transform: translate(-150%, -50%);
+    transform: translate(-50%, -150%);
   }
   &.in{
     transform: translate(-50%, -50%);

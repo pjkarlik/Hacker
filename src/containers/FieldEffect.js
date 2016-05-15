@@ -49,13 +49,7 @@ class FieldEffect extends React.Component {
     const { classes, transition } = this.props;
     return (
       <div className = {classes.container}>
-        <div {...resolve(this.props, 'window', transition)}>
-          <h2>Field Effect</h2>
-          <p>
-            Working with proximity of mouse movements and objects rendered on screen which change in size in relation
-            to the distance from the mouse.
-          </p>
-        </div>
+          <h2 {...resolve(this.props, 'title', transition)}>Field Effect</h2>
         <div {...resolve(this.props, 'experiment', transition)}>
           <Field />
         </div>

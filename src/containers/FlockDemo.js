@@ -1,16 +1,14 @@
 import React from 'react';
-// import { resolve } from '../utils/styles';
+import { resolve } from '../utils/styles';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import { setSiteState } from '../redux/modules/site';
 // Container Elements
-import Cube from './Cube';
+// import Flock from '../components/Flock.js';
 // Less for CSS Modules
-import ExperimentsStyles from './Experiments.less';
-import PanelStyles from './Panel.less';
+import ExperimentBaseStyles from './ExperimentBase.less';
 
-class Experiments extends React.Component {
-  static displayName = 'Experiments';
+class FlockDemo extends React.Component {
+  static displayName = 'FlockDemo';
   static propTypes = {
     /** CSS Modules Object **/
     classes: React.PropTypes.object,
@@ -21,13 +19,10 @@ class Experiments extends React.Component {
     setSiteState: React.PropTypes.func
   };
   static defaultProps = {
-    classes: ExperimentsStyles
+    classes: ExperimentBaseStyles
   };
   constructor(props) {
     super(props);
-    this.state = {
-      true: true
-    };
   }
   componentDidMount() {
     if (this.props.transition === 'out') {
@@ -37,6 +32,15 @@ class Experiments extends React.Component {
         });
       }, 100);
     }
+    // setTimeout(() => {
+    //   const config = {
+    //     amount: 75,
+    //     size: 25,
+    //     frames: 4
+    //   };
+    //   this.animationObject = new Flock(this.refs.inject, config);
+    //   return this.animationObject;
+    // }, 900);
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.transition !== this.props.transition) {
@@ -50,20 +54,21 @@ class Experiments extends React.Component {
       });
     }
   }
+
   render() {
-    const { classes } = this.props;
+    const { classes, transition } = this.props;
     return (
       <div className = {classes.container}>
-      <Cube
-        interactive
-        initialX = {-42}
-        classes = {PanelStyles}>
-          <div className = {PanelStyles.front}>
-          <Link to = "/fieldeffect" className = {classes.link}
-            onlyActiveOnIndex={this.state.true}
-            activeClassName = {classes.active}>Field Effect</Link>
-          </div>
-        </Cube>
+        <div {...resolve(this.props, 'window', transition)}>
+          <h2>Flock Example</h2>
+          <p>
+            Flock/Boid demonstration in HTML5.
+          </p>
+          <p>
+            This demo is pure a ES6 JavaScript Class with elements injected inside of the React component and lifecycle.
+          </p>
+        </div>
+        <div {...resolve(this.props, 'experiment', transition)} ref="inject" />
       </div>
     );
   }
@@ -73,4 +78,4 @@ export default connect((state) => {
     navigationIsOpen: state.site.navigationIsOpen,
     transition: state.site.transition
   };
-}, { setSiteState })(Experiments);
+}, { setSiteState })(FlockDemo);

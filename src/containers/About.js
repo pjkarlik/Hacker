@@ -63,7 +63,16 @@ class About extends React.Component {
           <div className = {CubeStyles.bottom}/>
         </Cube>
         <div {...resolve(this.props, 'information', transition)}>
-          <h3>About the Hacker</h3>
+          <h3>Paul J Karlik</h3>
+          <p>
+            I am a User Interface Architect and Front-End Developer with over 17 years experience working on
+            large-scale dynamic web applications and web sites. I have a strong knowledge and understanding
+            of JavaScript web application design, process and development. My experience is from large creative
+            digital agencies, tech startups and SAS development. Current skills include HTML5 & CSS3, LESS,
+            JavaScript, ES6, React, Redux, Webpack, CSS Modules and Node. I am also a pretty nerdy guy that aslo
+            enjoys other languages such as Processing, Arduino and Raspberry Pi hardware platforms.
+          </p>
+          <h4>About This Site</h4>
           <p>
             This site is my ongoing experiment and testing area for web and JavaScript development. My goal
             is to create a modular site in which to present my interactive experiments, and in doing so show
@@ -71,7 +80,6 @@ class About extends React.Component {
             to learn React/Redux and Webpack better. Please feel free to click around and interact with
             everything here. More to come, this is still in a work in progress...
           </p>
-
           <h4>Technology used in this site.</h4>
           <p>
             <a href="https://facebook.github.io/react/">React</a>,&nbsp;
@@ -83,16 +91,6 @@ class About extends React.Component {
             <a href="https://babeljs.io/">Babel</a>,&nbsp;
             <a href="http://lesscss.org/">LESS</a>, and&nbsp;
             <a href="https://nodejs.org/">Node.js</a>
-          </p>
-
-          <h4>About Me | Paul J Karlik</h4>
-          <p>
-            I am a User Interface Architect and Front-End Developer with over 17 years experience working on
-            large-scale dynamic web applications and web sites. I have a strong knowledge and understanding
-            of JavaScript web application design, process and development. My experience is from large creative
-            digital agencies, tech startups and SAS development. Current skills include HTML5 & CSS3, LESS,
-            JavaScript, ES6, React, Redux, Webpack, CSS Modules and Node. I am also a pretty nerdy guy that aslo
-            enjoys other languages such as Processing, Arduino and Raspberry Pi hardware platforms.
           </p>
         </div>
       </div>

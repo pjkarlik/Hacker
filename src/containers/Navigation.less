@@ -1,24 +1,35 @@
 @import (reference) '../utils/styles/MediaQuery.less';
-
+@base-url: "../../resources/images/";
 @linkHeight: 20px;
 
 .navigation {
+  background: url("@{base-url}tvstatic.gif");
+  background-size: 100% 50%;
   color: #FFF;
-  height: 29px;
+  height: 100%;
   // overflow: hidden;
   position: absolute;
-  right: 10px;
+  right: 0;
   text-align: right;
-  top: 10px;
+  bottom: -100%;
   width: 100%;
   z-index: 100;
-
+  transition: bottom 200ms ease-in;
   @media @medium {
     overflow: visible;
     text-align: right;
   }
+
+  &.open{
+    bottom: 0;
+  }
 }
 
+.bar {
+  background: #000;
+  height: 29px;
+  width: 100%;
+}
 .trigger {
   background: #000;
   cursor: default;
@@ -28,6 +39,7 @@
   line-height: 30px;
   position: absolute;
   right: 0;
+  top: -31px;
   text-align: center;
   width: 29px;
   z-index: 101;
@@ -39,19 +51,11 @@
   padding: 0;
   position: absolute;
   top: 0;
-  right: -800px;
+  right: -100%;
   transition: right 500ms ease-in;
   white-space: nowrap;
   &.open {
-    right: 30px;
-    @media @medium {
-      top: 0px;
-    }
-  }
-  @media @medium {
-    transition: top 200ms ease-in;
-    top: -220px;
-    right: 30px;
+    right: 0px;
   }
 }
 
@@ -59,11 +63,6 @@
   display: inline-block;
   margin-left: 1px;
   margin-bottom: 1px;
-
-  @media @medium {
-    clear: both;
-    display: block;
-  }
 }
 
 .link {
@@ -74,7 +73,6 @@
   font-size: .85em;
   padding: 7px;
   text-decoration: none;
-
   &.active{
     background: #FF0000;
   }
@@ -98,17 +96,12 @@
 .sublist{
   display:block;
   margin-bottom: 1px;
-
-  @media @medium {
-    clear: both;
-    display: block;
-  }
 }
 
 .sublink {
-  background: #999;
+  background: #FFF;
   box-sizing: border-box;
-  color: #FFF;
+  color: #000;
   display: inline-block;
   font-size: .85em;
   padding: 7px;

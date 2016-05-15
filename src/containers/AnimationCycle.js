@@ -58,16 +58,8 @@ class AnimationCycle extends React.Component {
   render() {
     const { classes, transition } = this.props;
     return (
-      <div className = {classes.container}>
-        <div {...resolve(this.props, 'window', transition)}>
-          <h2>Animation Cycle</h2>
-          <p>
-            This was an older project, back when doing animated items on screen was a new thing. It uses what is called
-            a sprite sheet to produce the animated image. Each frame the position on the background image is shifted
-            by the width in a POV (persistance of vision) effect. The result is an animating ship that can be controlled
-            programatically.
-          </p>
-        </div>
+      <div className = {classes.container} style = {{ background: '#AAA' }}>
+        <h2 {...resolve(this.props, 'title', transition)}>Animation Cycle</h2>
         <div {...resolve(this.props, 'experiment', transition)} ref="inject" />
       </div>
     );

@@ -26,7 +26,7 @@ export default class Field extends React.Component {
     square: 20,
     size: 5,
     radius: 140,
-    padding: 20,
+    padding: parseInt(FieldStyles.gridPadding, 10),
     maxTileSize: 80
   };
   constructor(props) {

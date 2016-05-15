@@ -42,14 +42,21 @@
 
   animation: circleEffect 2s infinite;
   @media @medium {
-    animation: circleEffectMobile 2s infinite;
+    animation: circleEffectMedium 2s infinite;
+  }
+  @media @small {
+    animation: circleEffectSmall 2s infinite;
   }
 }
 @keyframes circleEffect {
     from {height: 0px; width: 0px; border-width: 10px; opacity: 1;}
     to {height: 2200px; width: 2200px; border-width: 75px; opacity: 0;}
 }
-@keyframes circleEffectMobile {
+@keyframes circleEffectMedium {
     from {height: 0px; width: 0px; border-width: 10px; }
-    to {height: 1200px; width: 1200px; border-width: 75px; }
+    to {height: 1400px; width: 1400px; border-width: 55px; }
+}
+@keyframes circleEffectSmall {
+    from {height: 0px; width: 0px; border-width: 5px; }
+    to {height: 1100px; width: 1100px; border-width: 35px; }
 }

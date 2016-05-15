@@ -21,7 +21,8 @@ import CubeStyles from './Cube.less';
               ░  ░  ░   ░  ░    ░  ░  ░      ░  ░░ ░      ░  ░      ░  ░   ░
                                                  ░
 
-      the Hacker is an experimental website in design and user interaction.
+      'the Hacker' is an experimental website in design and user interaction.
+      email: pjkarlik@gmail.com // repository: github.com/pjkarlik
 
 */
 

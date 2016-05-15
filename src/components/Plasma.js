@@ -1,4 +1,5 @@
 import PlasmaStyles from './Plasma.less';
+import getBrowserDimensions from '../utils/getBrowserDimensions.js';
 
 // Shim layer with setTimeout fallback from Paul Irish
 window.requestAnimFrame = (() => {
@@ -31,17 +32,20 @@ export default class Plasma {
     this.plasmaGrid = this.createCanvas('plasma', square, square);
     this.surface = this.plasmaGrid.getContext('2d');
     this.surface.scale(1, 1);
+    this.browserSize = getBrowserDimensions(window, document);
     this.renderPlasma = this.renderPlasma.bind(this);
     this.renderPlasma();
   }
   // Create CanvasElement to inject into the page //
-  createCanvas(name, width, height) {
+  createCanvas(name) {
     const divElement = document.createElement('div');
     divElement.className = PlasmaStyles.container;
     const canvasElement = document.createElement('canvas');
     canvasElement.id = name;
-    canvasElement.width = width;
-    canvasElement.height = height;
+    canvasElement.style.width = '100%';
+    canvasElement.style.height = '100%';
+    // canvasElement.width = this.square;
+    // canvasElement.height = this.square;
     canvasElement.className = PlasmaStyles.plasmaGrid;
     divElement.appendChild(canvasElement);
     this.element.appendChild(divElement);

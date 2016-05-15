@@ -30,7 +30,8 @@ class Navigation extends React.Component {
   }
   toggleMenu() {
     this.props.setSiteState({
-      navigationIsOpen: !this.props.navigationIsOpen
+      navigationIsOpen: !this.props.navigationIsOpen,
+      experimentsIsOpen: false
     });
   }
   toggleSubMenu() {
@@ -40,11 +41,12 @@ class Navigation extends React.Component {
   }
   render() {
     const { navigationIsOpen, experimentsIsOpen, classes } = this.props;
-    const navIcon = navigationIsOpen ? ' ' : '+';
+    const navIcon = navigationIsOpen ? '-' : '+';
     return (
-      <div className = {classes.navigation}>
+      <div {...resolve(this.props, 'navigation', navigationIsOpen ? 'open' : '')}>
         <div className = {classes.trigger} onClick = {this.toggleMenu}
           dangerouslySetInnerHTML = {{ __html: navIcon }} />
+        <div className = {classes.bar}>
         <ul {...resolve(this.props, 'menu', navigationIsOpen ? 'open' : '')}>
           <li className = {classes.list}>
             <Link to = "/" className = {classes.link}
@@ -88,6 +90,7 @@ class Navigation extends React.Component {
               activeClassName = {classes.active}
               onClick = {this.toggleMenu}>about</Link></li>
         </ul>
+        </div>
       </div>
     );
   }
