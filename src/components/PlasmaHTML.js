@@ -30,7 +30,7 @@ export default class PlasmaHTML extends React.Component {
   };
   static defaultProps = {
     classes: PlasmaStyles,
-    square: 24,
+    square: 20,
     noise: 8,
     offsetRed: 0,
     offsetBlue: 0,

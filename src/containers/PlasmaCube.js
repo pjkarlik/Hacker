@@ -68,7 +68,7 @@ class PlasmaCube extends React.Component {
       offsetBlue: this.state.offsetBlue
     };
     const cube = (
-      <Cube onClick = {this.updateColor}
+      <Cube
         ref = "plasmaCube"
         initialX = {-42}
         initialY = {22}
@@ -83,7 +83,7 @@ class PlasmaCube extends React.Component {
       </Cube>
     );
     return (
-      <div className = {classes.container} style = {{ background: '#999' }}>
+      <div className = {classes.container} style = {{ background: '#999' }} onClick = {this.updateColor}>
         <h2 {...resolve(this.props, 'title', transition)}>Plasma Cube</h2>
         {cube}
       </div>
