@@ -18,7 +18,7 @@
 
 .title {
   background: #000;
-  bottom: 2px;
+  bottom: 1px;
   color: #FFF;
   font-size: 15px;
   height: 29px;
@@ -28,8 +28,8 @@
   position: absolute;
   right: 100%;
   text-align: right;
-  transition: right 300ms;
-  transition-delay: 300ms;
+  transition: right 400ms;
+  transition-delay: 200ms;
   z-index: 300;
   width: 100%;
   &.out{
@@ -37,33 +37,6 @@
   }
   &.in{
     right: 31px;
-  }
-}
-.window {
-  font-size: 1em;
-  height: 100%;
-  left: 50%;
-  padding: 0 20px;
-  position: absolute;
-  top: 50%;
-  transition: transform 800ms;
-  width: 100%;
-
-  h1 {
-    color: #FFF;
-    text-align: center;
-  }
-
-  p {
-    color: #AAA;
-    font-size: 14px;
-    width: 30%;
-  }
-  &.out{
-    transform: translate(-50%, -350%);
-  }
-  &.in{
-    transform: translate(-50%, -50%);
   }
 }
 
@@ -79,11 +52,11 @@
   padding: 0 20px;
   position: absolute;
   top: 50%;
-  transition: transform 600ms;
+  transition: transform 400ms;
   width: 100%;
 
   &.out{
-    transform: translate(-50%, -150%);
+    transform: translate(-50%, -100%);
   }
   &.in{
     transform: translate(-50%, -50%);

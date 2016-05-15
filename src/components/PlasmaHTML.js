@@ -79,7 +79,7 @@ export default class PlasmaHTML extends React.Component {
         colorMap =
           `rgba(${offsetRed > 0 ? offsetRed - convert : convert},` +
           `${offsetGreen > 0 ? offsetGreen - convert : convert},` +
-          `${offsetBlue > 0 ? convert - offsetBlue : convert},` +
+          `${offsetBlue > 0 ? offsetBlue - convert : convert},` +
           `${convert / 255})`;
           // Check for small case that component unmounted before function stopped.
         const objectCheck = this.refs[`tile${x}_${y}`];

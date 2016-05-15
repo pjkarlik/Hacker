@@ -31,6 +31,7 @@ class PlasmaCube extends React.Component {
       offsetBlue: 0
     };
     this.updateColor = this.updateColor.bind(this);
+    this.randomNumber = this.randomNumber.bind(this);
   }
   componentDidMount() {
     if (this.props.transition === 'out') {
@@ -53,11 +54,18 @@ class PlasmaCube extends React.Component {
       });
     }
   }
+
+  randomNumber(x) {
+    return Math.round(Math.random() * x) + 1;
+  }
   updateColor() {
+    const offsetRed = this.randomNumber(255) > 100 ? this.randomNumber(255) : 0;
+    const offsetGreen = this.randomNumber(255) > 200 ? this.randomNumber(255) : 0;
+    const offsetBlue = this.randomNumber(255) > 200 ? this.randomNumber(255) : 0;
     this.setState({
-      offsetRed: Math.round(Math.random() * 255) + 1,
-      offsetGreen: Math.round(Math.random() * 255) + 1,
-      offsetBlue: Math.round(Math.random() * 255) + 1
+      offsetRed,
+      offsetGreen,
+      offsetBlue
     });
   }
   render() {
@@ -83,7 +91,7 @@ class PlasmaCube extends React.Component {
       </Cube>
     );
     return (
-      <div className = {classes.container} style = {{ background: '#999' }} onClick = {this.updateColor}>
+      <div className = {classes.container} style = {{ background: '#222' }} onClick = {this.updateColor}>
         <h2 {...resolve(this.props, 'title', transition)}>Plasma Cube</h2>
         {cube}
       </div>

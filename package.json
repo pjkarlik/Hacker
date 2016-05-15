@@ -1,6 +1,6 @@
 {
   "name": "Hacker",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "The Hacker",
   "main": "index.js",
   "scripts": {

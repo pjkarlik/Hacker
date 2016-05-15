@@ -26,6 +26,11 @@ class PlasmaDisplay extends React.Component {
     this.updateColor = this.updateColor.bind(this);
   }
   componentDidMount() {
+    const redShift = Math.round(Math.random() * 255) + 1;
+    const blueShift = Math.round(Math.random() * 255) + 1;
+    const greenShift = Math.round(Math.random() * 255) + 1;
+    this.plasmaObject = new Plasma(this.refs.plasmaInject, 400, 120, redShift, greenShift, blueShift, 7);
+
     if (this.props.transition === 'out') {
       setTimeout(() => {
         this.props.setSiteState({
@@ -33,13 +38,8 @@ class PlasmaDisplay extends React.Component {
         });
       }, 100);
     }
-    setTimeout(() => {
-      const redShift = Math.round(Math.random() * 255) + 1;
-      const blueShift = Math.round(Math.random() * 255) + 1;
-      const greenShift = Math.round(Math.random() * 255) + 1;
-      this.plasmaObject = new Plasma(this.refs.plasmaInject, 400, 120, redShift, greenShift, blueShift, 7);
-      return this.plasmaObject;
-    }, 200);
+
+    return this.plasmaObject;
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.transition !== this.props.transition) {
