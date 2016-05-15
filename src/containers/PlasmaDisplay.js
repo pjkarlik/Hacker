@@ -29,7 +29,8 @@ class PlasmaDisplay extends React.Component {
     const redShift = Math.round(Math.random() * 255) + 1;
     const blueShift = Math.round(Math.random() * 255) + 1;
     const greenShift = Math.round(Math.random() * 255) + 1;
-    this.plasmaObject = new Plasma(this.refs.plasmaInject, 400, 120, redShift, greenShift, blueShift, 7);
+    const noise = Math.round(Math.random() * 7) + 6;
+    this.plasmaObject = new Plasma(this.refs.plasmaInject, 400, 150, redShift, greenShift, blueShift, noise);
 
     if (this.props.transition === 'out') {
       setTimeout(() => {

@@ -72,11 +72,12 @@ export default class Plasma {
              + Math.sin(this.dist(x, y + this.time / 6, 192.0, 64) / (this.noise - 2))
              + Math.sin(this.dist(x, y, 192.0, 100.0) / (this.noise - 2));
 
-        convert = Math.floor(parseInt((4 + value), 10) * 32);
+        convert = ~~(2 + value) * 32; // ~~ aka math.floor
         this.surface.fillStyle =
           `rgb(${this.offsetRed > 0 ? this.offsetRed - convert : convert},` +
-          `${this.offsetBlue > 0 ? this.offsetBlue - convert : convert},` +
-          `${this.offsetGreen > 0 ? this.offsetGreen - convert : convert})`;
+          `${this.offsetGreen > 0 ? this.offsetGreen - convert : convert},` +
+          `${convert})`; // blue set for color effect - otherwise random never makes it that pretty
+          // `${this.offsetBlue > 0 ? this.offsetBlue - convert : convert})`; this is what it should be...
         this.surface.fillRect(x * this.size, y * this.size, this.size, this.size);
       }
     }

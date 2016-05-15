@@ -31,7 +31,7 @@ export default class PlasmaHTML extends React.Component {
   static defaultProps = {
     classes: PlasmaStyles,
     square: 20,
-    noise: 8,
+    noise: 6,
     offsetRed: 0,
     offsetBlue: 0,
     offsetGreen: 0
@@ -58,11 +58,10 @@ export default class PlasmaHTML extends React.Component {
   }
 
   renderPlasma() {
-    const { square, noise, offsetRed, offsetBlue, offsetGreen } = this.props;
+    const { square, noise, offsetRed, offsetGreen } = this.props; // offsetBlue, removed for effect.
     // const half = square / 2;
     let colorMap;
     let value;
-    let color;
     let convert;
     this.time += 1;
     for (let x = 0; x < square; x++) {
@@ -73,13 +72,13 @@ export default class PlasmaHTML extends React.Component {
              + Math.sin(this.dist(x, y + this.time / 6, 192.0, 64) / 7.0)
              + Math.sin(this.dist(x, y, 192.0, 100.0) / noise);
 
-        color = parseInt((4 + value), 10) * 52;
-        convert = Math.floor(color);
+        convert = ~~(2 + value) * 52; // ~~ aka math.floor
 
         colorMap =
           `rgba(${offsetRed > 0 ? offsetRed - convert : convert},` +
           `${offsetGreen > 0 ? offsetGreen - convert : convert},` +
-          `${offsetBlue > 0 ? offsetBlue - convert : convert},` +
+          `${convert},` + // blue set for color effect - otherwise random never makes it that pretty
+          // `${offsetBlue > 0 ? offsetBlue - convert : convert},` + this is what it should be...
           `${convert / 255})`;
           // Check for small case that component unmounted before function stopped.
         const objectCheck = this.refs[`tile${x}_${y}`];
