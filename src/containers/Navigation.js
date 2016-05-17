@@ -83,6 +83,12 @@ class Navigation extends React.Component {
                     onClick = {this.toggleMenu}
                     activeClassName = {classes.active}>plasma display</Link>
                 </li>
+                <li className = {classes.sublist}>
+                  <Link to = "/threedemo" className = {classes.sublink}
+                    onlyActiveOnIndex={this.state.true}
+                    onClick = {this.toggleMenu}
+                    activeClassName = {classes.active}>three.js demo</Link>
+                </li>
               </ul>
           </li>
           <li className = {classes.list}>

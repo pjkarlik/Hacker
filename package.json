@@ -54,6 +54,7 @@
     "react-router": "2.0.0",
     "redux": "^3.3.1",
     "style-loader": "^0.13.0",
+    "three": "^0.76.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.13",
     "webpack-dev-server": "^1.14.1"

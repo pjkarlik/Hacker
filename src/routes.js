@@ -13,7 +13,8 @@ export function prefetchRoutes() {
     './containers/FieldEffect',
     './containers/FlockDemo',
     './containers/PlasmaCube',
-    './containers/PlasmaDisplay'
+    './containers/PlasmaDisplay',
+    './containers/ThreeDemo'
   ], () => {});
 }
 /**
@@ -50,6 +51,11 @@ export default (
     <Route path = "plasmadisplay" getComponent={(location, cb) =>
       require.ensure(['./containers/PlasmaDisplay'], (require) => {
         cb(null, require('./containers/PlasmaDisplay').default);
+      })
+    } />
+    <Route path = "threedemo" getComponent={(location, cb) =>
+      require.ensure(['./containers/ThreeDemo'], (require) => {
+        cb(null, require('./containers/ThreeDemo').default);
       })
     } />
   </Route>
