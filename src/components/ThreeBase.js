@@ -50,9 +50,6 @@ export default class ThreeBase {
 
     this.element.appendChild(this.renderer.domElement);
 
-    // this.effect = new THREE.AnaglyphEffect(this.renderer);
-    // this.effect.setSize(window.innerWidth, window.innerHeight);
-
     this.animateThree();
   }
 
