@@ -19,7 +19,7 @@ export default class ThreeBase {
   }
 
   initThree() {
-    this.amount = 16;
+    this.amount = 6;
     this.scene = new THREE.Scene();
 
     this.camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 10000);
@@ -59,11 +59,11 @@ export default class ThreeBase {
     for (let i = 0; i < this.cubes.length; i++) {
       const cube = this.cubes[i];
 
-      const formula = (Math.PI * i * 90) / this.amount;
+      const formula = (2 * Math.PI) / this.amount;
 
-      cube.position.x = amp * Math.cos(formula + timer);
-      cube.position.y = amp * Math.sin(formula - timer);
-      cube.position.z = (amp * 4) * Math.cos(formula + (timer * 3));
+      cube.position.x = amp * Math.cos((formula * i) + timer);
+      cube.position.y = amp * Math.sin((formula * i) + timer);
+      // cube.position.z = (amp * 4) * Math.cos(formula + (timer * 3));
     }
     this.renderer.render(this.scene, this.camera);
 
