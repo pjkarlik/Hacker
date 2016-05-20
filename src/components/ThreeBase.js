@@ -62,7 +62,7 @@ export default class ThreeBase {
       const formula = (Math.PI * i * 90) / this.amount;
 
       cube.position.x = amp * Math.cos(formula + timer);
-      cube.position.y = amp * Math.sin(formula + timer);
+      cube.position.y = amp * Math.sin(formula - timer);
       cube.position.z = (amp * 4) * Math.cos(formula + (timer * 3));
     }
     this.renderer.render(this.scene, this.camera);
