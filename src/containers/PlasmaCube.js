@@ -54,7 +54,6 @@ class PlasmaCube extends React.Component {
       });
     }
   }
-
   randomNumber(x) {
     return Math.round(Math.random() * x) + 1;
   }

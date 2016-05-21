@@ -1,13 +1,5 @@
 import UfoStyles from './UfoObject.less';
 
-// Shim layer with setTimeout fallback from Paul Irish
-window.requestAnimFrame = (() => {
-  return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame ||
-  ((callback) => {
-    window.setTimeout(callback, 6000 / 60);
-  });
-})();
-
 export class UfoShip {
   constructor(element, id, size, frames) {
     /** element to attach the plasma display to **/
@@ -63,7 +55,7 @@ export class UfoShip {
     this.ufo.style.top = `${Math.round(this.currentPosition._y)}px`;
 
     if (this.animated) {
-      window.requestAnimFrame(this.animateShip);
+      window.requestAnimationFrame(this.animateShip);
     }
   }
 }
@@ -84,5 +76,8 @@ export default class UfoObjects {
       for (let x = 0; x < this.config.amount; x++) {
         this.cache[x] = new UfoShip(this.element, `ufo${x}`, this.config.size, this.config.frames);
       }
+    }
+    stopAnimation() {
+      window.cancelAnimationFrame(this.animateShip);
     }
 }

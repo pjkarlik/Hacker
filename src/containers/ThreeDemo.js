@@ -47,7 +47,9 @@ class ThreeDemo extends React.Component {
       });
     }
   }
-
+  componentWillUnmount() {
+    this.threeJsObject.stopAnimation();
+  }
   render() {
     const { classes, transition } = this.props;
     return (

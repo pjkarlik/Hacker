@@ -54,7 +54,9 @@ class AnimationCycle extends React.Component {
       });
     }
   }
-
+  componentWillUnmount() {
+    this.animationObject.stopAnimation();
+  }
   render() {
     const { classes, transition } = this.props;
     return (

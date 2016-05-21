@@ -1,13 +1,5 @@
 import THREE from 'three';
 
-// Shim layer with setTimeout fallback from Paul Irish
-window.requestAnimFrame = (() => {
-  return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame ||
-  ((callback) => {
-    window.setTimeout(callback, 6000 / 60);
-  });
-})();
-
 export default class ThreeBase {
 
   constructor(element) {
@@ -20,18 +12,27 @@ export default class ThreeBase {
 
   initThree() {
     this.amount = 16;
-    this.scene = new THREE.Scene();
+    this.sphereSize = 45;
 
+    // Set up scene and cameras //
+    this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 10000);
     this.camera.position.z = 1000;
 
-    this.geometry = new THREE.BoxGeometry(80, 80, 80);
-    // this.geometry = new THREE.SphereGeometry(35, 12, 12);
-    this.material = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true });
-    // this.material = new THREE.MeshBasicMaterial({
-    //   map: THREE.ImageUtils.loadTexture('../../resources/images/pjkprofile.png',
-    //   THREE.SphericalRefractionMapping)
-    // });
+    // Set up lights //
+    this.particleLight = new THREE.Mesh(new THREE.SphereGeometry(8, 8, 8),
+      new THREE.MeshBasicMaterial({ color: 0x333333 }));
+    this.scene.add(this.particleLight);
+    this.scene.add(new THREE.AmbientLight(0x999999));
+    this.pointLight = new THREE.PointLight(0x00ff00, 1);
+    this.pointLight.position.set(0, 0, 500);
+    this.particleLight.add(this.pointLight);
+
+    // Set up Geomerty //
+    this.geometry = new THREE.SphereGeometry(this.sphereSize, 32, 32);
+
+    this.material = new THREE.MeshPhongMaterial({ color: 0xAAAAAA, specular: 0x0099FF,
+      shininess: 30, shading: THREE.FlatShading });
 
     this.cubes = [];
     for (let i = 0; i < this.amount; i++) {
@@ -60,14 +61,18 @@ export default class ThreeBase {
       const cube = this.cubes[i];
 
       const formula = (2 * Math.PI) / this.amount;
-
-      cube.position.x = amp * Math.cos((formula * i) + timer);
+      this.extraWave = amp * Math.cos((formula * i) - timer) * 0.01;
+      cube.position.x = amp * Math.cos((formula * i) + timer - this.extraWave);
       cube.position.y = amp * Math.sin((formula * i) + timer);
-      cube.position.z = (amp * 4) * Math.cos((formula * i) + (timer * 3));
+      // cube.position.z = (amp * 4) * Math.cos((formula * i) + (timer * 3));
     }
     this.renderer.render(this.scene, this.camera);
 
-    window.requestAnimFrame(this.animateThree);
+    window.requestAnimationFrame(this.animateThree);
+  }
+
+  stopAnimation() {
+    window.cancelAnimationFrame(this.animateThree);
   }
 
 }

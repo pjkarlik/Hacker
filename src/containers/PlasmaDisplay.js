@@ -54,6 +54,9 @@ class PlasmaDisplay extends React.Component {
       });
     }
   }
+  componentWillUnmount() {
+    this.plasmaObject.stopAnimation();
+  }
   updateColor(e) {
     e.preventDefault();
     const redShift = Math.round(Math.random() * 255) + 1;

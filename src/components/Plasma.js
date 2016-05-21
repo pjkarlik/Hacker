@@ -1,14 +1,6 @@
 import PlasmaStyles from './Plasma.less';
 import getBrowserDimensions from '../utils/getBrowserDimensions.js';
 
-// Shim layer with setTimeout fallback from Paul Irish
-window.requestAnimFrame = (() => {
-  return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame ||
-  ((callback) => {
-    window.setTimeout(callback, 6000 / 60);
-  });
-})();
-
 export default class Plasma {
   constructor(element, square, grid, offsetRed, offsetBlue, offsetGreen, noise) {
     /** element to attach the plasma display to **/
@@ -82,6 +74,9 @@ export default class Plasma {
       }
     }
     this.time += 1;
-    window.requestAnimFrame(this.renderPlasma);
+    window.requestAnimationFrame(this.renderPlasma);
+  }
+  stopAnimation() {
+    window.cancelAnimationFrame(this.renderPlasma);
   }
 }
