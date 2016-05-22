@@ -44,16 +44,25 @@ export default class Cube extends React.Component {
       mouseActive: false,
       transition: this.props.transition
     };
+    // See which axis is moved on start //
+    this.rotationZ = false;
+    // Function Bindings //
+    // Drag - Mouse //
     this.dragFunction = this.dragFunction.bind(this);
     this.endDragFunction = this.endDragFunction.bind(this);
     this.dragStart = this.dragStart.bind(this);
-    this.inactMouse = this.inactMouse.bind(this);
+    // Drag - Touch //
     this.touchStart = this.touchStart.bind(this);
     this.touchDrag = this.touchDrag.bind(this);
+    // Utils //
     this.checkRotation = this.checkRotation.bind(this);
+    this.checkAxis = this.checkAxis.bind(this);
+    // Automated Motion //
+    this.inactMouse = this.inactMouse.bind(this);
     this.waitFor = this.waitFor.bind(this);
-    this.animateRotation = this.animateRotation.bind(this);
     this.generateMouseMove = this.generateMouseMove.bind(this);
+    // Main Render Loop //
+    this.animateRotation = this.animateRotation.bind(this);
   }
   /* Component Life Cycle */
   componentDidMount() {
@@ -74,19 +83,18 @@ export default class Cube extends React.Component {
     }
   }
   componentWillUnmount() {
+    window.cancelAnimationFrame(this.animateRotation);
     clearInterval(this.timer);
     clearInterval(this.interval);
-    window.cancelAnimationFrame(this.animateRotation);
   }
+  // Drag Functions //
   dragFunction(e) {
-    const { rotation } = this.state;
     let mouseZ;
     let mouseY;
     const browserSize = getBrowserDimensions(window, document);
     const mouseX = ((browserSize.browserWidth / 2) - e.clientX) * 0.01;
     const mouseYZ = -((browserSize.browserHeight / 2) - e.clientY) * 0.01;
-    if ((this.checkRotation(rotation.x) > 70 && this.checkRotation(rotation.x) < 110) ||
-    (this.checkRotation(rotation.x) > 250 && this.checkRotation(rotation.x) < 300)) {
+    if (this.rotationZ) {
       mouseZ = mouseYZ;
       mouseY = 0;
     } else {
@@ -112,6 +120,7 @@ export default class Cube extends React.Component {
     });
   }
   dragStart(e) {
+    this.checkAxis();
     if (!this.props.interactive) {
       return;
     }
@@ -126,8 +135,10 @@ export default class Cube extends React.Component {
       mouseActive: true
     });
   }
+  // Touch Functions //
   touchStart(e) {
     e.preventDefault();
+    this.checkAxis();
     clearInterval(this.interval);
     this.touchDrag(e.touches[0]);
   }
@@ -153,6 +164,15 @@ export default class Cube extends React.Component {
         z: mouseZ
       }
     });
+  }
+  checkAxis() {
+    const { rotation } = this.state;
+    if ((this.checkRotation(rotation.x) > 70 && this.checkRotation(rotation.x) < 110) ||
+    (this.checkRotation(rotation.x) > 250 && this.checkRotation(rotation.x) < 300)) {
+      this.rotationZ = true;
+    } else {
+      this.rotationZ = false;
+    }
   }
   checkRotation(value) {
     let orientation = value % 360;
@@ -187,10 +207,12 @@ export default class Cube extends React.Component {
   generateMouseMove() {
     const genX = 4 - Math.floor((Math.random() * 8) + 1);
     const genY = 4 - Math.floor((Math.random() * 8) + 1);
+    const genZ = 4 - Math.floor((Math.random() * 8) + 1);
     this.setState({
       mouse: {
         x: genX,
-        y: genY
+        y: genY,
+        z: genZ
       }
     });
   }
