@@ -148,13 +148,13 @@ export default class Cube extends React.Component {
     let mouseY;
     const browserSize = getBrowserDimensions(window, document);
     const mouseX = ((browserSize.browserWidth / 2) - e.changedTouches[0].clientX) * 0.03;
-    const mouseYZ = -((browserSize.browserHeight / 2) - e.changedTouches[0].clientY) * 0.03;
+    const mouseYZ = ((browserSize.browserHeight / 2) - e.changedTouches[0].clientY) * 0.03;
     if (this.rotationZ !== 0) {
-      mouseZ = mouseYZ * this.rotationZ;
+      mouseZ = this.rotationZ === 1 ? mouseYZ : -mouseYZ;
       mouseY = 0;
     } else {
       mouseZ = 0;
-      mouseY = mouseYZ;
+      mouseY = -mouseYZ;
     }
     this.setState({
       mouse: {
