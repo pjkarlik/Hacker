@@ -45,7 +45,7 @@ export default class Cube extends React.Component {
     this.dragStart = this.dragStart.bind(this);
     this.inactMouse = this.inactMouse.bind(this);
     this.touchStart = this.touchStart.bind(this);
-    this.touchMove = this.touchMove.bind(this);
+    this.touchDrag = this.touchDrag.bind(this);
     this.waitFor = this.waitFor.bind(this);
     this.animateRotation = this.animateRotation.bind(this);
     this.generateMouseMove = this.generateMouseMove.bind(this);
@@ -53,8 +53,8 @@ export default class Cube extends React.Component {
   /* Component Life Cycle */
   componentDidMount() {
     if (this.props.interactive) {
-      window.addEventListener('touchmove', this.touchMove);
-      window.addEventListener('touchend', this.inactMouse);
+      window.addEventListener('touchmove', this.touchDrag);
+      window.addEventListener('touchend', this.dragStop);
     }
     this.waitFor();
     this.timer = setInterval(() => {
@@ -98,6 +98,7 @@ export default class Cube extends React.Component {
     if (!this.props.interactive) {
       return;
     }
+    clearInterval(this.interval);
     // Attach the drag and end drag events.
     if (document && document.addEventListener) {
       document.addEventListener('mousemove', this.dragFunction, false);
@@ -108,9 +109,26 @@ export default class Cube extends React.Component {
       mouseActive: true
     });
   }
+  touchStart(e) {
+    e.preventDefault();
+    clearInterval(this.interval);
+    this.touchDrag(e.touches[0]);
+  }
+  touchDrag(e) {
+    const browserSize = getBrowserDimensions(window, document);
+    const mouseX = ((browserSize.browserWidth / 2) - e.changedTouches[0].clientX) * 0.03;
+    const mouseY = -((browserSize.browserHeight / 2) - e.changedTouches[0].clientY) * 0.03;
+    this.setState({
+      mouse: {
+        x: mouseX,
+        y: mouseY
+      }
+    });
+  }
   /* Cube Rotation */
   animateRotation() {
     const { rotation, mouse } = this.state;
+    console.log(rotation.x);
     if (!this.state.mouseActive) {
       mouse.x = mouse.x - (mouse.x - 0) * 0.03;
       mouse.y = mouse.y - (mouse.y - 0) * 0.03;
@@ -139,22 +157,6 @@ export default class Cube extends React.Component {
     this.waitFor();
     this.setState({
       mouseActive: false
-    });
-  }
-  touchStart(e) {
-    e.preventDefault();
-    clearInterval(this.interval);
-    this.reactMouse(e.touches[0]);
-  }
-  touchMove(e) {
-    const browserSize = getBrowserDimensions(window, document);
-    const mouseX = ((browserSize.browserWidth / 2) - e.clientX) * 0.03;
-    const mouseY = -((browserSize.browserHeight / 2) - e.clientY) * 0.03;
-    this.setState({
-      mouse: {
-        x: mouseX,
-        y: mouseY
-      }
     });
   }
   waitFor() {
