@@ -1,4 +1,5 @@
 import React from 'react';
+import getBrowserDimensions from '../utils/getBrowserDimensions';
 // Less for CSS Modules
 import PlasmaStyles from './PlasmaHTML.less';
 
@@ -22,7 +23,7 @@ export default class PlasmaHTML extends React.Component {
   };
   static defaultProps = {
     classes: PlasmaStyles,
-    square: 20,
+    square: 30,
     noise: 6,
     offsetRed: 0,
     offsetBlue: 0,
@@ -36,20 +37,16 @@ export default class PlasmaHTML extends React.Component {
   }
 
   componentDidMount() {
-    this.timer = setInterval(() => {
-      window.requestAnimationFrame(this.renderPlasma);
-    }, 30);
+    window.requestAnimationFrame(this.renderPlasma);
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer);
     window.cancelAnimationFrame(this.renderPlasma);
   }
 
   dist(a, b, c, d) {
     return Math.sqrt(((a - c) * (a - c) + (b - d) * (b - d)));
   }
-
   renderPlasma() {
     const { square, noise, offsetRed, offsetGreen } = this.props; // offsetBlue, removed for effect.
     // const half = square / 2;
@@ -59,13 +56,12 @@ export default class PlasmaHTML extends React.Component {
     this.time += 1;
     for (let x = 0; x < square; x++) {
       for (let y = 0; y < square; y++) {
-        // value = Math.sin((this.dist(x, y, half, half) / 2) - this.time) * 5;
         value = Math.sin(this.dist(x + this.time, y, 128.0, 128.0) / noise)
              + Math.sin(this.dist(x, y, 64.0, 64.0) / noise)
              + Math.sin(this.dist(x, y + this.time / 6, 192.0, 64) / 7.0)
              + Math.sin(this.dist(x, y, 192.0, 100.0) / noise);
 
-        convert = ~~(2 + value) * 52; // ~~ aka math.floor
+        convert = ~~(3 + value) * 52; // ~~ aka math.floor
 
         colorMap =
           `rgba(${offsetRed > 0 ? offsetRed - convert : convert},` +
@@ -80,14 +76,17 @@ export default class PlasmaHTML extends React.Component {
         }
       }
     }
+    window.requestAnimationFrame(this.renderPlasma);
   }
 
   render() {
     const { classes, className, square } = this.props;
-    const size = 100 / square;
+    const bsize = getBrowserDimensions(window, document);
+    const amount = bsize.browserWidth < 600 ? 20 : square;
+    const size = 100 / amount;
     const tiles = [];
-    for (let x = 0; x < square; x++) {
-      for (let y = 0; y < square; y++) {
+    for (let x = 0; x < amount; x++) {
+      for (let y = 0; y < amount; y++) {
         const styleObject = {
           top: `${x * size}%`,
           left: `${y * size}%`,

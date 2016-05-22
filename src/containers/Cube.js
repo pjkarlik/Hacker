@@ -45,7 +45,7 @@ export default class Cube extends React.Component {
       transition: this.props.transition
     };
     // See which axis is moved on start //
-    this.rotationZ = false;
+    this.rotationZ = 0;
     // Function Bindings //
     // Drag - Mouse //
     this.dragFunction = this.dragFunction.bind(this);
@@ -93,13 +93,13 @@ export default class Cube extends React.Component {
     let mouseY;
     const browserSize = getBrowserDimensions(window, document);
     const mouseX = ((browserSize.browserWidth / 2) - e.clientX) * 0.01;
-    const mouseYZ = -((browserSize.browserHeight / 2) - e.clientY) * 0.01;
-    if (this.rotationZ) {
-      mouseZ = mouseYZ;
+    const mouseYZ = ((browserSize.browserHeight / 2) - e.clientY) * 0.01;
+    if (this.rotationZ !== 0) {
+      mouseZ = this.rotationZ === 1 ? mouseYZ : -mouseYZ;
       mouseY = 0;
     } else {
       mouseZ = 0;
-      mouseY = mouseYZ;
+      mouseY = -mouseYZ;
     }
     this.setState({
       mouse: {
@@ -115,9 +115,7 @@ export default class Cube extends React.Component {
       document.removeEventListener('mousemove', this.dragFunction, false);
       document.removeEventListener('mouseup', this.endDragFunction, false);
     }
-    this.setState({
-      mouseActive: false
-    });
+    this.inactMouse();
   }
   dragStart(e) {
     this.checkAxis();
@@ -141,17 +139,18 @@ export default class Cube extends React.Component {
     this.checkAxis();
     clearInterval(this.interval);
     this.touchDrag(e.touches[0]);
+    this.setState({
+      mouseActive: true
+    });
   }
   touchDrag(e) {
-    const { rotation } = this.state;
-    const browserSize = getBrowserDimensions(window, document);
     let mouseZ;
     let mouseY;
+    const browserSize = getBrowserDimensions(window, document);
     const mouseX = ((browserSize.browserWidth / 2) - e.changedTouches[0].clientX) * 0.03;
     const mouseYZ = -((browserSize.browserHeight / 2) - e.changedTouches[0].clientY) * 0.03;
-    if ((this.checkRotation(rotation.x) > 70 && this.checkRotation(rotation.x) < 110) ||
-    (this.checkRotation(rotation.x) > 250 && this.checkRotation(rotation.x) < 300)) {
-      mouseZ = mouseYZ;
+    if (this.rotationZ !== 0) {
+      mouseZ = mouseYZ * this.rotationZ;
       mouseY = 0;
     } else {
       mouseZ = 0;
@@ -167,11 +166,12 @@ export default class Cube extends React.Component {
   }
   checkAxis() {
     const { rotation } = this.state;
-    if ((this.checkRotation(rotation.x) > 70 && this.checkRotation(rotation.x) < 110) ||
-    (this.checkRotation(rotation.x) > 250 && this.checkRotation(rotation.x) < 300)) {
-      this.rotationZ = true;
+    if (this.checkRotation(rotation.x) > 70 && this.checkRotation(rotation.x) < 110) {
+      this.rotationZ = 1;
+    } else if (this.checkRotation(rotation.x) > 250 && this.checkRotation(rotation.x) < 300) {
+      this.rotationZ = -1;
     } else {
-      this.rotationZ = false;
+      this.rotationZ = 0;
     }
   }
   checkRotation(value) {
