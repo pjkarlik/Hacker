@@ -33,15 +33,21 @@ export default class Cube extends React.Component {
         x: this.props.initialX || 0,
         y: this.props.initialY || 0
       },
+      mouse: {
+        x: 0,
+        y: 0
+      },
       mouseActive: false,
       transition: this.props.transition
     };
-    this.reactMouse = this.reactMouse.bind(this);
+    this.dragFunction = this.dragFunction.bind(this);
+    this.endDragFunction = this.endDragFunction.bind(this);
+    this.dragStart = this.dragStart.bind(this);
     this.inactMouse = this.inactMouse.bind(this);
     this.touchStart = this.touchStart.bind(this);
     this.touchMove = this.touchMove.bind(this);
     this.waitFor = this.waitFor.bind(this);
-    this.computeRotation = this.computeRotation.bind(this);
+    this.animateRotation = this.animateRotation.bind(this);
     this.generateMouseMove = this.generateMouseMove.bind(this);
   }
   /* Component Life Cycle */
@@ -51,6 +57,9 @@ export default class Cube extends React.Component {
       window.addEventListener('touchend', this.inactMouse);
     }
     this.waitFor();
+    this.timer = setInterval(() => {
+      window.requestAnimationFrame(this.animateRotation);
+    }, 30);
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.transition !== this.props.transition) {
@@ -60,38 +69,72 @@ export default class Cube extends React.Component {
     }
   }
   componentWillUnmount() {
+    clearInterval(this.timer);
     clearInterval(this.interval);
+    window.cancelAnimationFrame(this.animateRotation);
   }
-  /* Cube Rotation */
-  computeRotation(x, y) {
-    const rotation = [];
+  dragFunction(e) {
     const browserSize = getBrowserDimensions(window, document);
-    const mouseX = 90 - Math.floor((90 / (browserSize.browserWidth / 2)) * x);
-    const mouseY = 90 - Math.floor((90 / (browserSize.browserHeight / 2)) * y);
-
-    rotation.x = mouseX;
-    rotation.y = mouseY;
+    const mouseX = ((browserSize.browserWidth / 2) - e.clientX) * 0.03;
+    const mouseY = -((browserSize.browserHeight / 2) - e.clientY) * 0.03;
     this.setState({
-      rotation
+      mouse: {
+        x: mouseX,
+        y: mouseY
+      }
     });
   }
-  generateMouseMove() {
-    const browserSize = getBrowserDimensions(window, document);
-    const genX = Math.floor((Math.random() * browserSize.browserWidth) + 1);
-    const genY = Math.floor((Math.random() * browserSize.browserHeight) + 1);
-    this.computeRotation(genX, genY);
+  endDragFunction() {
+    // Remove the drag functions.
+    if (document && document.removeEventListener) {
+      document.removeEventListener('mousemove', this.dragFunction, false);
+      document.removeEventListener('mouseup', this.endDragFunction, false);
+    }
+    this.setState({
+      mouseActive: false
+    });
   }
-  /* Mouse and Touch Events */
-  reactMouse(e) {
+  dragStart(e) {
     if (!this.props.interactive) {
       return;
     }
-    clearInterval(this.interval);
-    this.computeRotation(e.clientX, e.clientY);
+    // Attach the drag and end drag events.
+    if (document && document.addEventListener) {
+      document.addEventListener('mousemove', this.dragFunction, false);
+      document.addEventListener('mouseup', this.endDragFunction, false);
+    }
+    e.preventDefault();
     this.setState({
       mouseActive: true
     });
   }
+  /* Cube Rotation */
+  animateRotation() {
+    const { rotation, mouse } = this.state;
+    if (!this.state.mouseActive) {
+      mouse.x = mouse.x - (mouse.x - 0) * 0.03;
+      mouse.y = mouse.y - (mouse.y - 0) * 0.03;
+    }
+    rotation.x += mouse.x;
+    rotation.y -= mouse.y;
+    this.setState({
+      rotation: {
+        x: rotation.x,
+        y: rotation.y
+      }
+    });
+  }
+  generateMouseMove() {
+    const genX = 4 - Math.floor((Math.random() * 8) + 1);
+    const genY = 4 - Math.floor((Math.random() * 8) + 1);
+    this.setState({
+      mouse: {
+        x: genX,
+        y: genY
+      }
+    });
+  }
+
   inactMouse() {
     this.waitFor();
     this.setState({
@@ -104,10 +147,15 @@ export default class Cube extends React.Component {
     this.reactMouse(e.touches[0]);
   }
   touchMove(e) {
-    e.preventDefault();
-    const touchX = Math.floor(e.changedTouches[0].clientX);
-    const touchY = Math.floor(e.changedTouches[0].clientY);
-    this.computeRotation(touchX, touchY);
+    const browserSize = getBrowserDimensions(window, document);
+    const mouseX = ((browserSize.browserWidth / 2) - e.clientX) * 0.03;
+    const mouseY = -((browserSize.browserHeight / 2) - e.clientY) * 0.03;
+    this.setState({
+      mouse: {
+        x: mouseX,
+        y: mouseY
+      }
+    });
   }
   waitFor() {
     clearInterval(this.interval);
@@ -117,18 +165,17 @@ export default class Cube extends React.Component {
   /* Render Cube */
   render() {
     const { classes, children } = this.props;
-    const { rotation, mouseActive, transition } = this.state;
+    const { rotation, transition } = this.state;
     const styleObject = {
-      transition: `${mouseActive ? '0' : '2000'}ms`,
       transform: `rotateY(${360 - rotation.x}deg) rotateX(${rotation.y}deg)`
     };
 
     return (
       <div {...resolve(this.props, 'container', transition)}
         onTouchStart = {this.touchStart}
-        onMouseMove = {this.reactMouse}
-        onMouseLeave = {this.inactMouse}>
-        <div className = {classes.cube} style = {styleObject}>
+        onMouseDown = {this.dragStart}
+        onMouseUp = {this.dragStop}>
+        <div className = {classes.cube} style = {styleObject} ref="cube">
           {children}
         </div>
       </div>
