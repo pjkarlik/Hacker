@@ -18,6 +18,8 @@ export default class Cube extends React.Component {
     initialX: React.PropTypes.number,
     /** Initial Y Rotation of Cube **/
     initialY: React.PropTypes.number,
+    /** Initial Z Rotation of Cube **/
+    initialZ: React.PropTypes.number,
     /** Does this respond to mouse of touch **/
     interactive: React.PropTypes.bool,
     /** Modules Props **/
@@ -31,11 +33,13 @@ export default class Cube extends React.Component {
     this.state = {
       rotation: {
         x: this.props.initialX || 0,
-        y: this.props.initialY || 0
+        y: this.props.initialY || 0,
+        z: this.props.initialZ || 0
       },
       mouse: {
         x: 0,
-        y: 0
+        y: 0,
+        z: 0
       },
       mouseActive: false,
       transition: this.props.transition
@@ -46,6 +50,7 @@ export default class Cube extends React.Component {
     this.inactMouse = this.inactMouse.bind(this);
     this.touchStart = this.touchStart.bind(this);
     this.touchDrag = this.touchDrag.bind(this);
+    this.checkRotation = this.checkRotation.bind(this);
     this.waitFor = this.waitFor.bind(this);
     this.animateRotation = this.animateRotation.bind(this);
     this.generateMouseMove = this.generateMouseMove.bind(this);
@@ -74,13 +79,25 @@ export default class Cube extends React.Component {
     window.cancelAnimationFrame(this.animateRotation);
   }
   dragFunction(e) {
+    const { rotation } = this.state;
+    let mouseZ;
+    let mouseY;
     const browserSize = getBrowserDimensions(window, document);
-    const mouseX = ((browserSize.browserWidth / 2) - e.clientX) * 0.03;
-    const mouseY = -((browserSize.browserHeight / 2) - e.clientY) * 0.03;
+    const mouseX = ((browserSize.browserWidth / 2) - e.clientX) * 0.01;
+    const mouseYZ = -((browserSize.browserHeight / 2) - e.clientY) * 0.01;
+    if ((this.checkRotation(rotation.x) > 70 && this.checkRotation(rotation.x) < 110) ||
+    (this.checkRotation(rotation.x) > 250 && this.checkRotation(rotation.x) < 300)) {
+      mouseZ = mouseYZ;
+      mouseY = 0;
+    } else {
+      mouseZ = 0;
+      mouseY = mouseYZ;
+    }
     this.setState({
       mouse: {
         x: mouseX,
-        y: mouseY
+        y: mouseY,
+        z: mouseZ
       }
     });
   }
@@ -115,30 +132,55 @@ export default class Cube extends React.Component {
     this.touchDrag(e.touches[0]);
   }
   touchDrag(e) {
+    const { rotation } = this.state;
     const browserSize = getBrowserDimensions(window, document);
+    let mouseZ;
+    let mouseY;
     const mouseX = ((browserSize.browserWidth / 2) - e.changedTouches[0].clientX) * 0.03;
-    const mouseY = -((browserSize.browserHeight / 2) - e.changedTouches[0].clientY) * 0.03;
+    const mouseYZ = -((browserSize.browserHeight / 2) - e.changedTouches[0].clientY) * 0.03;
+    if ((this.checkRotation(rotation.x) > 70 && this.checkRotation(rotation.x) < 110) ||
+    (this.checkRotation(rotation.x) > 250 && this.checkRotation(rotation.x) < 300)) {
+      mouseZ = mouseYZ;
+      mouseY = 0;
+    } else {
+      mouseZ = 0;
+      mouseY = mouseYZ;
+    }
     this.setState({
       mouse: {
         x: mouseX,
-        y: mouseY
+        y: mouseY,
+        z: mouseZ
       }
     });
+  }
+  checkRotation(value) {
+    let orientation = value % 360;
+
+    if (orientation < 0) {
+      orientation += 360;
+    }
+    return orientation;
   }
   /* Cube Rotation */
   animateRotation() {
     const { rotation, mouse } = this.state;
-    console.log(rotation.x);
+
     if (!this.state.mouseActive) {
       mouse.x = mouse.x - (mouse.x - 0) * 0.03;
       mouse.y = mouse.y - (mouse.y - 0) * 0.03;
+      mouse.z = mouse.z - (mouse.z - 0) * 0.03;
     }
+
     rotation.x += mouse.x;
+    rotation.z -= mouse.z;
     rotation.y -= mouse.y;
+
     this.setState({
       rotation: {
-        x: rotation.x,
-        y: rotation.y
+        x: this.checkRotation(rotation.x),
+        y: this.checkRotation(rotation.y),
+        z: this.checkRotation(rotation.z)
       }
     });
   }
@@ -169,7 +211,7 @@ export default class Cube extends React.Component {
     const { classes, children } = this.props;
     const { rotation, transition } = this.state;
     const styleObject = {
-      transform: `rotateY(${360 - rotation.x}deg) rotateX(${rotation.y}deg)`
+      transform: `rotateY(${360 - rotation.x}deg) rotateX(${rotation.y}deg) rotateZ(${rotation.z}deg)`
     };
 
     return (
