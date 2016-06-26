@@ -1,6 +1,6 @@
 {
   "name": "Hacker",
-  "version": "0.0.17",
+  "version": "0.0.19",
   "description": "The Hacker",
   "main": "index.js",
   "scripts": {
@@ -48,8 +48,7 @@
     "postcss-color-rebeccapurple": "^1.1.0",
     "postcss-loader": "^0.8.1",
     "raw-loader": "^0.5.1",
-    "react": "^0.14.6",
-    "react-dom": "^0.14.7",
+    "react": "^15.1.0",
     "react-redux": "^4.4.0",
     "react-router": "2.0.0",
     "redux": "^3.3.1",

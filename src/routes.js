@@ -12,6 +12,7 @@ export function prefetchRoutes() {
     './containers/AnimationCycle',
     './containers/FieldEffect',
     './containers/FlockDemo',
+    './containers/Gravity',
     './containers/PlasmaCube',
     './containers/PlasmaDisplay',
     './containers/ThreeDemo'
@@ -41,6 +42,11 @@ export default (
     <Route path = "flockdemo" getComponent={(location, cb) =>
       require.ensure(['./containers/FlockDemo'], (require) => {
         cb(null, require('./containers/FlockDemo').default);
+      })
+    } />
+    <Route path = "gravity" getComponent={(location, cb) =>
+      require.ensure(['./containers/Gravity'], (require) => {
+        cb(null, require('./containers/Gravity').default);
       })
     } />
     <Route path = "plasmacube" getComponent={(location, cb) =>
