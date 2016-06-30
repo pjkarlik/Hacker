@@ -5,7 +5,7 @@ import getBrowserDimensions from '../utils/getBrowserDimensions';
 
 /**
 */
-export default class Environment extends React.Component {
+class Environment extends React.Component {
   static displayName = 'Environment';
   static propTypes = {
     classes: React.PropTypes.object,
@@ -78,17 +78,18 @@ export default class Environment extends React.Component {
     };
 
     return (
-      <div {...resolve(this.props, 'container', transition)}
-        onTouchStart = {this.touchStart}
-        onMouseMove = {this.reactMouse}
-        onMouseLeave = {this.inactMouse}>
-        <div className = {classes.cube} style = {styleObject}>
-          <div className = {classes.front}> </div>
-          <div className = {classes.back}> </div>
-          <div className = {classes.right}> </div>
-          <div className = {classes.left}> </div>
-          <div className = {classes.top}> </div>
-          <div className = {classes.bottom}> </div>
+      <div
+        {...resolve(this.props, 'container', transition)}
+        onTouchStart={this.touchStart}
+        onMouseMove={this.reactMouse}
+        onMouseLeave={this.inactMouse}>
+        <div className={classes.cube} style={styleObject}>
+          <div className={classes.front}> </div>
+          <div className={classes.back}> </div>
+          <div className={classes.right}> </div>
+          <div className={classes.left}> </div>
+          <div className={classes.top}> </div>
+          <div className={classes.bottom}> </div>
         </div>
       </div>
     );

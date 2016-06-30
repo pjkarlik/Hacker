@@ -7,7 +7,7 @@ import { setSiteState } from '../redux/modules/site';
 */
 class Navigation extends React.Component {
   static displayName = 'Navigation';
-  static propTypes = {
+  static propTypes={
     /** CSS Modules Object **/
     classes: React.PropTypes.object,
     /** Modules Props **/
@@ -44,64 +44,75 @@ class Navigation extends React.Component {
     const navIcon = navigationIsOpen ? '-' : '+';
     return (
       <div {...resolve(this.props, 'navigation', navigationIsOpen ? 'open' : '')}>
-        <div className = {classes.trigger} onClick = {this.toggleMenu}
-          dangerouslySetInnerHTML = {{ __html: navIcon }} />
-        <div className = {classes.bar}>
-        <ul {...resolve(this.props, 'menu', navigationIsOpen ? 'open' : '')}>
-          <li className = {classes.list}>
-            <Link to = "/" className = {classes.link}
-              onlyActiveOnIndex={this.state.true}
-              activeClassName = {classes.active}
-              onClick = {this.toggleMenu}>home</Link></li>
-          <li className = {classes.list}>
-            <a href="#" className = {classes.link}
-              activeClassName = {classes.active}
-              onClick = {this.toggleSubMenu}>experiments</a>
-              <ul {...resolve(this.props, 'submenu', experimentsIsOpen ? 'open' : '')}
-                onClick = {this.toggleSubMenu}>
-                <li className = {classes.sublist}>
-                  <Link to = "/animationcycle" className = {classes.sublink}
+        <div
+          className={classes.trigger} onClick={this.toggleMenu}
+          dangerouslySetInnerHTML={{ __html: navIcon }} />
+        <div className={classes.bar}>
+          <ul {...resolve(this.props, 'menu', navigationIsOpen ? 'open' : '')}>
+            <li className={classes.list}>
+              <Link
+                to="/" className={classes.link}
+                onlyActiveOnIndex={this.state.true}
+                activeClassName={classes.active}
+                onClick={this.toggleMenu}>home</Link></li>
+            <li className={classes.list}>
+              <a
+                href="#" className={classes.link}
+                activeClassName={classes.active}
+                onClick={this.toggleSubMenu}>experiments</a>
+              <ul
+                {...resolve(this.props, 'submenu', experimentsIsOpen ? 'open' : '')}
+                onClick={this.toggleSubMenu}>
+                <li className={classes.sublist}>
+                  <Link
+                    to="/animationcycle" className={classes.sublink}
                     onlyActiveOnIndex={this.state.true}
-                    onClick = {this.toggleMenu}
-                    activeClassName = {classes.active}>animation cycle</Link>
+                    onClick={this.toggleMenu}
+                    activeClassName={classes.active}>animation cycle</Link>
                 </li>
-                <li className = {classes.sublist}>
-                  <Link to = "/fieldeffect" className = {classes.sublink}
+                <li className={classes.sublist}>
+                  <Link
+                    to="/fieldeffect" className={classes.sublink}
                     onlyActiveOnIndex={this.state.true}
-                    onClick = {this.toggleMenu}
-                    activeClassName = {classes.active}>field effect</Link>
+                    onClick={this.toggleMenu}
+                    activeClassName={classes.active}>field effect</Link>
                 </li>
-                <li className = {classes.sublist}>
-                  <Link to = "/gravity" className = {classes.sublink}
+                <li className={classes.sublist}>
+                  <Link
+                    to="/gravity" className={classes.sublink}
                     onlyActiveOnIndex={this.state.true}
-                    onClick = {this.toggleMenu}
-                    activeClassName = {classes.active}>gravity</Link>
+                    onClick={this.toggleMenu}
+                    activeClassName={classes.active}>gravity</Link>
                 </li>
-                <li className = {classes.sublist}>
-                  <Link to = "/plasmacube" className = {classes.sublink}
+                <li className={classes.sublist}>
+                  <Link
+                    to="/plasmacube" className={classes.sublink}
                     onlyActiveOnIndex={this.state.true}
-                    onClick = {this.toggleMenu}
-                    activeClassName = {classes.active}>plasma cube</Link>
+                    onClick={this.toggleMenu}
+                    activeClassName={classes.active}>plasma cube</Link>
                 </li>
-                <li className = {classes.sublist}>
-                  <Link to = "/plasmadisplay" className = {classes.sublink}
+                <li className={classes.sublist}>
+                  <Link
+                    to="/plasmadisplay" className={classes.sublink}
                     onlyActiveOnIndex={this.state.true}
-                    onClick = {this.toggleMenu}
-                    activeClassName = {classes.active}>plasma display</Link>
+                    onClick={this.toggleMenu}
+                    activeClassName={classes.active}>plasma display</Link>
                 </li>
-                <li className = {classes.sublist}>
-                  <Link to = "/threedemo" className = {classes.sublink}
+                <li className={classes.sublist}>
+                  <Link
+                    to="/threedemo" className={classes.sublink}
                     onlyActiveOnIndex={this.state.true}
-                    onClick = {this.toggleMenu}
-                    activeClassName = {classes.active}>three.js demo</Link>
+                    onClick={this.toggleMenu}
+                    activeClassName={classes.active}>three.js demo</Link>
                 </li>
               </ul>
-          </li>
-          <li className = {classes.list}>
-            <Link to = "/about" className = {classes.link}
-              activeClassName = {classes.active}
-              onClick = {this.toggleMenu}>about</Link></li>
-        </ul>
+            </li>
+            <li className={classes.list}>
+              <Link
+                to="/about" className={classes.link}
+                activeClassName={classes.active}
+                onClick={this.toggleMenu}>about</Link></li>
+          </ul>
         </div>
       </div>
     );

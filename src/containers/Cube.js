@@ -5,7 +5,7 @@ import getBrowserDimensions from '../utils/getBrowserDimensions';
 
 /**
 */
-export default class Cube extends React.Component {
+class Cube extends React.Component {
   static displayName = 'Cube';
   static propTypes = {
     /** Object to render inside Cube **/
@@ -237,11 +237,12 @@ export default class Cube extends React.Component {
     };
 
     return (
-      <div {...resolve(this.props, 'container', transition)}
-        onTouchStart = {this.touchStart}
-        onMouseDown = {this.dragStart}
-        onMouseUp = {this.dragStop}>
-        <div className = {classes.cube} style = {styleObject} ref="cube">
+      <div
+        {...resolve(this.props, 'container', transition)}
+        onTouchStart={this.touchStart}
+        onMouseDown={this.dragStart}
+        onMouseUp={this.dragStop}>
+        <div className={classes.cube} style={styleObject} ref="cube">
           {children}
         </div>
       </div>

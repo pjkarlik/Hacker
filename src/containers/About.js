@@ -22,9 +22,6 @@ class About extends React.Component {
   static defaultProps = {
     classes: AboutStyles
   };
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     if (this.props.transition === 'out') {
       setTimeout(() => {
@@ -49,18 +46,18 @@ class About extends React.Component {
   render() {
     const { transition, classes } = this.props;
     return (
-      <div className = {classes.container}>
+      <div className={classes.container}>
         <Cube
-          initialX = {-42}
-          initialY = {22}
-          interactive = {false}
-          classes = {CubeStyles}>
-          <div className = {CubeStyles.front}/>
-          <div className = {CubeStyles.back}/>
-          <div className = {CubeStyles.right}/>
-          <div className = {CubeStyles.left}/>
-          <div className = {CubeStyles.top}/>
-          <div className = {CubeStyles.bottom}/>
+          initialX={-42}
+          initialY={22}
+          interactive={false}
+          classes={CubeStyles}>
+          <div className={CubeStyles.front} />
+          <div className={CubeStyles.back} />
+          <div className={CubeStyles.right} />
+          <div className={CubeStyles.left} />
+          <div className={CubeStyles.top} />
+          <div className={CubeStyles.bottom} />
         </Cube>
         <div {...resolve(this.props, 'information', transition)}>
           <h3>Paul J Karlik</h3>

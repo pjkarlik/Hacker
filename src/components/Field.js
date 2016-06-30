@@ -77,17 +77,17 @@ export default class Field extends React.Component {
     const { radius, size, padding, maxTileSize } = this.props;
     // Mouse positions, current tiles array
     this.container = this.refs.container.getBoundingClientRect();
-    const _x = mouseEvent.x - this.container.left;
-    const _y = mouseEvent.y - this.container.top;
+    const dx = mouseEvent.x - this.container.left;
+    const dy = mouseEvent.y - this.container.top;
 
     // Mod the min/max of x/y for cache look up
     const min = {
-      x: modus(_x - radius, size + padding),
-      y: modus(_y - radius, size + padding)
+      x: modus(dx - radius, size + padding),
+      y: modus(dy - radius, size + padding)
     };
     const max = {
-      x: modus(_x + radius, size + padding),
-      y: modus(_y + radius, size + padding)
+      x: modus(dx + radius, size + padding),
+      y: modus(dy + radius, size + padding)
     };
     // console.log(min.x, min.y, max.x, max.y);
     // Reset tiles that are no longer in the hit area
@@ -102,7 +102,7 @@ export default class Field extends React.Component {
       tileElement.style.width = `${size}px`;
       tileElement.style.height = `${size}px`;
       // tileElement.style.zIndex = `${1}`;
-      tileElement.style.backgroundColor = `#EEE`;
+      tileElement.style.backgroundColor = '#EEE';
     }
     this.affected_tiles = [];
     // find radius for currently effected tiles
@@ -124,7 +124,7 @@ export default class Field extends React.Component {
 
       const original = this.originalPosition(tileObject);
       // Calc distance from center of tiles
-      const d = distance(_x, original.left + (size / 2), _y, original.top + (size / 2));
+      const d = distance(dx, original.left + (size / 2), dy, original.top + (size / 2));
       const newSize = maxTileSize - (maxTileSize - size) * (d / radius);
       // set styles - TODO find better way to do this
       if (d < radius && newSize > size) {
@@ -133,14 +133,14 @@ export default class Field extends React.Component {
         tileObject.style.width = `${newSize}px`;
         tileObject.style.height = `${newSize}px`;
         // tileObject.style.zIndex = `${~~newSize}`;
-        tileObject.style.backgroundColor = `#333`;
+        tileObject.style.backgroundColor = '#333';
       } else {
         tileObject.style.left = `${original.left}px`;
         tileObject.style.top = `${original.top}px`;
         tileObject.style.width = `${size}px`;
         tileObject.style.height = `${size}px`;
         // tileObject.style.zIndex = `${1}`;
-        tileObject.style.backgroundColor = `#EEE`;
+        tileObject.style.backgroundColor = '#EEE';
       }
     }
   }
@@ -159,16 +159,17 @@ export default class Field extends React.Component {
           left: `${x * spacing}px`,
           width: `${size}px`,
           height: `${size}px`,
-          backgroundColor: `#EEE`
+          backgroundColor: '#EEE'
         };
         const tileId = `tile${x}_${y}`;
         tiles.push(
-          <div key = {tileId}
-            ref = {tileId}
-            className = {classes.tile}
-            data-top = {y * spacing}
-            data-left = {x * spacing}
-            style = {styleObject} />
+          <div
+            key={tileId}
+            ref={tileId}
+            className={classes.tile}
+            data-top={y * spacing}
+            data-left={x * spacing}
+            style={styleObject} />
         );
         const cacheID = `${x * spacing}_${y * spacing}`;
         this.cache[cacheID] = {
@@ -177,9 +178,10 @@ export default class Field extends React.Component {
       }
     }
     return (
-      <div className = {`${classes.container} ${className || null}`}
-        style = {containerStyle}
-        onTouchStart = {this.effectTouch}
+      <div
+        className={`${classes.container} ${className || null}`}
+        style={containerStyle}
+        onTouchStart={this.effectTouch}
         ref="container" >
         {tiles}
       </div>

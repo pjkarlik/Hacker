@@ -40,9 +40,6 @@ class Hacker extends React.Component {
   static defaultProps = {
     classes: HackerStyles
   };
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     if (this.props.transition === 'out') {
       setTimeout(() => {
@@ -73,18 +70,18 @@ class Hacker extends React.Component {
       <div {...resolve(this.props, navigationIsOpen ? null : 'circleEffect')} />
     );
     return (
-      <div className = {classes.container}>
+      <div className={classes.container}>
         {background}
         <Cube
           interactive
-          initialX = {-42}
-          classes = {CubeStyles}>
-          <div className = {CubeStyles.front}>J</div>
-          <div className = {CubeStyles.back}>pjkarlik@gmail.com</div>
-          <div className = {CubeStyles.right}>K</div>
-          <div className = {CubeStyles.left}>P</div>
-          <div className = {CubeStyles.top}>user interface architect</div>
-          <div className = {CubeStyles.bottom}>front-end developer</div>
+          initialX={-42}
+          classes={CubeStyles}>
+          <div className={CubeStyles.front}>J</div>
+          <div className={CubeStyles.back}>pjkarlik@gmail.com</div>
+          <div className={CubeStyles.right}>K</div>
+          <div className={CubeStyles.left}>P</div>
+          <div className={CubeStyles.top}>user interface architect</div>
+          <div className={CubeStyles.bottom}>front-end developer</div>
         </Cube>
       </div>
     );

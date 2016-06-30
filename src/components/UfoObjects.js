@@ -16,13 +16,13 @@ export class UfoShip {
     this.animated = true;
     /** Current Position of the object **/
     this.currentPosition = {
-      _x: window.innerWidth / 2,
-      _y: -100
+      dx: window.innerWidth / 2,
+      dy: -100
     };
     /** New Position of the object **/
     this.newPosition = {
-      _x: Math.round(Math.random() * 800) + 1,
-      _y: Math.round(Math.random() * 800) + 1
+      dx: Math.round(Math.random() * 800) + 1,
+      dy: Math.round(Math.random() * 800) + 1
     };
     /** Create the object **/
     this.ufo = document.createElement('div');
@@ -43,16 +43,16 @@ export class UfoShip {
     }
 
     if (this.randomValue(250) > 249) {
-      this.newPosition._x = this.randomValue(window.innerWidth);
+      this.newPosition.dx = this.randomValue(window.innerWidth);
     }
     if (this.randomValue(250) > 249) {
-      this.newPosition._y = this.randomValue(window.innerHeight);
+      this.newPosition.dy = this.randomValue(window.innerHeight);
     }
-    this.currentPosition._x = this.currentPosition._x - (this.currentPosition._x - this.newPosition._x) * 0.006;
-    this.ufo.style.left = `${Math.round(this.currentPosition._x)}px`;
+    this.currentPosition.dx = this.currentPosition.dx - (this.currentPosition.dx - this.newPosition.dx) * 0.006;
+    this.ufo.style.left = `${Math.round(this.currentPosition.dx)}px`;
 
-    this.currentPosition._y = this.currentPosition._y - (this.currentPosition._y - this.newPosition._y) * 0.006;
-    this.ufo.style.top = `${Math.round(this.currentPosition._y)}px`;
+    this.currentPosition.dy = this.currentPosition.dy - (this.currentPosition.dy - this.newPosition.dy) * 0.006;
+    this.ufo.style.top = `${Math.round(this.currentPosition.dy)}px`;
 
     if (this.animated) {
       window.requestAnimationFrame(this.animateShip);
@@ -61,23 +61,23 @@ export class UfoShip {
 }
 
 export default class UfoObjects {
-    constructor(element, config) {
-      /** element to attach the plasma display to **/
-      this.element = element;
-      /** ufo config ojbect **/
-      this.config = config;
-      /** ufo cache **/
-      this.cache = [];
-      this.createShips = this.createShips.bind(this);
-      this.createShips();
-    }
+  constructor(element, config) {
+    /** element to attach the plasma display to **/
+    this.element = element;
+    /** ufo config ojbect **/
+    this.config = config;
+    /** ufo cache **/
+    this.cache = [];
+    this.createShips = this.createShips.bind(this);
+    this.createShips();
+  }
 
-    createShips() {
-      for (let x = 0; x < this.config.amount; x++) {
-        this.cache[x] = new UfoShip(this.element, `ufo${x}`, this.config.size, this.config.frames);
-      }
+  createShips() {
+    for (let x = 0; x < this.config.amount; x++) {
+      this.cache[x] = new UfoShip(this.element, `ufo${x}`, this.config.size, this.config.frames);
     }
-    stopAnimation() {
-      window.cancelAnimationFrame(this.animateShip);
-    }
+  }
+  stopAnimation() {
+    window.cancelAnimationFrame(this.animateShip);
+  }
 }

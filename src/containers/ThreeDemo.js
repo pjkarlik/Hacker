@@ -21,9 +21,6 @@ class ThreeDemo extends React.Component {
   static defaultProps = {
     classes: ExperimentBaseStyles
   };
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     if (this.props.transition === 'out') {
       setTimeout(() => {
@@ -53,7 +50,7 @@ class ThreeDemo extends React.Component {
   render() {
     const { classes, transition } = this.props;
     return (
-      <div className = {classes.container}>
+      <div className={classes.container}>
         <h2 {...resolve(this.props, 'title', transition)}>Three.js Demo [in progress]</h2>
         <div {...resolve(this.props, 'experiment', transition)} ref="inject" />
       </div>

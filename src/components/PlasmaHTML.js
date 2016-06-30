@@ -94,15 +94,16 @@ export default class PlasmaHTML extends React.Component {
           height: `${size}%`
         };
         tiles.push(
-          <div key = {`tile${x}_${y}`}
-            ref = {`tile${x}_${y}`}
-            className = {classes.tile}
-            style = {styleObject} />
+          <div
+            key={`tile${x}_${y}`}
+            ref={`tile${x}_${y}`}
+            className={classes.tile}
+            style={styleObject} />
         );
       }
     }
     return (
-      <div className = {`${classes.container} ${className || null}`}>
+      <div className={`${classes.container} ${className || null}`}>
         {tiles}
       </div>
     );

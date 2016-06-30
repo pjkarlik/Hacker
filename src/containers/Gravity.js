@@ -21,9 +21,6 @@ class GravityDisplay extends React.Component {
   static defaultProps = {
     classes: ExperimentBaseStyles
   };
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     this.gravityObject = new Gravity(this.refs.gravityInject);
     if (this.props.transition === 'out') {
@@ -54,8 +51,8 @@ class GravityDisplay extends React.Component {
   render() {
     const { classes, transition } = this.props;
     return (
-      <div className = {classes.container} style = {{ background: '#000' }} >
-          <h2 {...resolve(this.props, 'title', transition)}>Gravity</h2>
+      <div className={classes.container} style={{ background: '#000' }} >
+        <h2 {...resolve(this.props, 'title', transition)}>Gravity</h2>
         <div {...resolve(this.props, 'experiment', transition)} ref="gravityInject" />
       </div>
     );

@@ -56,12 +56,12 @@ export default class App extends React.Component {
   };
   render() {
     return (
-        <Provider store={store}>
-          <div className = {AppStyles.bodyContainer}>
-            <Navigation classes = {NavigationStyles} />
-            {this.props.children}
-          </div>
-        </Provider>
+      <Provider store={store}>
+        <div className={AppStyles.bodyContainer}>
+          <Navigation classes={NavigationStyles} />
+          {this.props.children}
+        </div>
+      </Provider>
     );
   }
 }

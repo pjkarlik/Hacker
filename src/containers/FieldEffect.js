@@ -21,9 +21,6 @@ class FieldEffect extends React.Component {
   static defaultProps = {
     classes: ExperimentBaseStyles
   };
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     if (this.props.transition === 'out') {
       setTimeout(() => {
@@ -48,8 +45,8 @@ class FieldEffect extends React.Component {
   render() {
     const { classes, transition } = this.props;
     return (
-      <div className = {classes.container}>
-          <h2 {...resolve(this.props, 'title', transition)}>Field Effect</h2>
+      <div className={classes.container}>
+        <h2 {...resolve(this.props, 'title', transition)}>Field Effect</h2>
         <div {...resolve(this.props, 'experiment', transition)}>
           <Field />
         </div>

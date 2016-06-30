@@ -43,9 +43,9 @@ class Experiment extends React.Component {
   render() {
     const { classes, transition } = this.props;
     return (
-      <div className = {classes.container} style = {{ background: '#000' }} >
-          <h2 {...resolve(this.props, 'title', transition)}>Plasma Canvas</h2>
-        <div {...resolve(this.props, 'experiment', transition)} onClick = {this.updateColor} ref="plasmaInject" />
+      <div className={classes.container} style={{ background: '#000' }} >
+        <h2 {...resolve(this.props, 'title', transition)}>Plasma Canvas</h2>
+        <div {...resolve(this.props, 'experiment', transition)} onClick={this.updateColor} ref="plasmaInject" />
       </div>
     );
   }

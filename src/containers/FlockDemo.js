@@ -21,9 +21,6 @@ class FlockDemo extends React.Component {
   static defaultProps = {
     classes: ExperimentBaseStyles
   };
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     if (this.props.transition === 'out') {
       setTimeout(() => {
@@ -58,7 +55,7 @@ class FlockDemo extends React.Component {
   render() {
     const { classes, transition } = this.props;
     return (
-      <div className = {classes.container}>
+      <div className={classes.container}>
         <div {...resolve(this.props, 'window', transition)}>
           <h2>Flock Example</h2>
           <p>

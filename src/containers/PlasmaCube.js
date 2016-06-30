@@ -11,7 +11,7 @@ import CubeStyles from '../components/PlasmaCube.less';
 
 class PlasmaCube extends React.Component {
   static displayName = 'PlasmaCube';
-  static propTypes = {
+  static propTypes={
     /** CSS Modules Object **/
     classes: React.PropTypes.object,
     /** Modules Props **/
@@ -20,7 +20,7 @@ class PlasmaCube extends React.Component {
     /** Redux Actions **/
     setSiteState: React.PropTypes.func
   };
-  static defaultProps = {
+  static defaultProps={
     classes: ExperimentBaseStyles
   };
   constructor(props) {
@@ -76,21 +76,21 @@ class PlasmaCube extends React.Component {
     };
     const cube = (
       <Cube
-        ref = "plasmaCube"
-        initialX = {-42}
-        initialY = {22}
+        ref="plasmaCube"
+        initialX={-42}
+        initialY={22}
         interactive
-        classes = {CubeStyles}>
-        <PlasmaHTML className = {CubeStyles.front} {...offsetColors}/>
-        <PlasmaHTML className = {CubeStyles.back} {...offsetColors}/>
-        <PlasmaHTML className = {CubeStyles.right} {...offsetColors}/>
-        <PlasmaHTML className = {CubeStyles.left} {...offsetColors}/>
-        <PlasmaHTML className = {CubeStyles.top} {...offsetColors}/>
-        <PlasmaHTML className = {CubeStyles.bottom} {...offsetColors}/>
+        classes={CubeStyles}>
+        <PlasmaHTML className={CubeStyles.front} {...offsetColors} />
+        <PlasmaHTML className={CubeStyles.back} {...offsetColors} />
+        <PlasmaHTML className={CubeStyles.right} {...offsetColors} />
+        <PlasmaHTML className={CubeStyles.left} {...offsetColors} />
+        <PlasmaHTML className={CubeStyles.top} {...offsetColors} />
+        <PlasmaHTML className={CubeStyles.bottom} {...offsetColors} />
       </Cube>
     );
     return (
-      <div className = {classes.container} style = {{ background: '#222' }} onClick = {this.updateColor}>
+      <div className={classes.container} style={{ background: '#222' }} onClick={this.updateColor}>
         <h2 {...resolve(this.props, 'title', transition)}>Plasma Cube</h2>
         {cube}
       </div>

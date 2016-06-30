@@ -21,9 +21,6 @@ class AnimationCycle extends React.Component {
   static defaultProps = {
     classes: ExperimentBaseStyles
   };
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     if (this.props.transition === 'out') {
       setTimeout(() => {
@@ -60,7 +57,7 @@ class AnimationCycle extends React.Component {
   render() {
     const { classes, transition } = this.props;
     return (
-      <div className = {classes.container} style = {{ background: '#AAA' }}>
+      <div className={classes.container} style={{ background: '#AAA' }}>
         <h2 {...resolve(this.props, 'title', transition)}>Animation Cycle</h2>
         <div {...resolve(this.props, 'experiment', transition)} ref="inject" />
       </div>
