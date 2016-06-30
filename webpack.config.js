@@ -1,4 +1,3 @@
-'use strict';
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const AutoPrefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -11,6 +10,7 @@ const config = {
     host: '0.0.0.0',
     historyApiFallback: true
   },
+  devtool: 'source-map',
   output: {
     path: path.join(__dirname, 'dist/'),
     filename: 'src/index.js',

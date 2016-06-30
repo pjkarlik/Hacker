@@ -1,6 +1,6 @@
 {
   "name": "Hacker",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "The Hacker",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,7 @@
   "dependencies": {
     "autoprefixer": "^6.3.3",
     "babel-core": "^6.5.2",
-    "babel-eslint": "^5.0.0-beta6",
+    "babel-eslint": "^6.0.4",
     "babel-loader": "^6.2.2",
     "babel-plugin-react-remove-prop-types": "^2.0.2",
     "babel-plugin-transform-object-assign": "^6.5.0",
@@ -33,7 +33,7 @@
     "console-polyfill": "^0.2.2",
     "css-loader": "^0.23.1",
     "ejs": "^2.3.1",
-    "eslint": "^1.10.3",
+    "eslint": "^2.11.1",
     "eslint-config-airbnb": "^5.0.1",
     "eslint-loader": "^1.2.1",
     "eslint-plugin-react": "^3.16.1",
