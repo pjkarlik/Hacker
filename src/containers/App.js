@@ -55,6 +55,9 @@ export default class App extends React.Component {
     children: React.PropTypes.node
   };
   render() {
+    if (!this.props.children) {
+      return null;
+    }
     return (
       <Provider store={store}>
         <div className={AppStyles.bodyContainer}>

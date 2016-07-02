@@ -9,12 +9,21 @@ export function resolve(props, ...keys) {
   const { classes = {}, style = {} } = props;
 
   const classList = keys.map((k) => {
-    if (classes.hasOwnProperty(k)) { return classes[k]; }
+    let itemClass;
+    if (classes.hasOwnProperty(k)) {
+      itemClass = classes[k];
+    }
+    return itemClass;
   });
 
   const styleList = keys.map((k) => {
-    if (style.hasOwnProperty(k)) { return style[k]; }
+    let itemStyle;
+    if (style.hasOwnProperty(k)) {
+      itemStyle = classes[k];
+    }
+    return itemStyle;
   });
+
   return {
     className: classNames(classList),
     style: Object.assign({}, ...styleList)
@@ -29,14 +38,18 @@ export function resolve(props, ...keys) {
 export function select(props, ...keys) {
   const { classes = {}, style = {} } = props;
   const newStyles = keys.map((k) => {
+    let itemStyle;
     if (style.hasOwnProperty(k)) {
-      return style[k];
+      itemStyle = classes[k];
     }
+    return itemStyle;
   });
   const newClasses = keys.map((k) => {
+    let itemClass;
     if (classes.hasOwnProperty(k)) {
-      return classes[k];
+      itemClass = classes[k];
     }
+    return itemClass;
   });
   return {
     classes: Object.assign({}, ...newClasses),
