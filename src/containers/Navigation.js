@@ -100,6 +100,13 @@ class Navigation extends React.Component {
                 </li>
                 <li className={classes.sublist}>
                   <Link
+                    to="/simplexnoise" className={classes.sublink}
+                    onlyActiveOnIndex={this.state.true}
+                    onClick={this.toggleMenu}
+                    activeClassName={classes.active}>simplex noise</Link>
+                </li>
+                <li className={classes.sublist}>
+                  <Link
                     to="/threedemo" className={classes.sublink}
                     onlyActiveOnIndex={this.state.true}
                     onClick={this.toggleMenu}

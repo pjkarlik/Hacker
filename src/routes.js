@@ -15,6 +15,7 @@ export function prefetchRoutes() {
     './containers/Gravity',
     './containers/PlasmaCube',
     './containers/PlasmaDisplay',
+    './containers/SimplexNoise',
     './containers/ThreeDemo'
   ], () => {});
 }
@@ -64,6 +65,12 @@ export default (
       path="plasmadisplay" getComponent={(location, cb) =>
       require.ensure(['./containers/PlasmaDisplay'], (require) => {
         cb(null, require('./containers/PlasmaDisplay').default);
+      })
+    } />
+    <Route
+      path="simplexnoise" getComponent={(location, cb) =>
+      require.ensure(['./containers/SimplexNoise'], (require) => {
+        cb(null, require('./containers/SimplexNoise').default);
       })
     } />
     <Route
