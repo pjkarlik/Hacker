@@ -17,7 +17,6 @@ require.ensure(['./routes'], (require) => {
     document.getElementById('react-mount'));
   prefetchRoutes();
 });
-
 /**
   Fancy console log statement
 */
