@@ -9,7 +9,7 @@
 
 ```bash
 $ npm install
-$ npm start & open http://localhost:8080
+$ npm run dev & open http://localhost:8080
 ```
 
 ## License
