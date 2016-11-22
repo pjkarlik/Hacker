@@ -19,7 +19,7 @@
     "autoprefixer": "^6.5.3",
     "babel-core": "^6.18.2",
     "babel-eslint": "^6.0.4",
-    "babel-loader": "^6.2.7",
+    "babel-loader": "^6.2.8",
     "babel-plugin-react-remove-prop-types": "^2.0.2",
     "babel-plugin-transform-object-assign": "^6.5.0",
     "babel-plugin-transform-proto-to-assign": "^6.6.5",
