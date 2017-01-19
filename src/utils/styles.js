@@ -2,28 +2,35 @@ import classNames from 'classnames';
 
 /**
   ## Description
-  github.com/bitfrost
   Build a className string and an inline style object to pass to a react component using the provided keys and props.
+
+  ## Example Usage
+
+```js
+  props =  { classes : { button: 'myButtonClass',
+                         primary: 'myPrimaryClass',
+                         secondary: 'secondaryClass'},
+             style: { button: {background:'red'}, primary: {fontFace: 'blah'} } }
+  resolve(props, 'button', 'primary')
+```
+
+Would return:
+
+```js
+{className: 'myButtonClass myPrimaryClass' style: {background: 'red', fontFace: 'blah'}}
+```
+
 **/
 export function resolve(props, ...keys) {
   const { classes = {}, style = {} } = props;
 
   const classList = keys.map((k) => {
-    let itemClass;
-    if (classes.hasOwnProperty(k)) {
-      itemClass = classes[k];
-    }
-    return itemClass;
+    if (classes.hasOwnProperty(k)) { return classes[k]; }
   });
 
   const styleList = keys.map((k) => {
-    let itemStyle;
-    if (style.hasOwnProperty(k)) {
-      itemStyle = classes[k];
-    }
-    return itemStyle;
+    if (style.hasOwnProperty(k)) { return style[k]; }
   });
-
   return {
     className: classNames(classList),
     style: Object.assign({}, ...styleList)
@@ -32,24 +39,60 @@ export function resolve(props, ...keys) {
 
 /**
   ## Description
-  github.com/bitfrost
   Select a subset of values from classes and style in the passed in props object. Useful for styling children objects.
+
+
+  ## Example Usage for nested classes/style object
+
+```js
+  props = { classes: { button: 'myButtonClass',
+                       trigger: { button: 'myTriggerButtonClass' } },
+            style: { button: { color: 'blue' }, trigger: { button: { color: 'green' } } } }
+
+  select(props, 'trigger')
+```
+
+Would return:
+
+```js
+{classes: { button: 'myTriggerButtonClass' },
+ style: { button: { color: 'green' } } }
+```
+
+  ## Example Usage for flat classes/style object
+
+```js
+  props = { classes: { button: 'myButtonClass',
+                       trigger: 'myTriggerButtonClass' },
+            style: { button: { color: 'blue' }, trigger: { color: 'green' } } }
+
+  select(props, 'trigger')
+```
+
+Would return:
+
+```js
+{classes: { trigger: 'myTriggerButtonClass' },
+ style: { trigger: { color: 'green' } } }
+```
 **/
 export function select(props, ...keys) {
   const { classes = {}, style = {} } = props;
   const newStyles = keys.map((k) => {
-    let itemStyle;
     if (style.hasOwnProperty(k)) {
-      itemStyle = classes[k];
+      if (classes.hasOwnProperty(k) && typeof classes[k] === 'string') {
+        return { [k]: style[k] };
+      }
+      return style[k];
     }
-    return itemStyle;
   });
   const newClasses = keys.map((k) => {
-    let itemClass;
     if (classes.hasOwnProperty(k)) {
-      itemClass = classes[k];
+      if (typeof classes[k] === 'string') {
+        return { [k]: classes[k] };
+      }
+      return classes[k];
     }
-    return itemClass;
   });
   return {
     classes: Object.assign({}, ...newClasses),
